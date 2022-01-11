@@ -1,14 +1,12 @@
 import React from 'react';
 import {Avatar, Grid, Typography, Button, Box, TextField} from '@mui/material';
-import {Navigate} from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LinkMaterial from '@mui/material/Link';
-import {Link} from 'react-router-dom';
-
+import {Navigate, Link} from "react-router-dom";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) => {
 
-    if (!loginState.loading && loginState.data?.success && redirect) {
+    if (!loginState?.loading && loginState?.data?.success && redirect) {
         return <Navigate to='/'/>
     }
 
@@ -29,7 +27,7 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
             </Typography>
 
             <Typography component="h1" variant="h5" fontStyle={{color: "red"}}>
-                {loginState.error && loginState.error.validationErrors ? loginState.error?.validationErrors?.User : ""}
+                {loginState?.error?.validationErrors?.User ?? ""}
             </Typography>
             <form onSubmit={handleSubmit} noValidate>
                 <TextField
@@ -44,9 +42,9 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     onChange={handleInputChange}
                     autoComplete="Name"
                     autoFocus={true}
-                    {...(loginState.error?.validationErrors?.Name && {
+                    {...(loginState?.error?.validationErrors?.Name && {
                         error: true,
-                        helperText: loginState.error?.validationErrors?.Name
+                        helperText: loginState?.error?.validationErrors?.Name
                     })}
                 />
                 <TextField
@@ -61,9 +59,9 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    {...(loginState.error?.validationErrors?.Password && {
+                    {...(loginState?.error?.validationErrors?.Password && {
                         error: true,
-                        helperText: loginState.error?.validationErrors?.Password
+                        helperText: loginState?.error?.validationErrors?.Password
                     })}
                 />
                 <pre>
@@ -74,7 +72,7 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     fullWidth
                     variant="contained"
                     sx={{mt: 3, mb: 2}}
-                    disabled={loginState.loading}
+                    disabled={loginState?.loading}
                 >
                     Login
                 </Button>
