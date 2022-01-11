@@ -7,7 +7,12 @@ export const LoginAction = (data) => {
 
         await LoginAPI().login(data)
             .then(response => {
-                    dispatch({type: ACTION_TYPES.LOGIN_SUCCESS, payload: response.data})
+                    localStorage.setItem("jwtToken", response.data?.jwtToken)
+                    localStorage.setItem("refreshToken", response.data?.refreshToken)
+                    dispatch({
+                        type: ACTION_TYPES.LOGIN_SUCCESS,
+                        payload: response.data
+                    })
                 }
             ).catch(error => {
                 if (error.response) {
