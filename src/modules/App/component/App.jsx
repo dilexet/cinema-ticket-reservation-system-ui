@@ -8,7 +8,7 @@ import HomeContainer from "../../Home/container/HomeContainer";
 import LoginContainer from "../../Login/container/LoginContainer";
 import ButtonAppBarContainer from "../../ButtonAppBar/container/ButtonAppBarContainer";
 import RegisterContainer from "../../Register/container/RegisterContainer";
-import {darkTheme, lightTheme} from "../../Shared/utils/DarkModeService";
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,
@@ -22,6 +22,7 @@ const App = ({
                 <Routes>
                     <Route exact path='/' element={<HomeContainer/>}/>
                     <Route path='/login' element={<LoginContainer/>}/>
+                    <Route path='/register' element={<RegisterContainer/>}/>
                 </Routes>
             </CssBaseline>
         </ThemeProvider>
