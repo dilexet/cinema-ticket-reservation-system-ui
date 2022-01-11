@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {createTheme} from '@mui/material';
 import {useCookies} from "react-cookie";
 import App from "../component/App";
 
