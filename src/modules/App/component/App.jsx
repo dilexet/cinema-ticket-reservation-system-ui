@@ -7,12 +7,12 @@ import {ThemeProvider, CssBaseline} from '@mui/material';
 import HomeContainer from "../../Home/container/HomeContainer";
 import LoginContainer from "../../Login/container/LoginContainer";
 import ButtonAppBarContainer from "../../ButtonAppBar/container/ButtonAppBarContainer";
+import RegisterContainer from "../../Register/container/RegisterContainer";
+import {darkTheme, lightTheme} from "../../Shared/utils/DarkModeService";
 
 const App = ({
                  darkMode,
                  setDarkMode,
-                 darkTheme,
-                 lightTheme,
                  setCookie,
              }) => {
     return (
