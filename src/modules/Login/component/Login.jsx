@@ -44,7 +44,7 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     onChange={handleInputChange}
                     autoComplete="Name"
                     autoFocus={true}
-                    {...(((loginState.error?.validationErrors?.Name)) && {
+                    {...(loginState.error?.validationErrors?.Name && {
                         error: true,
                         helperText: loginState.error?.validationErrors?.Name
                     })}
@@ -61,7 +61,7 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    {...(((loginState.error?.validationErrors?.Password)) && {
+                    {...(loginState.error?.validationErrors?.Password && {
                         error: true,
                         helperText: loginState.error?.validationErrors?.Password
                     })}
@@ -81,7 +81,7 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                 <Grid container>
                     <Grid item>
                         <LinkMaterial color='inherit' component={Link} to='/register'>
-                            Don't have account?
+                            Don't have an account?
                         </LinkMaterial>
                     </Grid>
                 </Grid>

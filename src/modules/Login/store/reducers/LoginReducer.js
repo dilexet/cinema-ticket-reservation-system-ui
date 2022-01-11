@@ -6,7 +6,7 @@ const initialState = {
     error: [],
 }
 
-export const loginReducer = (state = initialState, action) => {
+export const LoginReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPES.LOGIN:
             return {
