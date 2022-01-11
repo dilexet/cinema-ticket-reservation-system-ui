@@ -4,7 +4,7 @@ import LinkMaterial from '@mui/material/Link';
 import {Navigate, Link} from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) => {
+const Login = ({loginState, handleSubmit, handleInputChange, values, redirect, errors}) => {
 
     if (!loginState?.loading && loginState?.data?.success && redirect) {
         return <Navigate to='/'/>
@@ -42,9 +42,9 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     onChange={handleInputChange}
                     autoComplete="Name"
                     autoFocus={true}
-                    {...(loginState?.error?.validationErrors?.Name && {
+                    {...((loginState?.error?.validationErrors?.Name || errors?.Name) && {
                         error: true,
-                        helperText: loginState?.error?.validationErrors?.Name
+                        helperText: loginState?.error?.validationErrors?.Name || errors?.Name
                     })}
                 />
                 <TextField
@@ -59,9 +59,9 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect}) 
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    {...(loginState?.error?.validationErrors?.Password && {
+                    {...((loginState?.error?.validationErrors?.Password || errors?.Password) && {
                         error: true,
-                        helperText: loginState?.error?.validationErrors?.Password
+                        helperText: loginState?.error?.validationErrors?.Password || errors?.Password
                     })}
                 />
                 <pre>
