@@ -23,7 +23,7 @@ const LoginContainer = () => {
     }
 
     const validate = (fieldValues = values) => {
-        let tempErrors = {...errors}
+        const tempErrors = {...errors}
         if ('Name' in fieldValues) {
             if (!fieldValues.Name) {
                 tempErrors.Name = "This field is required";
