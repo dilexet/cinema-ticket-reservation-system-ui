@@ -64,9 +64,6 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect, e
                         helperText: loginState?.error?.validationErrors?.Password || errors?.Password
                     })}
                 />
-                <pre>
-                    {JSON.stringify(values, null, 2)}
-                </pre>
                 <Button
                     type="submit"
                     fullWidth
