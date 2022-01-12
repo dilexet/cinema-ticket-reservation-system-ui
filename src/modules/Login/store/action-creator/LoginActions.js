@@ -1,14 +1,19 @@
 import {ACTION_TYPES} from "../../constants/ActionTypes";
 import {LoginAPI} from "./LoginAPI";
 
-export const LoginAction = (data) => {
+export const LoginAction = (data, rememberMe) => {
     return async (dispatch) => {
         dispatch({type: ACTION_TYPES.LOGIN})
 
         await LoginAPI().login(data)
             .then(response => {
-                    localStorage.setItem("jwtToken", response.data?.jwtToken)
-                    localStorage.setItem("refreshToken", response.data?.refreshToken)
+                    if (rememberMe) {
+                        localStorage.setItem("jwtToken", response.data?.jwtToken)
+                        localStorage.setItem("refreshToken", response.data?.refreshToken)
+                    } else {
+                        sessionStorage.setItem("jwtToken", response.data?.jwtToken)
+                        sessionStorage.setItem("refreshToken", response.data?.refreshToken)
+                    }
                     dispatch({
                         type: ACTION_TYPES.LOGIN_SUCCESS,
                         payload: response.data
