@@ -1,40 +1,77 @@
 import * as React from 'react';
-import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
+import {Toolbar, Typography, Button, IconButton, AppBar, Box} from '@mui/material'
+import LinkMaterial from "@mui/material/Link";
 import {Link} from 'react-router-dom'
+import SearchIcon from '@mui/icons-material/Search';
 
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import WEB_SITE_NAME from "../../Shared/constants/WebSiteName";
 
 
 const ButtonAppBar = ({darkMode, onChangeTheme}) => {
     return (
-        <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        <Button color="inherit" component={Link} to='/'>
-                            Home
-                        </Button>
+        <React.Fragment>
+            <AppBar
+                position="static"
+                color="default"
+                elevation={0}
+                sx={{borderBottom: (theme) => `1px solid ${theme.palette.divider}`}}
+            >
+                <Toolbar sx={{flexWrap: 'wrap'}}>
+                    <Typography variant="h6" color="inherit"
+                                style={{textDecoration: 'none'}} component={Link} to='/'
+                                noWrap sx={{flexGrow: 1}}>
+                        {WEB_SITE_NAME}
                     </Typography>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        <IconButton sx={{ml: 1}} onClick={onChangeTheme}
+
+                    <nav>
+                        <LinkMaterial
+                            style={{textDecoration: 'none', textTransform: "capitalize"}}
+                            variant="button"
+                            color="text.primary"
+                            href="#"
+                            sx={{my: 1, mx: 1.5}}
+                        >
+                            {"Features"}
+                        </LinkMaterial>
+                        <LinkMaterial
+                            style={{textDecoration: 'none', textTransform: "capitalize"}}
+                            variant="button"
+                            color="text.primary"
+                            href="#"
+                            sx={{my: 1, mx: 1.5}}
+                        >
+                            Enterprise
+                        </LinkMaterial>
+                        <LinkMaterial
+                            style={{textDecoration: 'none', textTransform: "capitalize"}}
+                            variant="button"
+                            color="text.primary"
+                            href="#"
+                            sx={{my: 1, mx: 1.5}}
+                        >
+                            Support
+                        </LinkMaterial>
+                    </nav>
+
+                    <Box>
+                        <IconButton sx={{ml: 1, mr: 1}} onClick={onChangeTheme}
                                     color="inherit">
                             {darkMode ? <Brightness7Icon/> : <Brightness4Icon/>}
                         </IconButton>
-                    </Typography>
+
+                        <IconButton sx={{mr: 1}}>
+                            <SearchIcon/>
+                        </IconButton>
+                    </Box>
+
+                    <Button variant="outlined" style={{borderRadius: "25px"}} size='medium' sx={{my: 1, mx: 1.5}}>
+                        Sign up
+                    </Button>
                 </Toolbar>
             </AppBar>
-        </Box>
+        </React.Fragment>
     );
 }
 
