@@ -1,10 +1,21 @@
 import React from 'react';
-import {Avatar, Grid, Typography, Button, Box, TextField} from '@mui/material';
+import {Avatar, Grid, Typography, Box, FormControlLabel, Checkbox} from '@mui/material';
 import LinkMaterial from '@mui/material/Link';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {Navigate, Link} from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {InitialFieldValues} from "../constants/InitialFieldValues";
+import loginSchema from "../constants/LoginSchema";
+import {Formik, Form} from 'formik';
+import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
+import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
+import handleErrorService from "../../Shared/utils/HandleErrorService";
 
-const Login = ({loginState, handleSubmit, handleInputChange, values, redirect, errors}) => {
+
+const Login = ({
+                   loginState, handleSubmitForm, redirect, rememberMe,
+                   setRememberMe
+               }) => {
 
     if (!loginState?.loading && loginState?.data?.success && redirect) {
         return <Navigate to='/'/>
@@ -22,65 +33,81 @@ const Login = ({loginState, handleSubmit, handleInputChange, values, redirect, e
             <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                 <LockOutlinedIcon/>
             </Avatar>
-            <Typography component="h1" variant="h5">
-                Login
-            </Typography>
 
+            <Typography component="h1" variant="h5">
+                Sign in
+            </Typography>
             <Typography component="h1" variant="h5" fontStyle={{color: "red"}}>
                 {loginState?.error?.validationErrors?.User ?? ""}
             </Typography>
-            <form onSubmit={handleSubmit} noValidate>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required={true}
-                    fullWidth={true}
-                    id="name"
-                    label="Name"
-                    name="Name"
-                    value={values.Name}
-                    onChange={handleInputChange}
-                    autoComplete="Name"
-                    autoFocus={true}
-                    {...((loginState?.error?.validationErrors?.Name || errors?.Name) && {
-                        error: true,
-                        helperText: loginState?.error?.validationErrors?.Name || errors?.Name
-                    })}
-                />
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required={true}
-                    fullWidth={true}
-                    name="Password"
-                    value={values.Password}
-                    onChange={handleInputChange}
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    {...((loginState?.error?.validationErrors?.Password || errors?.Password) && {
-                        error: true,
-                        helperText: loginState?.error?.validationErrors?.Password || errors?.Password
-                    })}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{mt: 3, mb: 2}}
-                    disabled={loginState?.loading}
-                >
-                    Login
-                </Button>
-                <Grid container>
-                    <Grid item>
-                        <LinkMaterial color='inherit' component={Link} to='/register'>
-                            Don't have an account?
-                        </LinkMaterial>
-                    </Grid>
-                </Grid>
-            </form>
+
+            <Formik
+                initialValues={InitialFieldValues}
+                validationSchema={loginSchema}
+                validateOnChange={true}
+                validateOnBlur={true}
+                onSubmit={handleSubmitForm}
+            >
+                {
+                    ({
+                         values,
+                         errors,
+                         touched,
+                         handleChange,
+                         handleBlur,
+                         handleSubmit,
+                     }) => (
+
+                        <Box component={Form} sx={{mt: 3}} onSubmit={handleSubmit}>
+                            <AuthorizeTextField
+                                id="name"
+                                type="text"
+                                label="Name"
+                                name="Name"
+                                value={values.Name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                autoComplete="Name"
+                                autoFocus={true}
+                                {...handleErrorService(loginState, errors, touched, "Name")}
+                            />
+                            <AuthorizePasswordField
+                                name="Password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                value={values.Password}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                {...handleErrorService(loginState, errors, touched, "Password")}
+                            />
+                            <FormControlLabel
+                                onChange={() => setRememberMe(rememberMe => !rememberMe)}
+                                control={<Checkbox value={rememberMe} color="primary"/>}
+                                label="Remember me"
+                            />
+                            <LoadingButton
+                                type="submit"
+                                fullWidth
+                                sx={{mt: 3, mb: 2}}
+                                loading={loginState?.loading}
+                                loadingIndicator="Loading..."
+                                variant="outlined"
+                            >
+                                Sign in
+                            </LoadingButton>
+                            <Grid container>
+                                <Grid item xs>
+                                    <LinkMaterial color='inherit' variant="body2" component={Link} to='/register'>
+                                        Don't have an account? Sign Up
+                                    </LinkMaterial>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    )
+                }
+            </Formik>
         </Box>
     );
 }
