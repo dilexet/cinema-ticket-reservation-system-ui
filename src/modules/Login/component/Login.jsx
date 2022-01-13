@@ -9,6 +9,7 @@ import loginSchema from "../constants/LoginSchema";
 import {Formik, Form} from 'formik';
 import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
 import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
+import handleErrorService from "../../Shared/utils/HandleErrorService";
 
 
 const Login = ({
@@ -45,9 +46,7 @@ const Login = ({
                 validationSchema={loginSchema}
                 validateOnChange={true}
                 validateOnBlur={true}
-                onSubmit={(values) => {
-                    handleSubmitForm(values)
-                }}
+                onSubmit={handleSubmitForm}
             >
                 {
                     ({
@@ -70,12 +69,7 @@ const Login = ({
                                 onBlur={handleBlur}
                                 autoComplete="Name"
                                 autoFocus={true}
-                                {...((loginState?.error?.validationErrors?.Name ||
-                                    (errors?.Name && touched.Name)) && {
-                                    error: true,
-                                    helperText: loginState?.error?.validationErrors?.Name ||
-                                        errors?.Name
-                                })}
+                                {...handleErrorService(loginState, errors, touched, "Name")}
                             />
                             <AuthorizePasswordField
                                 name="Password"
@@ -86,12 +80,7 @@ const Login = ({
                                 value={values.Password}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                {...((loginState?.error?.validationErrors?.Password ||
-                                    (errors?.Password && touched.Password)) && {
-                                    error: true,
-                                    helperText: loginState?.error?.validationErrors?.Password ||
-                                        errors?.Password
-                                })}
+                                {...handleErrorService(loginState, errors, touched, "Password")}
                             />
                             <FormControlLabel
                                 onChange={() => setRememberMe(rememberMe => !rememberMe)}

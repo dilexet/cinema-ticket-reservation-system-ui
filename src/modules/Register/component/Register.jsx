@@ -9,6 +9,7 @@ import registerSchema from "../constants/RegisterSchema";
 import {Formik, Form} from 'formik';
 import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
 import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
+import handleErrorService from "../../Shared/utils/HandleErrorService";
 
 const Register = ({
                       registerState, handleSubmitForm, redirect, rememberMe,
@@ -41,9 +42,7 @@ const Register = ({
             validationSchema={registerSchema}
             validateOnChange={true}
             validateOnBlur={true}
-            onSubmit={(values) => {
-                handleSubmitForm(values)
-            }}
+            onSubmit={handleSubmitForm}
         >
             {({
                   values,
@@ -64,12 +63,7 @@ const Register = ({
                         onBlur={handleBlur}
                         autoComplete="Name"
                         autoFocus={true}
-                        {...((registerState?.error?.validationErrors?.Name ||
-                            (errors?.Name && touched.Name)) && {
-                            error: true,
-                            helperText: registerState?.error?.validationErrors?.Name ||
-                                errors?.Name
-                        })}
+                        {...handleErrorService(registerState, errors, touched, "Name")}
                     />
                     <AuthorizeTextField
                         id="email"
@@ -80,12 +74,7 @@ const Register = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                         autoComplete="email"
-                        {...((registerState?.error?.validationErrors?.Email ||
-                            (errors?.Email && touched.Email)) && {
-                            error: true,
-                            helperText: registerState?.error?.validationErrors?.Email ||
-                                errors?.Email
-                        })}
+                        {...handleErrorService(registerState, errors, touched, "Email")}
                     />
                     <AuthorizePasswordField
                         name="Password"
@@ -96,12 +85,7 @@ const Register = ({
                         value={values.Password}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        {...((registerState?.error?.validationErrors?.Password ||
-                            (errors?.Password && touched.Password)) && {
-                            error: true,
-                            helperText: registerState?.error?.validationErrors?.Password ||
-                                errors?.Password
-                        })}
+                        {...handleErrorService(registerState, errors, touched, "Password")}
                     />
                     <AuthorizePasswordField
                         name="ConfirmPassword"
@@ -112,12 +96,7 @@ const Register = ({
                         value={values.ConfirmPassword}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        {...((registerState?.error?.validationErrors?.ConfirmPassword ||
-                            (errors?.ConfirmPassword && touched.ConfirmPassword)) && {
-                            error: true,
-                            helperText: registerState?.error?.validationErrors?.ConfirmPassword ||
-                                errors?.ConfirmPassword
-                        })}
+                        {...handleErrorService(registerState, errors, touched, "ConfirmPassword")}
                     />
                     <FormControlLabel
                         onChange={() => setRememberMe(rememberMe => !rememberMe)}
