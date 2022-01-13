@@ -30,7 +30,7 @@ const Register = ({
             <LockOutlinedIcon/>
         </Avatar>
         <Typography component="h1" variant="h5">
-            {"Sign up"}
+            Sign up
         </Typography>
 
         <Typography component="h1" variant="h5" fontStyle={{color: "red"}}>
@@ -111,12 +111,12 @@ const Register = ({
                         loadingIndicator="Loading..."
                         variant="outlined"
                     >
-                        {"Sign up"}
+                        Sign up
                     </LoadingButton>
                     <Grid container>
                         <Grid item>
                             <LinkMaterial color='inherit' variant="body2" component={Link} to='/login'>
-                                {"Already have an account? Sign in"}
+                                Already have an account? Sign in
                             </LinkMaterial>
                         </Grid>
                     </Grid>

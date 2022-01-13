@@ -35,7 +35,7 @@ const Login = ({
             </Avatar>
 
             <Typography component="h1" variant="h5">
-                {"Sign in"}
+                Sign in
             </Typography>
             <Typography component="h1" variant="h5" fontStyle={{color: "red"}}>
                 {loginState?.error?.validationErrors?.User ?? ""}
@@ -95,12 +95,12 @@ const Login = ({
                                 loadingIndicator="Loading..."
                                 variant="outlined"
                             >
-                                {"Sign in"}
+                                Sign in
                             </LoadingButton>
                             <Grid container>
                                 <Grid item xs>
                                     <LinkMaterial color='inherit' variant="body2" component={Link} to='/register'>
-                                        {"Don't have an account? Sign Up"}
+                                        Don't have an account? Sign Up
                                     </LinkMaterial>
                                 </Grid>
                             </Grid>
