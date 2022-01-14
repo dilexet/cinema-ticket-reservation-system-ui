@@ -10,6 +10,8 @@ import ButtonAppBarContainer from "../../ButtonAppBar/container/ButtonAppBarCont
 import RegisterContainer from "../../Register/container/RegisterContainer";
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import Footer from "../../Footer/component/Footer";
+import PublicRoute from "../../Shared/components/PublicRoute";
+import PrivateRoute from "../../Shared/components/PrivateRoute";
 
 const App = ({
                  darkMode,
@@ -29,9 +31,12 @@ const App = ({
                     <ButtonAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}/>
                     <Container component="main" sx={{mt: 8, mb: 2}} maxWidth="sm">
                         <Routes>
-                            <Route exact path='/' element={<HomeContainer/>}/>
-                            <Route path='/login' element={<LoginContainer/>}/>
-                            <Route path='/register' element={<RegisterContainer/>}/>
+                            <Route exact path='/'
+                                   element={<PrivateRoute component={HomeContainer}/>}/>
+                            <Route path='/login'
+                                   element={<PublicRoute component={LoginContainer} restricted={true}/>}/>
+                            <Route path='/register'
+                                   element={<PublicRoute component={RegisterContainer} restricted={true}/>}/>
                         </Routes>
                     </Container>
                     <Footer description={"Some description"}/>
