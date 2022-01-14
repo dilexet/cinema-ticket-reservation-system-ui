@@ -2,7 +2,7 @@ import {registerAPI} from "./RegisterAPI";
 import {register_loading, register_success, register_error} from "../reducers/RegisterReducer"
 
 
-export const RegisterAction = (data, rememberMe) => {
+export const registerAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {
         dispatch(register_loading)
 

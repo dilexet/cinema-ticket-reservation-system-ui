@@ -9,13 +9,13 @@ const LoginContainer = () => {
     const [redirect, setRedirect] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
 
-    const {LoginAction} = useActions();
+    const {loginAsyncAction} = useActions();
 
     const loginState = useSelector((state) => state.login);
 
     const handleSubmit = async (values) => {
         if (await loginSchema.isValid(values)) {
-            await LoginAction(values, rememberMe)
+            await loginAsyncAction(values, rememberMe)
             setRedirect(true)
         }
     }
