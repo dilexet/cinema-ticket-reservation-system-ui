@@ -1,4 +1,4 @@
-import {ACTION_TYPES} from "../../constants/ActionTypes";
+import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
     data: null,
@@ -6,30 +6,27 @@ const initialState = {
     error: [],
 }
 
-export const LoginReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ACTION_TYPES.LOGIN:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-                data: null,
-            }
-        case ACTION_TYPES.LOGIN_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                error: null,
-                data: action.payload,
-            }
-        case ACTION_TYPES.LOGIN_ERROR:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-                data: null,
-            }
-        default:
-            return state;
+const loginSlice = createSlice({
+    name: "login",
+    initialState: initialState,
+    reducers: {
+        login_loading(state) {
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+        },
+        login_success(state, action) {
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+        },
+        login_error(state, action) {
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+        }
     }
-}
+})
+
+export default loginSlice.reducer;
+export const {login_loading, login_success, login_error} = loginSlice.actions;
