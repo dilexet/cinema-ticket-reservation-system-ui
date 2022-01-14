@@ -1,11 +1,11 @@
-import {ACTION_TYPES} from "../../constants/ActionTypes";
-import {LoginAPI} from "./LoginAPI";
+import {loginAPI} from "./LoginAPI";
+import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
 
-export const LoginAction = (data, rememberMe) => {
+export const loginAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {
-        dispatch({type: ACTION_TYPES.LOGIN})
+        dispatch(login_loading())
 
-        await LoginAPI().login(data)
+        await loginAPI().login(data)
             .then(response => {
                     if (rememberMe) {
                         localStorage.setItem("jwtToken", response.data?.jwtToken)
@@ -14,17 +14,11 @@ export const LoginAction = (data, rememberMe) => {
                         sessionStorage.setItem("jwtToken", response.data?.jwtToken)
                         sessionStorage.setItem("refreshToken", response.data?.refreshToken)
                     }
-                    dispatch({
-                        type: ACTION_TYPES.LOGIN_SUCCESS,
-                        payload: response.data
-                    })
+                    dispatch(login_success(response.data))
                 }
             ).catch(error => {
                 if (error.response) {
-                    dispatch({
-                        type: ACTION_TYPES.LOGIN_ERROR,
-                        payload: error.response.data
-                    })
+                    dispatch(login_error(error.response.data))
                 }
             });
     }
