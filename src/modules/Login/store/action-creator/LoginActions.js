@@ -7,7 +7,8 @@ export const loginAsyncAction = (data, rememberMe) => {
 
         await loginAPI().login(data)
             .then(response => {
-                    if (rememberMe) {
+                    localStorage.setItem("rememberMe", rememberMe)
+                    if (Boolean(JSON.parse(rememberMe)) === true) {
                         localStorage.setItem("jwtToken", response.data?.jwtToken)
                         localStorage.setItem("refreshToken", response.data?.refreshToken)
                     } else {
