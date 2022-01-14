@@ -1,8 +1,8 @@
-import axios from "axios";
 import {RegisterURL} from "../../constants/RegisterURL";
+import axiosInstance from "../../../Shared/utils/AxiosCreater";
 
-export const RegisterAPI = (url = RegisterURL) => {
+export const registerAPI = (url = RegisterURL) => {
     return {
-        register: async (data) => await axios.post(url, data, {withCredentials: true})
+        register: async (data) => await axiosInstance.post(url, data, {withCredentials: true})
     }
 }

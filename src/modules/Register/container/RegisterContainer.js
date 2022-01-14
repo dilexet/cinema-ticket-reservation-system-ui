@@ -9,13 +9,13 @@ const RegisterContainer = () => {
     const [redirect, setRedirect] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
 
-    const {RegisterAction} = useActions();
+    const {registerAsyncAction} = useActions();
 
     const registerState = useSelector((state) => state.register);
 
     const handleSubmit = async (values) => {
         if (await registerSchema.isValid(values)) {
-            await RegisterAction(values, rememberMe)
+            await registerAsyncAction(values, rememberMe)
             setRedirect(true)
         }
     }

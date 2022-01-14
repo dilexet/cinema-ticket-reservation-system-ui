@@ -1,4 +1,4 @@
-import {ACTION_TYPES} from "../../constants/ActionTypes";
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     data: null,
@@ -6,30 +6,27 @@ const initialState = {
     error: [],
 }
 
-export const RegisterReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ACTION_TYPES.REGISTER:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-                data: null,
-            }
-        case ACTION_TYPES.REGISTER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                error: null,
-                data: action.payload,
-            }
-        case ACTION_TYPES.REGISTER_ERROR:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-                data: null,
-            }
-        default:
-            return state;
+const registerSlice = createSlice({
+    name: "register",
+    initialState: initialState,
+    reducers: {
+        register_loading(state) {
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+        },
+        register_success(state, action) {
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+        },
+        register_error(state, action) {
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+        }
     }
-}
+})
+
+export default registerSlice.reducer;
+export const {register_loading, register_success, register_error} = registerSlice.actions;
