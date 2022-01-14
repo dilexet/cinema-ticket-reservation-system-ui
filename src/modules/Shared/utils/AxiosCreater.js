@@ -34,9 +34,9 @@ axiosInstance.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
         if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
             const res = await refreshTokenAsyncAction();
             if (res === true) {
-                originalRequest._retry = true;
                 const tokens = getLocalAccessToken();
                 if (tokens) {
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.jwt;
