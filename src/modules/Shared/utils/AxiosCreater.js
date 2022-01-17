@@ -10,6 +10,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     async (config) => {
+        console.log("call")
         if (!config.url.includes(AuthorizeURL)) {
             const res = getLocalAccessToken();
             if (res) {
@@ -33,7 +34,7 @@ axiosInstance.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
-        if (error.response.status === 401 && !originalRequest._retry) {
+        if (!originalRequest.url.includes(AuthorizeURL) && error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             const res = await refreshTokenAsyncAction();
             if (res === true) {
