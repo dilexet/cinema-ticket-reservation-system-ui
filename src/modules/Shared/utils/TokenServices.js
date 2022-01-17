@@ -1,18 +1,26 @@
 import jwt_decode from "jwt-decode";
 import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
 
-export const isAuthorize = () => {
+export const isTokenExpired = () => {
+
     const decoded_token = getJwtPayload();
+
     if (decoded_token == null) {
-        return false;
+        return true;
     }
 
     const now = Date.now() / 1000 - 2;
-    const tokenIsExpired = decoded_token.exp <= now;
-    if (!tokenIsExpired) {
-        return true
+
+    return decoded_token.exp <= now;
+}
+
+export const isAuthorize = async () => {
+    const result = isTokenExpired();
+
+    if (result === true) {
+        return await refreshTokenAsyncAction();
     } else {
-        return refreshTokenAsyncAction();
+        return !result;
     }
 }
 
@@ -20,6 +28,7 @@ export const getJwtPayload = () => {
     const rememberMe = localStorage.getItem("rememberMe")
     if (Boolean(JSON.parse(rememberMe)) === true) {
         const jwt = localStorage.getItem("jwtToken")
+
         if (jwt == null) {
             return null
         }
