@@ -1,9 +1,13 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import {tokenIsExpired} from '../utils/TokenServices';
+import {isAuthorize} from '../utils/TokenServices';
 
 const PrivateRoute = ({component: Component, ...props}) => {
-    return tokenIsExpired() ? <Navigate to='/login'/> : <Component {...props}/>;
+    if (isAuthorize()) {
+        return <Component {...props}/>
+    } else {
+        return <Navigate to='/login'/>
+    }
 };
 
 export default PrivateRoute;
