@@ -1,23 +1,35 @@
 import jwt_decode from "jwt-decode";
+import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
 
-export const tokenIsExpired = () => {
+export const isAuthorize = () => {
+    const decoded_token = getJwtPayload();
+    if (decoded_token == null) {
+        return false;
+    }
+
+    const now = Date.now() / 1000 - 2;
+    const tokenIsExpired = decoded_token.exp <= now;
+    if (!tokenIsExpired) {
+        return true
+    } else {
+        return refreshTokenAsyncAction();
+    }
+}
+
+export const getJwtPayload = () => {
     const rememberMe = localStorage.getItem("rememberMe")
     if (Boolean(JSON.parse(rememberMe)) === true) {
         const jwt = localStorage.getItem("jwtToken")
         if (jwt == null) {
-            return true
+            return null
         }
-        const {exp} = jwt_decode(jwt)
-        const now = Date.now() / 1000 - 2
-        return exp <= now;
+        return jwt_decode(jwt);
     } else {
         const sessionJwt = sessionStorage.getItem("jwtToken")
         if (sessionJwt == null) {
-            return true
+            return null
         }
-        const {exp} = jwt_decode(sessionJwt)
-        const now = Date.now() / 1000 - 2
-        return exp <= now;
+        return jwt_decode(sessionJwt);
     }
 }
 
@@ -37,23 +49,6 @@ export const getLocalAccessToken = () => {
         }
     }
     return null;
-}
-
-export const getJwtPayload = () => {
-    const rememberMe = localStorage.getItem("rememberMe")
-    if (Boolean(JSON.parse(rememberMe)) === true) {
-        const jwt = localStorage.getItem("jwtToken")
-        if (jwt == null) {
-            return null
-        }
-        return jwt_decode(jwt);
-    } else {
-        const sessionJwt = sessionStorage.getItem("jwtToken")
-        if (sessionJwt == null) {
-            return null
-        }
-        return jwt_decode(sessionJwt);
-    }
 }
 
 export const removeTokens = () => {
