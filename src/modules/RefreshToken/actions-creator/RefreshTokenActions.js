@@ -3,8 +3,11 @@ import {getJwtPayload, getLocalAccessToken} from "../../Shared/utils/TokenServic
 
 export const refreshTokenAsyncAction = async () => {
     const tokens = getLocalAccessToken();
+    if (tokens === null) {
+        return false;
+    }
     const payloadJWT = getJwtPayload();
-    const data = {userId: payloadJWT.UserId, token: tokens?.refreshToken}
+    const data = {userId: payloadJWT?.UserId, token: tokens?.refreshToken}
 
     try {
         const response = await refreshTokenAPI().refresh(data);
