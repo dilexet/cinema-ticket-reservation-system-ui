@@ -1,11 +1,31 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import App from "../component/App";
+import {isAuthorize} from "../../Shared/utils/TokenServices";
 
 const AppContainer = () => {
     const [cookie, setCookie] = useCookies();
 
     const [darkMode, setDarkMode] = React.useState(cookie.DarkMode === undefined ? false : Boolean(JSON.parse(cookie.DarkMode)));
+
+    const [isAuthenticate, setIsAuthenticate] = useState(null);
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        let cleanupFunction = false;
+
+        async function checkAuthorize() {
+            console.log("App")
+            const result = await isAuthorize();
+            setIsAuthenticate(result)
+            setIsLoading(false)
+        }
+
+        checkAuthorize()
+
+        return () => cleanupFunction = true;
+    }, [isAuthenticate]);
+
 
     useEffect(() => {
         if (cookie.DarkMode === undefined) {
@@ -19,7 +39,11 @@ const AppContainer = () => {
     return (
         <App darkMode={darkMode}
              setDarkMode={setDarkMode}
-             setCookie={setCookie}/>
+             setCookie={setCookie}
+             isLoading={isLoading}
+             isAuthenticate={isAuthenticate}
+             setIsAuthenticate={setIsAuthenticate}
+        />
     );
 }
 
