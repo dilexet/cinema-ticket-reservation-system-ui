@@ -8,18 +8,15 @@ const PublicRoute = ({
                          setIsAuthenticate, isLoading, restricted, ...props
                      }) => {
     useEffect(() => {
-        let cleanupFunction = false;
 
         async function checkAuthorize() {
             if (isLoading === false && isAuthenticate === false) {
-                console.log("Public route")
                 const result = await isAuthorize();
                 setIsAuthenticate(result)
             }
         }
 
         checkAuthorize()
-        return () => cleanupFunction = true;
     }, [isAuthenticate, isLoading, setIsAuthenticate]);
 
     if (isAuthenticate === null) {

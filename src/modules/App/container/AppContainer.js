@@ -12,18 +12,13 @@ const AppContainer = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        let cleanupFunction = false;
-
         async function checkAuthorize() {
-            console.log("App")
             const result = await isAuthorize();
             setIsAuthenticate(result)
             setIsLoading(false)
         }
 
         checkAuthorize()
-
-        return () => cleanupFunction = true;
     }, [isAuthenticate]);
 
 

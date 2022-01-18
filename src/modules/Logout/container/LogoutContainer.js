@@ -8,8 +8,6 @@ const LogoutContainer = ({isAuthenticate, setIsAuthenticate}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        let cleanupFunction = false;
-
         async function logout() {
             removeTokens();
             setIsAuthenticate(false)
@@ -17,7 +15,6 @@ const LogoutContainer = ({isAuthenticate, setIsAuthenticate}) => {
         }
 
         logout()
-        return () => cleanupFunction = true;
     }, [setIsAuthenticate]);
 
     if (!isLoading && !isAuthenticate) {

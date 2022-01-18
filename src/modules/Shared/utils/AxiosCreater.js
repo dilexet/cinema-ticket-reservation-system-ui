@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     async (config) => {
-        console.log("call")
         if (!config.url.includes(AuthorizeURL)) {
             const res = getLocalAccessToken();
             if (res) {
