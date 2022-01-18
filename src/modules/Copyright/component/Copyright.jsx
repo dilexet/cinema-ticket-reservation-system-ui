@@ -1,5 +1,5 @@
 import Link from "@mui/material/Link";
-import WEB_SITE_NAME from "../../Shared/constants/WebSiteName";
+import {WEB_SITE_NAME} from "../../Shared/constants/WebSiteName";
 import {Typography} from "@mui/material";
 import React from "react";
 
