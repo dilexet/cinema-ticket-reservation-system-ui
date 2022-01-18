@@ -1,26 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Navigate} from 'react-router-dom';
 import {isAuthorize} from '../utils/TokenServices';
+import Loading from "../../Loading/component/Loading";
 
-const PrivateRoute = ({component: Component, ...props}) => {
-    const [isAuthenticate, setIsAuthenticate] = useState(null);
-
+const PrivateRoute = ({
+                          component: Component, isAuthenticate,
+                          isLoading, setIsAuthenticate, ...props
+                      }) => {
     useEffect(() => {
         let cleanupFunction = false;
 
         async function checkAuthorize() {
-            const result = await isAuthorize();
-            setIsAuthenticate(result)
+            if (isLoading === false && isAuthenticate === false) {
+                console.log("Private route")
+                const result = await isAuthorize();
+                setIsAuthenticate(result)
+            }
         }
 
         checkAuthorize()
         return () => cleanupFunction = true;
-    }, [isAuthenticate]);
+    }, [isAuthenticate, isLoading, setIsAuthenticate]);
 
     if (isAuthenticate === null) {
-        return <div>Loading...</div>
+        return <Loading/>
     } else if (isAuthenticate === true) {
-        return <Component {...props}/>
+        return <Component isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate} {...props}/>
     } else {
         return <Navigate to='/login'/>
     }
