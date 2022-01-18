@@ -1,5 +1,10 @@
-import {TextField} from "@mui/material";
 import React from "react";
+import {
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    OutlinedInput
+} from "@mui/material";
 
 const AuthorizeTextField = ({
                                 error, helperText,
@@ -7,27 +12,28 @@ const AuthorizeTextField = ({
                                 ...props
                             }) => {
     return (
-        <TextField
+        <FormControl
             variant="outlined"
             margin="normal"
             required={true}
             fullWidth={true}
-
-            id={props.id}
-            label={props.label}
-            name={props.name}
-            type={props.type}
-            autoFocus={props.autoFocus}
-            autoComplete={props.autoComplete}
-
             error={error}
-            helperText={helperText}
-
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            {...props}
-        />
+        >
+            <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
+            <OutlinedInput
+                id={props.id}
+                label={props.label}
+                name={props.name}
+                type={props.type}
+                autoFocus={props.autoFocus}
+                autoComplete={props.autoComplete}
+                style={{borderRadius: "20px"}}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+            />
+            <FormHelperText>{helperText}</FormHelperText>
+        </FormControl>
     )
 }
 

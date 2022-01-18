@@ -6,10 +6,10 @@ import {
 import {ThemeProvider, CssBaseline, Container, Box} from '@mui/material';
 import HomeContainer from "../../Home/container/HomeContainer";
 import LoginContainer from "../../Login/container/LoginContainer";
-import ButtonAppBarContainer from "../../ButtonAppBar/container/ButtonAppBarContainer";
+import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
 import RegisterContainer from "../../Register/container/RegisterContainer";
-import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import Footer from "../../Footer/component/Footer";
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,
@@ -26,7 +26,7 @@ const App = ({
                 }}
             >
                 <CssBaseline>
-                    <ButtonAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}/>
+                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}/>
                     <Container component="main" sx={{mt: 8, mb: 2}} maxWidth="sm">
                         <Routes>
                             <Route exact path='/' element={<HomeContainer/>}/>

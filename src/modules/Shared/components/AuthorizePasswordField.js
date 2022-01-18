@@ -1,5 +1,5 @@
-import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import React, {useState} from "react";
+import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const AuthorizePasswordField = ({
@@ -15,6 +15,7 @@ const AuthorizePasswordField = ({
             required={true}
             fullWidth={true}
             error={error}
+
         >
             <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
             <OutlinedInput
@@ -24,7 +25,7 @@ const AuthorizePasswordField = ({
                 type={showPassword ? 'text' : 'password'}
                 autoFocus={props.autoFocus}
                 autoComplete={props.autoComplete}
-
+                style={{borderRadius: "20px"}}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}

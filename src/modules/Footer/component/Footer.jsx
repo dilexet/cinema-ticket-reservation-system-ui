@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Container, Typography} from '@mui/material';
 import Copyright from "../../Copyright/component/Copyright";
-import WEB_SITE_NAME from "../../Shared/constants/WebSiteName";
+import {WEB_SITE_NAME} from "../../Shared/constants/WebSiteName";
 
 const Footer = (props) => {
     const {description} = props;
