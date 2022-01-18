@@ -1,5 +1,5 @@
-import {RegisterURL} from "../../constants/RegisterURL";
 import axiosInstance from "../../../Shared/utils/AxiosCreater";
+import {RegisterURL} from "../../constants/RegisterURL";
 
 export const registerAPI = (url = RegisterURL) => {
     return {

@@ -1,7 +1,6 @@
-import Link from "@mui/material/Link";
-import {WEB_SITE_NAME} from "../../Shared/constants/WebSiteName";
-import {Typography} from "@mui/material";
 import React from "react";
+import {Typography, Link} from "@mui/material";
+import {WEB_SITE_NAME} from "../../Shared/constants/WebSiteName";
 
 const Copyright = (props) => {
     return (

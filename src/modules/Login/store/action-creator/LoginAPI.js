@@ -1,5 +1,5 @@
-import {LoginURL} from "../../constants/LoginURL";
 import axiosInstance from "../../../Shared/utils/AxiosCreater";
+import {LoginURL} from "../../constants/LoginURL";
 
 export const loginAPI = (url = LoginURL) => {
     return {

@@ -8,8 +8,8 @@ import HomeContainer from "../../Home/container/HomeContainer";
 import LoginContainer from "../../Login/container/LoginContainer";
 import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
 import RegisterContainer from "../../Register/container/RegisterContainer";
-import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import Footer from "../../Footer/component/Footer";
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,

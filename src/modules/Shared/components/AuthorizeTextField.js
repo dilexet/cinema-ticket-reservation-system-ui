@@ -1,10 +1,10 @@
+import React from "react";
 import {
     FormControl,
     FormHelperText,
     InputLabel,
     OutlinedInput
 } from "@mui/material";
-import React from "react";
 
 const AuthorizeTextField = ({
                                 error, helperText,

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Register from "../component/Register";
 import {useSelector} from "react-redux";
+import Register from "../component/Register";
 import {useActions} from "../hooks/UseActions";
 import registerSchema from "../constants/RegisterSchema";
 

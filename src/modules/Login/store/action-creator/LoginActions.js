@@ -1,5 +1,5 @@
-import {loginAPI} from "./LoginAPI";
 import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
+import {loginAPI} from "./LoginAPI";
 
 export const loginAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {

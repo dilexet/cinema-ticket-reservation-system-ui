@@ -1,15 +1,14 @@
 import React from 'react';
-import {Avatar, Grid, Typography, Box, FormControlLabel, Checkbox} from '@mui/material';
-import LinkMaterial from '@mui/material/Link';
 import {Navigate, Link} from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {InitialFieldValues} from "../constants/InitialFieldValues";
-import loginSchema from "../constants/LoginSchema";
 import {Formik, Form} from 'formik';
+import {Avatar, Grid, Typography, Box, FormControlLabel, Checkbox, Link as LinkMaterial} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
 import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
 import handleErrorService from "../../Shared/utils/HandleErrorService";
 import AuthorizeButton from "../../Shared/components/AuthorizeButton";
+import {InitialFieldValues} from "../constants/InitialFieldValues";
+import loginSchema from "../constants/LoginSchema";
 
 
 const Login = ({
