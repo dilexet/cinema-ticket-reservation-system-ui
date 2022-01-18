@@ -1,7 +1,6 @@
 import React from 'react';
 import {Avatar, Grid, Typography, Box, FormControlLabel, Checkbox} from '@mui/material';
 import LinkMaterial from '@mui/material/Link';
-import LoadingButton from '@mui/lab/LoadingButton';
 import {Navigate, Link} from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {InitialFieldValues} from "../constants/InitialFieldValues";
@@ -10,6 +9,7 @@ import {Formik, Form} from 'formik';
 import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
 import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
 import handleErrorService from "../../Shared/utils/HandleErrorService";
+import AuthorizeButton from "../../Shared/components/AuthorizeButton";
 
 const Register = ({
                       registerState, handleSubmitForm, redirect, rememberMe,
@@ -103,16 +103,7 @@ const Register = ({
                         control={<Checkbox value={rememberMe} color="primary"/>}
                         label="Remember me"
                     />
-                    <LoadingButton
-                        type="submit"
-                        fullWidth
-                        sx={{mt: 3, mb: 2}}
-                        loading={registerState?.loading}
-                        loadingIndicator="Loading..."
-                        variant="outlined"
-                    >
-                        Sign up
-                    </LoadingButton>
+                    <AuthorizeButton loading={registerState?.loading} buttonText='Sign up'/>
                     <Grid container>
                         <Grid item>
                             <LinkMaterial color='inherit' variant="body2" component={Link} to='/login'>
