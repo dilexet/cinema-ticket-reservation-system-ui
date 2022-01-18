@@ -6,7 +6,7 @@ export const isTokenExpired = () => {
     const decoded_token = getJwtPayload();
 
     if (decoded_token == null) {
-        return true;
+        return null;
     }
 
     const now = Date.now() / 1000 - 2;
@@ -20,7 +20,7 @@ export const isAuthorize = async () => {
     if (result === true) {
         return await refreshTokenAsyncAction();
     } else {
-        return !result;
+        return result === false;
     }
 }
 
