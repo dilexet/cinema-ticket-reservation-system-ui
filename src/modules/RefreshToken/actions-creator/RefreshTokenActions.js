@@ -3,7 +3,7 @@ import {getJwtPayload, getLocalAccessToken} from "../../Shared/utils/TokenServic
 
 export const refreshTokenAsyncAction = async () => {
     const tokens = getLocalAccessToken();
-    if (tokens === null) {
+    if (tokens?.jwt === null || tokens?.refreshToken == null) {
         return false;
     }
     const payloadJWT = getJwtPayload();
