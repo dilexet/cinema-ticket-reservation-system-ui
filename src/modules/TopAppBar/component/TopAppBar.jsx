@@ -1,21 +1,18 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom'
-import {Toolbar, Typography, IconButton, AppBar, Box} from '@mui/material'
-import LinkMaterial from "@mui/material/Link";
+import {Toolbar, Typography, IconButton, AppBar, Box, Link as LinkMaterial} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {AccountCircle} from "@mui/icons-material";
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {WEB_SITE_NAME, WEB_SHORT_SITE_NAME} from "../../Shared/constants/WebSiteName";
-import TopMenu from "./TopMenu";
-import TopMobileMenu from "./TopMobileMenu";
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {Search, SearchIconWrapper, StyledInputBase} from "../constants/SearchStyled";
+import TopMenu from "./TopMenu";
 
 const TopAppBar = ({
                        darkMode, onChangeTheme, isAuthenticate, menuId, mobileMenuId,
-                       handleProfileMenuOpen, handleMobileMenuOpen, mobileMoreAnchorEl,
-                       isMobileMenuOpen, handleMobileMenuClose,
+                       handleProfileMenuOpen, handleMobileMenuOpen,
                        anchorEl, isMenuOpen, handleMenuClose
                    }) => {
     return (
@@ -113,9 +110,6 @@ const TopAppBar = ({
                     </Box>
                 </Toolbar>
             </AppBar>
-            <TopMobileMenu mobileMenuId={mobileMenuId} mobileMoreAnchorEl={mobileMoreAnchorEl}
-                           isMobileMenuOpen={isMobileMenuOpen} handleMobileMenuClose={handleMobileMenuClose}
-                           isAuthenticate={isAuthenticate}/>
             <TopMenu menuId={menuId} anchorEl={anchorEl} isAuthenticate={isAuthenticate}
                      isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose}/>
         </Box>
