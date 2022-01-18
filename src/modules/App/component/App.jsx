@@ -9,9 +9,19 @@ import LoginContainer from "../../Login/container/LoginContainer";
 import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
 import RegisterContainer from "../../Register/container/RegisterContainer";
 import Footer from "../../Footer/component/Footer";
+<<<<<<< Updated upstream
 import PublicRoute from "../../Shared/components/PublicRoute";
 import PrivateRoute from "../../Shared/components/PrivateRoute";
 import LogoutContainer from "../../Logout/container/LogoutContainer";
+=======
+<<<<<<< HEAD
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
+=======
+import PublicRoute from "../../Shared/components/PublicRoute";
+import PrivateRoute from "../../Shared/components/PrivateRoute";
+import LogoutContainer from "../../Logout/container/LogoutContainer";
+>>>>>>> Authentication
+>>>>>>> Stashed changes
 
 const App = ({
                  darkMode,
@@ -31,8 +41,17 @@ const App = ({
                 }}
             >
                 <CssBaseline>
+<<<<<<< Updated upstream
                     <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
                                         isAuthenticate={isAuthenticate}/>
+=======
+<<<<<<< HEAD
+                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}/>
+=======
+                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
+                                        isAuthenticate={isAuthenticate}/>
+>>>>>>> Authentication
+>>>>>>> Stashed changes
                     <Container component="main" sx={{mt: 8, mb: 2}} maxWidth="sm">
                         <Routes>
                             <Route exact path='/'
