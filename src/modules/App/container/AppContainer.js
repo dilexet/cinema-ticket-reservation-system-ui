@@ -2,24 +2,26 @@ import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import App from "../component/App";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
+import {useAuthenticate} from "../../Shared/utils/AuthenticateContext";
 
 const AppContainer = () => {
     const [cookie, setCookie] = useCookies();
 
     const [darkMode, setDarkMode] = React.useState(cookie.DarkMode === undefined ? false : Boolean(JSON.parse(cookie.DarkMode)));
 
-    const [isAuthenticate, setIsAuthenticate] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
+
+    const {isAuthenticate, changeAuthenticate} = useAuthenticate();
 
     useEffect(() => {
         async function checkAuthorize() {
             const result = await isAuthorize();
-            setIsAuthenticate(result)
+            changeAuthenticate(result)
             setIsLoading(false)
         }
 
         checkAuthorize()
-    }, [isAuthenticate]);
+    }, [changeAuthenticate, isAuthenticate]);
 
 
     useEffect(() => {
@@ -37,7 +39,7 @@ const AppContainer = () => {
              setCookie={setCookie}
              isLoading={isLoading}
              isAuthenticate={isAuthenticate}
-             setIsAuthenticate={setIsAuthenticate}
+             changeAuthenticate={changeAuthenticate}
         />
     );
 }

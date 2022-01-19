@@ -1,8 +1,11 @@
 import React from "react";
 import TopAppBar from "../component/TopAppBar";
+import {useAuthenticate} from "../../Shared/utils/AuthenticateContext";
 
-const TopAppBarContainer = ({darkMode, setDarkMode, setCookie, isAuthenticate}) => {
+const TopAppBarContainer = ({darkMode, setDarkMode, setCookie}) => {
     const menuId = 'primary-search-account-menu';
+
+    const {isAuthenticate} = useAuthenticate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 

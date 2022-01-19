@@ -2,22 +2,25 @@ import React, {useEffect} from 'react';
 import {Navigate} from 'react-router-dom';
 import {isAuthorize} from '../utils/TokenServices';
 import Loading from "../../Loading/component/Loading";
+import {useAuthenticate} from "../utils/AuthenticateContext";
 
 const PublicRoute = ({
-                         component: Component, isAuthenticate,
-                         setIsAuthenticate, isLoading, restricted, ...props
+                         component: Component,
+                         isLoading, restricted, ...props
                      }) => {
-    useEffect(() => {
 
+    const {isAuthenticate, changeAuthenticate} = useAuthenticate();
+
+    useEffect(() => {
         async function checkAuthorize() {
             if (isLoading === false && isAuthenticate === false) {
                 const result = await isAuthorize();
-                setIsAuthenticate(result)
+                changeAuthenticate(result)
             }
         }
 
         checkAuthorize()
-    }, [isAuthenticate, isLoading, setIsAuthenticate]);
+    }, [isAuthenticate, isLoading]);
 
     if (isAuthenticate === null) {
         return <Loading/>

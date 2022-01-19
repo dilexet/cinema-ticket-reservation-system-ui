@@ -2,20 +2,22 @@ import {useEffect, useState} from "react";
 import {removeTokens} from "../../Shared/utils/TokenServices";
 import {Navigate} from "react-router-dom";
 import Loading from "../../Loading/component/Loading";
+import {useAuthenticate} from "../../Shared/utils/AuthenticateContext";
 
-const LogoutContainer = ({isAuthenticate, setIsAuthenticate}) => {
+const LogoutContainer = () => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const {isAuthenticate, changeAuthenticate} = useAuthenticate();
 
     useEffect(() => {
         async function logout() {
             removeTokens();
-            setIsAuthenticate(false)
+            changeAuthenticate(false)
             setIsLoading(false)
         }
 
         logout()
-    }, [setIsAuthenticate]);
+    }, [changeAuthenticate]);
 
     if (!isLoading && !isAuthenticate) {
         return (
