@@ -7,4 +7,5 @@ import userManagementSlice from "../../UserManagement/store/reducers/UserManagem
 export const rootReducer = combineReducers({
     login: loginSlice,
     register: registerSlice,
+    userManagement: userManagementSlice
 })
