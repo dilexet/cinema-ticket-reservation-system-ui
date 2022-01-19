@@ -20,7 +20,7 @@ const PublicRoute = ({
     }, [isAuthenticate, isLoading, setIsAuthenticate]);
 
     if (isAuthenticate === null) {
-        return <Loading/>
+        return <Loading isLoading={true}/>
     } else if (isAuthenticate === true && restricted) {
         return <Navigate to='/'/>
     } else {

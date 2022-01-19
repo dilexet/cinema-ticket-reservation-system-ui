@@ -19,7 +19,7 @@ const PrivateRoute = ({
     }, [isAuthenticate, isLoading, setIsAuthenticate]);
 
     if (isAuthenticate === null) {
-        return <Loading/>
+        return <Loading isLoading={true}/>
     } else if (isAuthenticate === true) {
         return <Component isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate} {...props}/>
     } else {
