@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
-import App from "../component/App";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
+import App from "../component/App";
 
 const AppContainer = () => {
     const [cookie, setCookie] = useCookies();
@@ -13,9 +13,11 @@ const AppContainer = () => {
 
     useEffect(() => {
         async function checkAuthorize() {
-            const result = await isAuthorize();
-            setIsAuthenticate(result)
-            setIsLoading(false)
+            if (isLoading) {
+                setIsLoading(false)
+                const result = await isAuthorize();
+                setIsAuthenticate(result)
+            }
         }
 
         checkAuthorize()
