@@ -67,7 +67,7 @@ const userManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                users: state.dataList.users.push(action.payload.user)
+                users: [...state.dataList.users, action.payload.user]
             };
             state.error = null;
         },
