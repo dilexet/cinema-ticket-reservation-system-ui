@@ -15,8 +15,8 @@ axiosInstance.interceptors.request.use(
             if (res) {
                 config.headers = {
                     'Authorization': `Bearer ` + res.jwt,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json-patch+json'
                 }
             }
         }
