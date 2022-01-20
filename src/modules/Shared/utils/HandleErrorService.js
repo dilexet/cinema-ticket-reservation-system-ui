@@ -1,9 +1,9 @@
-const handleErrorService = (state, errors, touched, field) => {
-    if (errors[field] && touched[field]) {
+const handleErrorService = (state, errors, touched, name, field) => {
+    if (errors[name] && touched[name]) {
         return (
-            ((errors[field] && touched[field]) && {
+            ((errors[name] && touched[name]) && {
                 error: true,
-                helperText: errors[field]
+                helperText: errors[name]
             })
         )
     } else if (state?.error?.validationErrors) {
