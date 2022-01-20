@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import Login from "../component/Login";
-import {useActions} from "../hooks/UseActions";
 import loginSchema from "../constants/LoginSchema";
+import {loginAsyncAction} from "../store/action-creator/LoginActions";
 
 const LoginContainer = () => {
 
     const [redirect, setRedirect] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
 
-    const {loginAsyncAction} = useActions();
+    const dispatch = useDispatch();
 
     const loginState = useSelector((state) => state.login);
 
     const handleSubmit = async (values) => {
         if (await loginSchema.isValid(values)) {
-            await loginAsyncAction(values, rememberMe)
+            await dispatch(loginAsyncAction(values, rememberMe))
             setRedirect(true)
         }
     }
