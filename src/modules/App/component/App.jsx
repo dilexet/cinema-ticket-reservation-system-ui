@@ -3,7 +3,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-import {ThemeProvider, CssBaseline, Container, Box} from '@mui/material';
+import {ThemeProvider, CssBaseline, Box} from '@mui/material';
 import HomeContainer from "../../Home/container/HomeContainer";
 import LoginContainer from "../../Login/container/LoginContainer";
 import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
@@ -12,7 +12,10 @@ import Footer from "../../Footer/component/Footer";
 import PublicRoute from "../../Shared/components/PublicRoute";
 import PrivateRoute from "../../Shared/components/PrivateRoute";
 import LogoutContainer from "../../Logout/container/LogoutContainer";
+import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
+import Dashboard from "../../Dashboard/component/Dashboard";
+import NotFound from "../../NotFound/component/NotFound";
 
 const App = ({
                  darkMode,
@@ -34,29 +37,38 @@ const App = ({
                 <CssBaseline>
                     <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
                                         isAuthenticate={isAuthenticate}/>
-                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}/>
-                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
-                                        isAuthenticate={isAuthenticate}/>
-                    <Container component="main" sx={{mt: 8, mb: 2}} maxWidth="sm">
-                        <Routes>
-                            <Route exact path='/'
+                    <Routes>
+
+                        <Route exact path='/'
+                               element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                      component={HomeContainer}/>}/>
+                        <Route exact path='/logout'
+                               element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                      component={LogoutContainer}/>}/>
+                        <Route path='/login'
+                               element={<PublicRoute isAuthenticate={isAuthenticate}
+                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                     component={LoginContainer} restricted={true}/>}/>
+                        <Route path='/register'
+                               element={<PublicRoute isAuthenticate={isAuthenticate}
+                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                     component={RegisterContainer} restricted={true}/>}/>
+                        <Route exact path='/dashboard/*'
+                               element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                     component={Dashboard} restricted={false}/>}>
+                            <Route index={true} element={<NotFound/>}/>
+                            <Route exact path='userManagement'
                                    element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={HomeContainer}/>}/>
-                            <Route exact path='/logout'
-                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={LogoutContainer}/>}/>
-                            <Route path='/login'
-                                   element={<PublicRoute isAuthenticate={isAuthenticate}
                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                         component={LoginContainer} restricted={true}/>}/>
-                            <Route path='/register'
-                                   element={<PublicRoute isAuthenticate={isAuthenticate}
-                                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                         component={RegisterContainer} restricted={true}/>}/>
-                        </Routes>
-                    </Container>
+                                                         component={UserManagementContainer} restricted={false}/>}/>
+                            <Route path="*" element={<NotFound/>}/>
+                        </Route>
+
+
+                    </Routes>
                     <Footer description={"Some description"}/>
                 </CssBaseline>
             </Box>

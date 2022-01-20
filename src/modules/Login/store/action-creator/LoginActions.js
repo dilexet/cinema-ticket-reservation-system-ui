@@ -1,9 +1,15 @@
 import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
+import {
+    authenticate_loading,
+    authenticate_success,
+    authenticate_error
+} from "../../../Authenticate/store/reducers/AuthenticateReducer"
 import {loginAPI} from "./LoginAPI";
 
 export const loginAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {
         dispatch(login_loading())
+        dispatch(authenticate_loading())
 
         try {
             const response = await loginAPI().login(data)
@@ -16,9 +22,11 @@ export const loginAsyncAction = (data, rememberMe) => {
                 sessionStorage.setItem("refreshToken", response.data?.refreshToken)
             }
             dispatch(login_success(response.data))
+            dispatch(authenticate_success())
         } catch (error) {
             if (error.response) {
                 dispatch(login_error(error.response.data))
+                dispatch(authenticate_error())
             }
         }
     }

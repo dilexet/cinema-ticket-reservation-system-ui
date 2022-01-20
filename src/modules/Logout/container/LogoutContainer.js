@@ -22,7 +22,7 @@ const LogoutContainer = ({isAuthenticate, setIsAuthenticate}) => {
             <Navigate to='/'/>
         )
     } else {
-        return <Loading/>
+        return <Loading isLoading={true}/>
     }
 }
 

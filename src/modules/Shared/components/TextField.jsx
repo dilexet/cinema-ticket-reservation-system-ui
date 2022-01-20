@@ -1,20 +1,17 @@
-import React from "react";
-import {
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    OutlinedInput
-} from "@mui/material";
+import React from 'react';
+import {FormControl, FormHelperText, InputLabel, OutlinedInput} from "@mui/material";
 
-const AuthorizeTextField = ({
-                                error, helperText,
-                                value, onChange, onBlur,
-                                ...props
-                            }) => {
+const TextField = ({
+                       error, helperText,
+                       value, onChange, onBlur,
+                       variant, size, margin, style, inputProps,
+                       ...props
+                   }) => {
     return (
         <FormControl
-            variant="outlined"
-            margin="normal"
+            variant={variant}
+            size={size}
+            margin={margin}
             required={true}
             fullWidth={true}
             error={error}
@@ -27,7 +24,8 @@ const AuthorizeTextField = ({
                 type={props.type}
                 autoFocus={props.autoFocus}
                 autoComplete={props.autoComplete}
-                style={{borderRadius: "20px"}}
+                style={style}
+                inputProps={inputProps}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
@@ -37,4 +35,4 @@ const AuthorizeTextField = ({
     )
 }
 
-export default AuthorizeTextField;
+export default TextField;
