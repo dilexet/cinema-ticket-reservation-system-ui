@@ -12,7 +12,7 @@ const initialState = {
         users: null
     },
     loading: false,
-    error: [],
+    error: null,
 }
 
 const userManagementSlice = createSlice({
@@ -21,6 +21,10 @@ const userManagementSlice = createSlice({
     reducers: {
         loading(state) {
             state.loading = true;
+            state.error = null;
+        },
+        clearError(state) {
+            state.loading = false;
             state.error = null;
         },
         get_users_loading(state) {
@@ -103,6 +107,7 @@ const userManagementSlice = createSlice({
 export default userManagementSlice.reducer;
 export const {
     loading,
+    clearError,
     get_users_loading,
     get_users_success,
     get_users_error,
