@@ -1,12 +1,12 @@
 import UsersTable from "../component/UsersTable";
-import {useActions} from "../hooks/UseActions";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import React, {useEffect, useState} from "react";
 import Loading from "../../Loading/component/Loading";
 import {useTheme} from "@mui/material";
+import {getUsers} from "../store/action-creator/UserManagementActions";
 
 const UserManagementContainer = () => {
-    const {getUsers} = useActions();
+    const dispatch = useDispatch();
     const usersState = useSelector((state) => state.userManagement);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -21,14 +21,14 @@ const UserManagementContainer = () => {
 
     useEffect(() => {
         async function getUsersList() {
-            await getUsers();
+            await dispatch(await getUsers());
             setIsLoading(false)
         }
 
         if (isLoading === true) {
             getUsersList()
         }
-    }, [isLoading]);
+    }, [dispatch, isLoading, setIsLoading]);
 
     if (isLoading) {
         return <Loading isLoading={true}/>

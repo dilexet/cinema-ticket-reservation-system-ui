@@ -22,7 +22,6 @@ const UserCreateRowContainer = ({setOpenAdd, theme}) => {
 
         setIsCreate(false)
         if (await createUserSchema.isValid(values)) {
-            console.log(values)
             await createUser(values)
             setIsCreate(true)
         }
