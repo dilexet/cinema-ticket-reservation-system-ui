@@ -2,16 +2,18 @@ import React, {useState} from "react";
 import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
-const AuthorizePasswordField = ({
+const PasswordTextField = ({
                                     error, helperText,
                                     value, onChange, onBlur,
+                                    variant, size, margin, style,
                                     ...props
                                 }) => {
     const [showPassword, setShowPassword] = useState(false)
     return (
         <FormControl
-            variant="outlined"
-            margin="normal"
+            variant={variant}
+            size={size}
+            margin={margin}
             required={true}
             fullWidth={true}
             error={error}
@@ -24,8 +26,8 @@ const AuthorizePasswordField = ({
                 name={props.name}
                 type={showPassword ? 'text' : 'password'}
                 autoFocus={props.autoFocus}
-                autoComplete={props.autoComplete}
-                style={{borderRadius: "20px"}}
+                autoComplete="current-password"
+                style={style}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
@@ -47,4 +49,4 @@ const AuthorizePasswordField = ({
     )
 }
 
-export default AuthorizePasswordField;
+export default PasswordTextField;
