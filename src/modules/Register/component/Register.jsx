@@ -12,8 +12,8 @@ import {
     Container
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import AuthorizeTextField from "../../Shared/components/AuthorizeTextField";
-import AuthorizePasswordField from "../../Shared/components/AuthorizePasswordField";
+import TextField from "../../Shared/components/TextField";
+import PasswordTextField from "../../Shared/components/PasswordTextField";
 import handleErrorService from "../../Shared/utils/HandleErrorService";
 import AuthorizeButton from "../../Shared/components/AuthorizeButton";
 import {InitialFieldValues} from "../constants/InitialFieldValues";
@@ -63,50 +63,60 @@ const Register = ({
                           handleSubmit,
                       }) => (
                         <Box component={Form} sx={{mt: 3}} onSubmit={handleSubmit}>
-                            <AuthorizeTextField
+                            <TextField
                                 id="name"
                                 type="text"
                                 label="Name"
                                 name="Name"
+                                variant="outlined"
+                                margin="normal"
+                                style={{borderRadius: "20px"}}
                                 value={values.Name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 autoComplete="Name"
                                 autoFocus={true}
-                                {...handleErrorService(registerState, errors, touched, "Name")}
+                                {...handleErrorService(registerState, errors, touched, "Name", "Name")}
                             />
-                            <AuthorizeTextField
+                            <TextField
                                 id="email"
                                 type='email'
                                 label="Email"
                                 name="Email"
+                                variant="outlined"
+                                margin="normal"
+                                style={{borderRadius: "20px"}}
                                 value={values.Email}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 autoComplete="email"
-                                {...handleErrorService(registerState, errors, touched, "Email")}
+                                {...handleErrorService(registerState, errors, touched, "Email", "Email")}
                             />
-                            <AuthorizePasswordField
+                            <PasswordTextField
                                 name="Password"
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                variant="outlined"
+                                margin="normal"
+                                style={{borderRadius: "20px"}}
                                 value={values.Password}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                {...handleErrorService(registerState, errors, touched, "Password")}
+                                {...handleErrorService(registerState, errors, touched, "Password", "Password")}
                             />
-                            <AuthorizePasswordField
+                            <PasswordTextField
                                 name="ConfirmPassword"
                                 label="ConfirmPassword"
                                 type="password"
                                 id="confirmPassword"
-                                autoComplete="current-password"
+                                variant="outlined"
+                                margin="normal"
+                                style={{borderRadius: "20px"}}
                                 value={values.ConfirmPassword}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                {...handleErrorService(registerState, errors, touched, "ConfirmPassword")}
+                                {...handleErrorService(registerState, errors, touched, "ConfirmPassword", "ConfirmPassword")}
                             />
                             <FormControlLabel
                                 onChange={() => setRememberMe(rememberMe => !rememberMe)}
