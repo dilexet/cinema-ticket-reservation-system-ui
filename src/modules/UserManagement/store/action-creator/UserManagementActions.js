@@ -1,6 +1,7 @@
 import {userManagementAPI} from "./UserManagementAPI";
 import {
     loading,
+    clearError,
     get_users_loading,
     get_users_success,
     get_users_error,
@@ -12,6 +13,12 @@ import {
     remove_user_success,
     change_users_error
 } from "../reducers/UserManagementReducer"
+
+export const clearErrors = () => {
+    return (dispatch) => {
+        dispatch(clearError())
+    }
+}
 
 export const getUsers = (filter) => {
     return async (dispatch) => {
