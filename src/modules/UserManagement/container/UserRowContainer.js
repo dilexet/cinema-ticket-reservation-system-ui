@@ -4,12 +4,12 @@ import {useActions} from "../hooks/UseActions";
 
 const UserRowContainer = ({
                               index, user, openEditId, setOpenEditId,
-                              openDeleteId, setOpenDeleteId, theme
+                              openDeleteId, setOpenDeleteId, theme, openAdd
                           }) => {
-    const isEdit = (openEditId !== -1 && openEditId !== index);
+    const isEdit = openEditId !== -1 && openEditId !== index;
     const isDelete = openDeleteId !== -1 && openDeleteId !== index;
 
-    const isDisable = isEdit || isDelete;
+    const isDisable = isEdit || isDelete || openAdd;
 
     const {deleteUser} = useActions();
 

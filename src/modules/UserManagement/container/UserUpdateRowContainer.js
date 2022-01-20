@@ -1,46 +1,52 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useActions} from "../hooks/UseActions";
 import UserUpdateRow from "../component/UserUpdateRow";
+import updateUserSchema from "../constants/UpdateUserSchema";
+import {useSelector} from "react-redux";
 
 const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
-    const {updateUser} = useActions();
-
-    const [values, setValues] = React.useState({
+    const initialValues = {
         "Id": user.id,
         "Name": user.name,
         "Email": user.email,
         "RoleName": user.roleName
-    });
-
-    const handleSubmitEditClick = async () => {
-        await updateUser(values, user.id)
-        handleCloseClick()
     }
+
+    const [isUpdate, setIsUpdate] = React.useState(false)
+
+    const {updateUser, clearErrors} = useActions();
+
+    const userManagementState = useSelector((state) => state.userManagement);
 
     const handleCloseClick = () => {
-        setValues({
-            "Id": user.id,
-            "Name": user.name,
-            "Email": user.email,
-            "RoleName": user.roleName
-        })
+        setIsUpdate(false)
         setOpenEditId(-1)
+        clearErrors()
     }
 
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        const fieldValue = {[name]: value}
-        setValues({
-            ...values, ...fieldValue
-        })
+    const handleSubmitEditClick = async (values) => {
+        setIsUpdate(false)
+        if (await updateUserSchema.isValid(values)) {
+            await updateUser(values, user.id)
+            setIsUpdate(true)
+        }
     }
+
+    useEffect(() => {
+        const close = () => {
+            if (isUpdate === true && userManagementState.error === null) {
+                handleCloseClick()
+            }
+        }
+        close()
+    }, [isUpdate, userManagementState.error]);
+
 
     return (
         <UserUpdateRow
-            index={index} theme={theme} values={values}
-            handleInputChange={handleInputChange}
+            index={index} theme={theme} initialValues={initialValues}
             handleSubmitEditClick={handleSubmitEditClick}
-            handleCloseClick={handleCloseClick}
+            handleCloseClick={handleCloseClick} userManagementState={userManagementState}
         />
     )
 }

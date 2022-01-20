@@ -18,11 +18,12 @@ import {IconButton} from "@mui/material";
 import Loading from "../../Loading/component/Loading";
 import UserUpdateRowContainer from "../container/UserUpdateRowContainer";
 import UserRowContainer from "../container/UserRowContainer";
+import UserCreateRowContainer from "../container/UserCreateRowContainer";
 
 
 const UsersTable = ({
                         theme, usersState, setOpenEditId, setOpenDeleteId,
-                        handleAddClick, openEditId, openDeleteId
+                        handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
                     }) => {
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="lg">
@@ -38,6 +39,7 @@ const UsersTable = ({
                         </Typography>
                         <IconButton aria-label='edit'
                                     onClick={handleAddClick}
+                                    disabled={openAdd}
                                     style={{
                                         display: 'inline-block',
                                         textAlign: 'right',
@@ -46,6 +48,17 @@ const UsersTable = ({
                                     }}>
                             <AddCircleIcon style={{fill: theme.palette.success.main}}/>
                         </IconButton>
+                    </Box>
+                    <Box>
+                        <Typography component="h1" variant="h5" color="secondary"
+                                    style={{
+                                        display: 'block',
+                                        textAlign: 'center',
+                                    }}
+                                    fontStyle={{color: theme.palette.error.dark}}
+                        >
+                            {usersState?.error?.validationErrors?.User ?? ""}
+                        </Typography>
                     </Box>
                     <Loading isLoading={usersState?.loading}/>
 
@@ -76,11 +89,17 @@ const UsersTable = ({
                                                                   setOpenEditId={setOpenEditId}
                                                                   openDeleteId={openDeleteId}
                                                                   setOpenDeleteId={setOpenDeleteId}
-                                                                  theme={theme}
+                                                                  theme={theme} openAdd={openAdd}
                                                 />
                                         }
                                     </React.Fragment>
                                 ))}
+                                {
+                                    openAdd === true ?
+                                        <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        : <></>
+                                }
+
                             </TableBody>
                         </Table>
                     </TableContainer>

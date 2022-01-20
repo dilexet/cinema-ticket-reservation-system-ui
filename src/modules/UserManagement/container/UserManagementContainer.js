@@ -3,11 +3,10 @@ import {useActions} from "../hooks/UseActions";
 import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import Loading from "../../Loading/component/Loading";
-import UserCreateForm from "../component/UserCreateForm";
 import {useTheme} from "@mui/material";
 
 const UserManagementContainer = () => {
-    const {getUsers, createUser} = useActions();
+    const {getUsers} = useActions();
     const usersState = useSelector((state) => state.userManagement);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -18,16 +17,6 @@ const UserManagementContainer = () => {
 
     const handleAddClick = () => {
         setOpenAdd(true)
-    }
-
-    const handleSubmitAddClick = async (values) => {
-        await createUser(values)
-        console.log(values)
-        handleCloseClick()
-    }
-
-    const handleCloseClick = () => {
-        setOpenAdd(false)
     }
 
     useEffect(() => {
@@ -45,17 +34,11 @@ const UserManagementContainer = () => {
         return <Loading isLoading={true}/>
     } else {
         return (
-            <div>
-                <UserCreateForm openAdd={openAdd}
-                                handleSubmitAddClick={handleSubmitAddClick}
-                                handleCloseClick={handleCloseClick}
-                />
-                <UsersTable usersState={usersState} theme={theme}
-                            setOpenEditId={setOpenEditId} openDeleteId={openDeleteId}
-                            setOpenDeleteId={setOpenDeleteId} handleAddClick={handleAddClick}
-                            openEditId={openEditId}
-                />
-            </div>
+            <UsersTable usersState={usersState} theme={theme}
+                        setOpenEditId={setOpenEditId} openDeleteId={openDeleteId}
+                        setOpenDeleteId={setOpenDeleteId} handleAddClick={handleAddClick}
+                        openEditId={openEditId} openAdd={openAdd} setOpenAdd={setOpenAdd}
+            />
         )
     }
 
