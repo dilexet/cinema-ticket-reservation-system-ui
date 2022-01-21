@@ -13,8 +13,8 @@ import {
     Grid,
 } from "@mui/material";
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {IconButton} from "@mui/material";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import Loading from "../../Loading/component/Loading";
 import UserUpdateRowContainer from "../container/UserUpdateRowContainer";
 import UserRowContainer from "../container/UserRowContainer";
@@ -39,14 +39,14 @@ const UsersTable = ({
                         </Typography>
                         <IconButton aria-label='edit'
                                     onClick={handleAddClick}
-                                    disabled={openAdd}
+                                    disabled={openAdd || openEditId !== -1 || openDeleteId !== -1}
                                     style={{
                                         display: 'inline-block',
                                         textAlign: 'right',
                                         float: 'right',
                                         marginRight: '45px'
                                     }}>
-                            <AddCircleIcon style={{fill: theme.palette.success.main}}/>
+                            <AddBoxIcon style={{fill: theme.palette.success.dark}}/>
                         </IconButton>
                     </Box>
                     <Box>
