@@ -15,6 +15,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PublicRoute from "../../Shared/components/PublicRoute";
 import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
+import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open}) => ({
@@ -41,24 +42,15 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
         },
     }),
 );
-const MainListItems = () => {
+const AdminListItems = () => {
     return (
         <div>
+            <ListSubheader inset>Admin panel</ListSubheader>
             <ListItem style={{
                 color: 'inherit',
                 textDecoration: 'none',
             }}
-                      component={Link} to={`dashBoardTest`}>
-                <ListItemIcon>
-                    <DashboardIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Dashboard"/>
-            </ListItem>
-            <ListItem style={{
-                color: 'inherit',
-                textDecoration: 'none',
-            }}
-                      component={Link} to={`userManagement`}>
+                      component={Link} to={`user-management`}>
                 <ListItemIcon>
                     <ManageAccountsIcon/>
                 </ListItemIcon>
@@ -68,17 +60,23 @@ const MainListItems = () => {
     )
 };
 
-export const secondaryListItems = (
-    <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Current month"/>
-        </ListItem>
-    </div>
-);
+export const ManagerListItems = () => {
+    return (
+        <div>
+            <ListSubheader inset>Manager panel</ListSubheader>
+            <ListItem style={{
+                color: 'inherit',
+                textDecoration: 'none',
+            }}
+                      component={Link} to={`movie-management`}>
+                <ListItemIcon>
+                    <MovieCreationIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Movie management"/>
+            </ListItem>
+        </div>
+    )
+};
 
 const dashBoardTest = () => {
     return (
@@ -141,10 +139,12 @@ export const DrawerComponent = () => {
             </Toolbar>
             <Divider/>
             <List>
-                <MainListItems/>
+                <AdminListItems/>
             </List>
             <Divider/>
-            <List>{secondaryListItems}</List>
+            <List>
+                <ManagerListItems/>
+            </List>
         </Drawer>
     )
 }
