@@ -1,7 +1,6 @@
-import {UserManagementURL} from "../../../Shared/constants/BaseURLs";
-import axiosInstance from "../../../Shared/utils/AxiosCreater";
+import axiosInstance from "../utils/AxiosCreater";
 
-export const userManagementAPI = (url = UserManagementURL) => {
+export const defaultApi = (url) => {
     return {
         post: async (data) => await axiosInstance.post(url, data),
         get: async (filter) => await axiosInstance.get(url, filter),
