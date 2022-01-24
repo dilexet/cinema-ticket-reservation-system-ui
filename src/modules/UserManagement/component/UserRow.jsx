@@ -1,7 +1,7 @@
 import React from "react"
 import {TableCell, TableRow} from "@mui/material";
-import UserDeleteButtonGroup from "./UserDeleteButtonGroup";
-import UserRowActionsButtonGroup from "./UserRowActionsButtonGroup";
+import DeleteButtonGroup from "../../Shared/components/DeleteButtonGroup";
+import RowActionsButtonGroup from "../../Shared/components/RowActionsButtonGroup";
 
 const UserRow = ({
                      index, user, theme, isDisable, openDeleteId,
@@ -30,12 +30,12 @@ const UserRow = ({
             </TableCell>
             <TableCell component="th" scope="row" align="right">
                 {openDeleteId === index ?
-                    <UserDeleteButtonGroup
+                    <DeleteButtonGroup
                         theme={theme}
                         handleSubmitDeleteClick={handleSubmitDeleteClick}
                         handleCloseClick={handleCloseClick}
                     /> :
-                    <UserRowActionsButtonGroup
+                    <RowActionsButtonGroup
                         theme={theme}
                         handleDeleteClick={handleDeleteClick}
                         handleEditClick={handleEditClick}

@@ -99,7 +99,6 @@ const UsersTable = ({
                                         <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
                                         : <></>
                                 }
-
                             </TableBody>
                         </Table>
                     </TableContainer>

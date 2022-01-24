@@ -19,7 +19,6 @@ const UserCreateRowContainer = ({setOpenAdd, theme}) => {
     }
 
     const handleSubmitCreateClick = async (values) => {
-
         setIsCreate(false)
         if (await createUserSchema.isValid(values)) {
             await createUser(values)
