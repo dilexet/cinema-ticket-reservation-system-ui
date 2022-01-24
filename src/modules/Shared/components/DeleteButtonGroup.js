@@ -3,14 +3,14 @@ import {ButtonGroup, IconButton} from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
-const UserDeleteButtonGroup = ({handleSubmitDeleteClick, handleCloseClick, theme}) => {
+const DeleteButtonGroup = ({handleSubmitDeleteClick, handleCloseClick, theme}) => {
     return (
         <ButtonGroup>
-            <IconButton aria-label='edit' onClick={handleSubmitDeleteClick}
+            <IconButton aria-label='confirm' onClick={handleSubmitDeleteClick}
                         style={{marginLeft: '5px', marginRight: '5px'}}>
                 <DoneIcon style={{fill: theme.palette.success.dark}}/>
             </IconButton>
-            <IconButton aria-label='delete' onClick={handleCloseClick}
+            <IconButton aria-label='close' onClick={handleCloseClick}
                         style={{marginLeft: '5px', marginRight: '5px'}}>
                 <CloseIcon style={{fill: theme.palette.error.dark}}/>
             </IconButton>
@@ -18,4 +18,4 @@ const UserDeleteButtonGroup = ({handleSubmitDeleteClick, handleCloseClick, theme
     )
 }
 
-export default UserDeleteButtonGroup;
+export default DeleteButtonGroup;
