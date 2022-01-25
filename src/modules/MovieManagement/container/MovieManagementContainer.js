@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import MoviesTable from '../component/MoviesTable'
 import {useDispatch, useSelector} from "react-redux";
-import {getMovies} from "../store/action-creator/MovieManagementActions";
 import {useTheme} from "@mui/material";
 import Loading from "../../Loading/component/Loading";
+import MoviesTable from '../component/MoviesTable'
+import {getMovies} from "../store/action-creator/MovieManagementActions";
 
 const MovieManagementContainer = () => {
 
     const dispatch = useDispatch();
     const moviesState = useSelector((state) => state.movieManagement);
-    const uploadImageState = useSelector((state) => state.uploadImage);
 
     const theme = useTheme();
     const [isLoading, setIsLoading] = useState(true);

@@ -1,10 +1,12 @@
+import moment from "moment";
+
 export const InitialMovieFieldValues = {
     Name: "",
     PosterUrl: "",
-    StartDate: Date.now(),
-    EndDate: Date.now(),
-    ReleaseDate: Date.now(),
+    StartDate: moment(Date.now()).format('yyyy-MM-DD'),
+    EndDate: moment(Date.now()).format('yyyy-MM-DD'),
+    ReleaseDate: moment(Date.now()).format('yyyy-MM-DD'),
     Description: "",
-    Countries: [],
-    Genres: [],
+    Countries: "",
+    Genres: "",
 }

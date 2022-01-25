@@ -1,4 +1,5 @@
 import {defaultApi} from "../../../Shared/constants/DefaultApi";
+import {MovieManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
@@ -13,7 +14,6 @@ import {
     remove_movie_success,
     change_movies_error
 } from "../reducers/MovieManagementReducer"
-import {MovieManagementURL} from "../../../Shared/constants/BaseURLs";
 
 export const clearErrors = () => {
     return (dispatch) => {
@@ -54,7 +54,6 @@ export const getMovieById = (id) => {
 export const createMovie = (data) => {
     return async (dispatch) => {
         dispatch(loading())
-
         try {
             const response = await defaultApi(MovieManagementURL).post(data)
             dispatch(create_movie_success(response.data))

@@ -1,7 +1,6 @@
 import React from "react"
-import {Avatar, TableCell, TableRow} from "@mui/material";
+import {Avatar, Box, TableCell, TableRow} from "@mui/material";
 import {toDateString} from "../../Shared/utils/DateConverter";
-import {BaseURL} from "../../Shared/constants/BaseURLs";
 import DeleteButtonGroup from "../../Shared/components/DeleteButtonGroup";
 import RowActionsButtonGroup from "../../Shared/components/RowActionsButtonGroup";
 
@@ -22,7 +21,9 @@ const MovieRow = ({
                 {index + 1}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                <Avatar alt="poster" src={`${BaseURL}${movie?.posterUrl}`}/>
+                <Box component="div" sx={{margin: 0, padding: 0, display: "flex", justifyContent: "center"}}>
+                    <Avatar alt="poster" src={`${movie?.posterUrl}`}/>
+                </Box>
             </TableCell>
             <TableCell component="th" scope="row" align="center">
                 {movie.name}

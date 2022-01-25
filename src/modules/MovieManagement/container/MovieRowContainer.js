@@ -1,6 +1,7 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import MovieRow from "../component/MovieRow";
-import {useActions} from "../../UserManagement/hooks/UseActions";
+import {deleteMovie} from "../store/action-creator/MovieManagementActions";
 
 const MovieRowContainer = ({
                                index, movie, openEditId, setOpenEditId,
@@ -12,7 +13,7 @@ const MovieRowContainer = ({
 
     const isDisable = isEdit || isDelete || openAdd;
 
-    const {deleteUser} = useActions();
+    const dispatch = useDispatch();
 
     const handleEditClick = () => {
         setOpenEditId(index)
@@ -23,7 +24,7 @@ const MovieRowContainer = ({
     }
 
     const handleSubmitDeleteClick = async () => {
-        await deleteUser(movie.id)
+        await dispatch(await deleteMovie(movie.id))
         handleCloseClick()
     }
 
