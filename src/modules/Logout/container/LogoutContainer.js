@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {removeTokens} from "../../Shared/utils/TokenServices";
 import {Navigate} from "react-router-dom";
+import {removeTokens} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
 
 const LogoutContainer = ({isAuthenticate, setIsAuthenticate}) => {

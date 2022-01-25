@@ -1,7 +1,7 @@
 import axios from "axios";
+import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
 import {AuthorizeURL, BaseApiURL, ImageUploadURL} from "../constants/BaseURLs";
 import {getLocalAccessToken} from "./TokenServices";
-import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
 
 const axiosInstance = axios.create({
     baseURL: BaseApiURL,
@@ -39,7 +39,6 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     async (error) => {
-        console.log(error.config)
         const originalRequest = error.config;
         if (!originalRequest.url.includes(AuthorizeURL) && error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;

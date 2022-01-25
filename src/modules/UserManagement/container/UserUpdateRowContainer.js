@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
+import {useSelector} from "react-redux";
 import {useActions} from "../hooks/UseActions";
 import UserUpdateRow from "../component/UserUpdateRow";
 import updateUserSchema from "../constants/UpdateUserSchema";
-import {useSelector} from "react-redux";
 
 const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
     const initialValues = {

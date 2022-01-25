@@ -11,9 +11,8 @@ import {
     TableBody,
     Typography,
     Grid,
+    IconButton
 } from "@mui/material";
-
-import {IconButton} from "@mui/material";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Loading from "../../Loading/component/Loading";
 import UserUpdateRowContainer from "../container/UserUpdateRowContainer";

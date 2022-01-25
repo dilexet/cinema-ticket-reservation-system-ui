@@ -1,5 +1,5 @@
-import {RefreshTokenURL} from "../constants/RefreshTokenURL";
 import axiosInstance from "../../Shared/utils/AxiosCreater";
+import {RefreshTokenURL} from "../constants/RefreshTokenURL";
 
 export const refreshTokenAPI = (url = RefreshTokenURL) => {
     return {

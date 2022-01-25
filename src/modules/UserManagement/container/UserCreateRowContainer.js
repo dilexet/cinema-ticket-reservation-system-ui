@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
+import {useSelector} from "react-redux";
 import {useActions} from "../hooks/UseActions";
 import UserCreateRow from "../component/UserCreateRow";
-import {useSelector} from "react-redux";
 import createUserSchema from "../constants/CreateUserSchema";
 
 const UserCreateRowContainer = ({setOpenAdd, theme}) => {

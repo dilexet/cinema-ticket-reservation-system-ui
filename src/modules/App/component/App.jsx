@@ -13,10 +13,11 @@ import PublicRoute from "../../Shared/components/PublicRoute";
 import PrivateRoute from "../../Shared/components/PrivateRoute";
 import LogoutContainer from "../../Logout/container/LogoutContainer";
 import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
-import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import Dashboard from "../../Dashboard/component/Dashboard";
 import NotFound from "../../NotFound/component/NotFound";
 import MovieManagementContainer from "../../MovieManagement/container/MovieManagementContainer";
+
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,

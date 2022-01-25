@@ -1,4 +1,5 @@
 import {defaultApi} from "../../../Shared/constants/DefaultApi";
+import {UserManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
@@ -13,7 +14,6 @@ import {
     remove_user_success,
     change_users_error
 } from "../reducers/UserManagementReducer"
-import {UserManagementURL} from "../../../Shared/constants/BaseURLs";
 
 export const clearErrors = () => {
     return (dispatch) => {

@@ -1,5 +1,5 @@
 import React from "react"
-import {Link, Route, Routes, Outlet} from "react-router-dom"
+import {Link, Outlet} from "react-router-dom"
 import {
     styled,
     Toolbar,
@@ -10,11 +10,8 @@ import {
 } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PublicRoute from "../../Shared/components/PublicRoute";
-import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
 import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
