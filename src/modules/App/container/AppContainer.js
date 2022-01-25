@@ -21,7 +21,7 @@ const AppContainer = () => {
         }
 
         checkAuthorize()
-    }, [isAuthenticate]);
+    }, [isAuthenticate, isLoading]);
 
 
     useEffect(() => {
