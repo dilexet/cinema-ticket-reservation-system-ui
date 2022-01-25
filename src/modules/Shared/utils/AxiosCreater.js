@@ -1,10 +1,10 @@
 import axios from "axios";
-import {AuthorizeURL, BaseURL} from "../constants/BaseURLs";
-import {getLocalAccessToken} from "./TokenServices";
 import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
+import {AuthorizeURL, BaseApiURL, ImageUploadURL} from "../constants/BaseURLs";
+import {getLocalAccessToken} from "./TokenServices";
 
 const axiosInstance = axios.create({
-    baseURL: BaseURL,
+    baseURL: BaseApiURL,
     timeout: 3000,
 })
 
@@ -17,6 +17,13 @@ axiosInstance.interceptors.request.use(
                     'Authorization': `Bearer ` + res.jwt,
                     'Accept': '*/*',
                     'Content-Type': 'application/json-patch+json'
+                }
+                if (config.url.includes(ImageUploadURL)) {
+                    config.headers = {
+                        'Authorization': `Bearer ` + res.jwt,
+                        'Accept': '*/*',
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
             }
         }

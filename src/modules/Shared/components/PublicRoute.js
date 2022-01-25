@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {Navigate} from 'react-router-dom';
-import {isAuthorize} from '../utils/TokenServices';
-import Loading from "../../Loading/component/Loading";
 import {useSelector} from "react-redux";
+import {Navigate} from 'react-router-dom';
+import Loading from "../../Loading/component/Loading";
+import {isAuthorize} from '../utils/TokenServices';
 
 const PublicRoute = ({
                          component: Component, isAuthenticate,

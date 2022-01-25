@@ -3,7 +3,7 @@ import {ButtonGroup, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const UserRowActionsButtonGroup = ({handleEditClick, handleDeleteClick, isDisable, theme}) => {
+const RowActionsButtonGroup = ({handleEditClick, handleDeleteClick, isDisable, theme}) => {
     return (
         <ButtonGroup>
             <IconButton aria-label='edit' onClick={handleEditClick}
@@ -20,4 +20,4 @@ const UserRowActionsButtonGroup = ({handleEditClick, handleDeleteClick, isDisabl
     )
 }
 
-export default UserRowActionsButtonGroup;
+export default RowActionsButtonGroup;

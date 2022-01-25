@@ -1,4 +1,5 @@
-import {userManagementAPI} from "./UserManagementAPI";
+import {defaultApi} from "../../../Shared/constants/DefaultApi";
+import {UserManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
@@ -25,7 +26,7 @@ export const getUsers = (filter) => {
         dispatch(get_users_loading())
 
         try {
-            const response = await userManagementAPI().get(filter)
+            const response = await defaultApi(UserManagementURL).get(filter)
             dispatch(get_users_success(response.data))
         } catch (error) {
             if (error.response) {
@@ -40,7 +41,7 @@ export const createUser = (data) => {
         dispatch(loading())
 
         try {
-            const response = await userManagementAPI().post(data)
+            const response = await defaultApi(UserManagementURL).post(data)
             dispatch(create_user_success(response.data))
         } catch (error) {
             if (error.response) {
@@ -55,7 +56,7 @@ export const updateUser = (data, id) => {
         dispatch(loading())
 
         try {
-            const response = await userManagementAPI().update(data, id);
+            const response = await defaultApi(UserManagementURL).update(data, id);
             dispatch(update_user_success(response.data))
         } catch (error) {
             if (error.response) {
@@ -70,7 +71,7 @@ export const deleteUser = (id) => {
         dispatch(loading())
 
         try {
-            const response = await userManagementAPI().delete(id);
+            const response = await defaultApi(UserManagementURL).delete(id);
             dispatch(remove_user_success(response.data))
         } catch (error) {
             if (error.response) {
@@ -85,7 +86,7 @@ export const getUserById = (id) => {
         dispatch(get_user_by_id_loading())
 
         try {
-            const response = await userManagementAPI().getById(id);
+            const response = await defaultApi(UserManagementURL).getById(id);
             dispatch(get_user_by_id_success(response.data))
         } catch (error) {
             if (error.response) {

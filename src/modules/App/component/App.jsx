@@ -13,9 +13,11 @@ import PublicRoute from "../../Shared/components/PublicRoute";
 import PrivateRoute from "../../Shared/components/PrivateRoute";
 import LogoutContainer from "../../Logout/container/LogoutContainer";
 import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
-import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import Dashboard from "../../Dashboard/component/Dashboard";
 import NotFound from "../../NotFound/component/NotFound";
+import MovieManagementContainer from "../../MovieManagement/container/MovieManagementContainer";
+
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,
@@ -57,13 +59,17 @@ const App = ({
                                                      component={RegisterContainer} restricted={true}/>}/>
                         <Route exact path='/dashboard/*'
                                element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                     component={Dashboard} restricted={false}/>}>
+                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                      component={Dashboard} restricted={false}/>}>
                             <Route index={true} element={<NotFound/>}/>
-                            <Route exact path='userManagement'
+                            <Route exact path='user-management'
                                    element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                         component={UserManagementContainer} restricted={false}/>}/>
+                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                          component={UserManagementContainer} restricted={false}/>}/>
+                            <Route exact path='movie-management'
+                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                          component={MovieManagementContainer} restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Route>
 

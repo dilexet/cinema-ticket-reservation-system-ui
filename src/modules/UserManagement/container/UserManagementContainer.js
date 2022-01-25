@@ -1,9 +1,10 @@
-import UsersTable from "../component/UsersTable";
-import {useSelector, useDispatch} from "react-redux";
 import React, {useEffect, useState} from "react";
-import Loading from "../../Loading/component/Loading";
+import {useSelector, useDispatch} from "react-redux";
 import {useTheme} from "@mui/material";
+import Loading from "../../Loading/component/Loading";
+import UsersTable from "../component/UsersTable";
 import {getUsers} from "../store/action-creator/UserManagementActions";
+
 
 const UserManagementContainer = () => {
     const dispatch = useDispatch();

@@ -29,8 +29,9 @@ const TextField = ({
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                {...props}
             />
-            <FormHelperText>{helperText}</FormHelperText>
+            <FormHelperText style={{minWidth: '150px'}}>{helperText}</FormHelperText>
         </FormControl>
     )
 }

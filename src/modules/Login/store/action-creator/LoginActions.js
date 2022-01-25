@@ -1,9 +1,9 @@
-import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
 import {
     authenticate_loading,
     authenticate_success,
     authenticate_error
 } from "../../../Authenticate/store/reducers/AuthenticateReducer"
+import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
 import {loginAPI} from "./LoginAPI";
 
 export const loginAsyncAction = (data, rememberMe) => {

@@ -1,29 +1,27 @@
-import React from 'react';
+import React from 'react'
 import {
     Box,
     Container,
-    TableContainer,
+    Grid,
+    IconButton,
     Paper,
-    Table,
+    Table, TableBody, TableCell,
+    TableContainer,
     TableHead,
     TableRow,
-    TableCell,
-    TableBody,
-    Typography,
-    Grid,
-    IconButton
+    Typography
 } from "@mui/material";
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import AddBoxIcon from "@mui/icons-material/AddBox";
 import Loading from "../../Loading/component/Loading";
-import UserUpdateRowContainer from "../container/UserUpdateRowContainer";
-import UserRowContainer from "../container/UserRowContainer";
-import UserCreateRowContainer from "../container/UserCreateRowContainer";
+import MovieRowContainer from "../container/MovieRowContainer";
+import MovieUpdateRowContainer from "../container/MovieUpdateRowContainer";
+import MovieCreateRowContainer from "../container/MovieCreateRowContainer";
 
 
-const UsersTable = ({
-                        theme, usersState, setOpenEditId, setOpenDeleteId,
-                        handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
-                    }) => {
+const MoviesTable = ({
+                         theme, moviesState, setOpenEditId, setOpenDeleteId,
+                         handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
+                     }) => {
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="lg">
             <Grid item>
@@ -34,7 +32,7 @@ const UsersTable = ({
                             textAlign: 'left',
                             float: 'left'
                         }}>
-                            Users management
+                            Movies management
                         </Typography>
                         <IconButton aria-label='edit'
                                     onClick={handleAddClick}
@@ -56,46 +54,51 @@ const UsersTable = ({
                                     }}
                                     fontStyle={{color: theme.palette.error.dark}}
                         >
-                            {usersState?.error?.validationErrors?.User ?? ""}
+                            {moviesState?.error?.validationErrors?.Movie ?? ""}
                         </Typography>
                     </Box>
-                    <Loading isLoading={usersState?.loading}/>
+                    <Loading isLoading={moviesState?.loading}/>
 
                     <TableContainer>
                         <Table width='auto' aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="left">Id</TableCell>
+                                    <TableCell align="center">Poster</TableCell>
                                     <TableCell align="center">Name</TableCell>
-                                    <TableCell align="center">Email</TableCell>
-                                    <TableCell align="center">Role</TableCell>
+                                    <TableCell align="center">Start date</TableCell>
+                                    <TableCell align="center">End date</TableCell>
+                                    <TableCell align="center">Release year</TableCell>
+                                    <TableCell align="center">Description</TableCell>
+                                    <TableCell align="center">Countries</TableCell>
+                                    <TableCell align="center">Genres</TableCell>
                                     <TableCell align="right"/>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {usersState.dataList.users.map((user, index) => (
+                                {moviesState.dataList.movies.map((movie, index) => (
                                     <React.Fragment key={index}>
                                         {
                                             openEditId === index ?
-                                                <UserUpdateRowContainer
-                                                    user={user}
+                                                <MovieUpdateRowContainer
+                                                    movie={movie}
                                                     index={index}
                                                     setOpenEditId={setOpenEditId}
                                                     theme={theme}
                                                 /> :
-                                                <UserRowContainer user={user} index={index}
-                                                                  openEditId={openEditId}
-                                                                  setOpenEditId={setOpenEditId}
-                                                                  openDeleteId={openDeleteId}
-                                                                  setOpenDeleteId={setOpenDeleteId}
-                                                                  theme={theme} openAdd={openAdd}
+                                                <MovieRowContainer movie={movie} index={index}
+                                                                   openEditId={openEditId}
+                                                                   setOpenEditId={setOpenEditId}
+                                                                   openDeleteId={openDeleteId}
+                                                                   setOpenDeleteId={setOpenDeleteId}
+                                                                   theme={theme} openAdd={openAdd}
                                                 />
                                         }
                                     </React.Fragment>
                                 ))}
                                 {
                                     openAdd === true ?
-                                        <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        <MovieCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
                                         : <></>
                                 }
                             </TableBody>
@@ -104,7 +107,7 @@ const UsersTable = ({
                 </Paper>
             </Grid>
         </Container>
-    );
+    )
 }
 
-export default UsersTable;
+export default MoviesTable;

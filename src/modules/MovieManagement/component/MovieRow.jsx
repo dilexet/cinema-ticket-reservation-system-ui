@@ -1,13 +1,14 @@
 import React from "react"
-import {TableCell, TableRow} from "@mui/material";
+import {Avatar, Box, TableCell, TableRow} from "@mui/material";
+import {toDateString} from "../../Shared/utils/DateConverter";
 import DeleteButtonGroup from "../../Shared/components/DeleteButtonGroup";
 import RowActionsButtonGroup from "../../Shared/components/RowActionsButtonGroup";
 
-const UserRow = ({
-                     index, user, theme, isDisable, openDeleteId,
-                     handleSubmitDeleteClick, handleCloseClick,
-                     handleEditClick, handleDeleteClick
-                 }) => {
+const MovieRow = ({
+                      index, movie, theme, isDisable, openDeleteId,
+                      handleSubmitDeleteClick, handleCloseClick,
+                      handleEditClick, handleDeleteClick
+                  }) => {
     return (
         <TableRow
             key={index}
@@ -20,13 +21,30 @@ const UserRow = ({
                 {index + 1}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {user.name}
+                <Box component="div" sx={{margin: 0, padding: 0, display: "flex", justifyContent: "center"}}>
+                    <Avatar alt="poster" src={`${movie?.posterUrl}`}/>
+                </Box>
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {user.email}
+                {movie.name}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {user.roleName}
+                {toDateString(movie.startDate)}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+                {toDateString(movie.endDate)}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+                {toDateString(movie.movieDescriptionViewModel.releaseDate)}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+                {movie.movieDescriptionViewModel.description}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+                {movie.movieDescriptionViewModel.countries.join(`, `)}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+                {movie.movieDescriptionViewModel.genres.join(`, `)}
             </TableCell>
             <TableCell component="th" scope="row" align="right">
                 {openDeleteId === index ?
@@ -48,4 +66,4 @@ const UserRow = ({
     )
 }
 
-export default UserRow;
+export default MovieRow;
