@@ -1,11 +1,9 @@
 import React from 'react'
-import UploadImage from "../component/UploadImage";
 import {useDispatch} from "react-redux";
 import {uploadImageAsyncAction} from "../store/action-creator/UploadImageActions";
+import UploadImage from "../component/UploadImage";
 
 const UploadImageContainer = () => {
-    // const[] = React.useState();
-
     const dispatch = useDispatch();
 
     const handleUploadImage = async (event) => {
@@ -13,7 +11,6 @@ const UploadImageContainer = () => {
         const formData = new FormData();
         formData.append("formFile", file)
         await dispatch(uploadImageAsyncAction(formData));
-        console.log(formData)
     }
 
     return (

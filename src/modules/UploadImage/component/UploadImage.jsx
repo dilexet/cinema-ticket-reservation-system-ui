@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Stack, styled, Typography} from "@mui/material";
+import {IconButton, Stack, styled} from "@mui/material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 const Input = styled('input')({
@@ -16,19 +16,12 @@ const UploadImage = ({handleUploadImage}) => {
                     type="file"
                     onChange={handleUploadImage}
                 />
-                <Button
-                    variant="contained"
-                    component="span"
-                    fullWidth
-                    style={{borderRadius: "20px"}}
-                    size='medium'
-                    sx={{mt: 3, mb: 2}}
-                >
+                <IconButton color="primary" aria-label="upload picture" component="span"
+                            style={{
+                                margin: '10px 10px'
+                            }}>
                     <FileUploadIcon/>
-                    <Typography margin="5px 10px">
-                        Upload
-                    </Typography>
-                </Button>
+                </IconButton>
             </label>
         </Stack>
     )

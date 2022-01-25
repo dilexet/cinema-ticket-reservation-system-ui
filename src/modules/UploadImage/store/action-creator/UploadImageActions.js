@@ -1,9 +1,13 @@
-import {upload_image_loading, upload_image_success, upload_image_error} from "../reducers/UploadImageReducer"
+import {
+    upload_image_loading,
+    upload_image_success,
+    upload_image_error,
+    upload_image_clear
+} from "../reducers/UploadImageReducer"
 import {uploadImageAPI} from "./UploadImageAPI";
 
 export const uploadImageAsyncAction = (data) => {
     return async (dispatch) => {
-        console.log("CALL")
         dispatch(upload_image_loading())
 
         try {
@@ -14,5 +18,11 @@ export const uploadImageAsyncAction = (data) => {
                 dispatch(upload_image_error(error.response.data))
             }
         }
+    }
+}
+
+export const clearUploadImage = () => {
+    return async (dispatch) => {
+        await dispatch(upload_image_clear())
     }
 }

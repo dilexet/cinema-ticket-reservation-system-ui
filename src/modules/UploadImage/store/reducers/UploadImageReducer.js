@@ -15,6 +15,11 @@ const uploadImageSlice = createSlice({
             state.data = null;
             state.error = null;
         },
+        upload_image_clear(state) {
+            state.loading = false;
+            state.data = null;
+            state.error = null;
+        },
         upload_image_success(state, action) {
             state.loading = false;
             state.data = action.payload;
@@ -34,6 +39,7 @@ export default uploadImageSlice.reducer;
 export const {
     upload_image_loading,
     upload_image_success,
-    upload_image_error
+    upload_image_error,
+    upload_image_clear
 
 } = uploadImageSlice.actions;
