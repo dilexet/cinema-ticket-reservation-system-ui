@@ -9,7 +9,7 @@ const initialState = {
     dataItem: {
         code: null,
         success: false,
-        movies: null
+        movie: null
     },
     loading: false,
     error: null,
