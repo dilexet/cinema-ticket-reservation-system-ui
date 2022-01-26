@@ -10,7 +10,7 @@ const CinemaManagementContainer = () => {
     const cinemaState = useSelector((state) => state.cinemaManagement);
 
     const theme = useTheme();
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(null);
     const [openEditId, setOpenEditId] = React.useState(-1);
     const [openDeleteId, setOpenDeleteId] = React.useState(-1);
     const [openAdd, setOpenAdd] = React.useState(false);
@@ -25,12 +25,16 @@ const CinemaManagementContainer = () => {
             setIsLoading(false)
         }
 
+        if (isLoading === null) {
+            setIsLoading(true)
+        }
+
         if (isLoading === true) {
             getCinemasList()
         }
     }, [dispatch, isLoading, setIsLoading]);
 
-    if (isLoading) {
+    if (isLoading === null || isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
         return (

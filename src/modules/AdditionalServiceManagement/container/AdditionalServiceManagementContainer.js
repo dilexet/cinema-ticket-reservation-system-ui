@@ -9,7 +9,7 @@ const AdditionalServiceManagementContainer = () => {
 
     const dispatch = useDispatch();
     const serviceState = useSelector((state) => state.additionalServiceManagement);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(null);
 
     const theme = useTheme();
     const [openEditId, setOpenEditId] = React.useState(-1);
@@ -26,12 +26,16 @@ const AdditionalServiceManagementContainer = () => {
             setIsLoading(false)
         }
 
+        if (isLoading === null) {
+            setIsLoading(true)
+        }
+
         if (isLoading === true) {
             getAdditionalServicesList()
         }
     }, [dispatch, isLoading, setIsLoading]);
 
-    if (isLoading) {
+    if (isLoading === null || isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
         return (
