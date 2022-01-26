@@ -12,5 +12,7 @@ export const rootReducer = combineReducers({
     userManagement: userManagementSlice,
     authenticate: authenticateSlice,
     movieManagement: movieManagementSlice,
-    uploadImage: uploadImageSlice
+    uploadImage: uploadImageSlice,
+    cinemaManagement: cinemaManagementSlice,
+    additionalServiceManagement: additionalServiceManagementSlice,
 })
