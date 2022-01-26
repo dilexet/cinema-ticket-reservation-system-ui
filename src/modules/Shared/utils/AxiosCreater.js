@@ -14,13 +14,13 @@ axiosInstance.interceptors.request.use(
             const res = getLocalAccessToken();
             if (res) {
                 config.headers = {
-                    'Authorization': `Bearer ` + res.jwt,
+                    'Authorization': `Bearer ${res.jwt}`,
                     'Accept': '*/*',
                     'Content-Type': 'application/json-patch+json'
                 }
                 if (config.url.includes(ImageUploadURL)) {
                     config.headers = {
-                        'Authorization': `Bearer ` + res.jwt,
+                        'Authorization': `Bearer ${res.jwt}`,
                         'Accept': '*/*',
                         'Content-Type': 'multipart/form-data'
                     }
@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
             if (res === true) {
                 const tokens = getLocalAccessToken();
                 if (tokens) {
-                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.jwt;
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${tokens.jwt}`;
                     return axiosInstance(originalRequest);
                 }
             }
