@@ -9,7 +9,6 @@ import movieSchema from "../constants/MovieSchema";
 
 const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
     const initialValues = {
-        "Id": movie.id,
         "Name": movie.name,
         "PosterUrl": movie.posterUrl,
         "StartDate": toDateStringInputFormat(movie.startDate),

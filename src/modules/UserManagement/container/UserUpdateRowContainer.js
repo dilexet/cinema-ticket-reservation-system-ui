@@ -6,7 +6,6 @@ import updateUserSchema from "../constants/UpdateUserSchema";
 
 const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
     const initialValues = {
-        "Id": user.id,
         "Name": user.name,
         "Email": user.email,
         "RoleName": user.roleName

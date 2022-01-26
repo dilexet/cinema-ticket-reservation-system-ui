@@ -6,7 +6,6 @@ import {clearErrors, updateCinema} from "../store/action-creator/CinemaManagemen
 
 const CinemaUpdateRowContainer = ({cinema, index, setOpenEditId, theme}) => {
     const initialValues = {
-        "Id": cinema.id,
         "Name": cinema.name,
         "CityName": cinema.cityName,
         "Street": cinema.street,
