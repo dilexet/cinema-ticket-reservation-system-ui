@@ -30,6 +30,8 @@ const MovieCreateRowContainer = ({setOpenAdd, theme}) => {
             values.Countries = values.Countries.split(',')
             values.Genres = values.Genres.split(',')
             await dispatch(await createMovie(values))
+            values.Countries = values.Countries.join(',')
+            values.Genres = values.Genres.join(',')
             setIsCreate(true)
         }
     }
@@ -46,7 +48,7 @@ const MovieCreateRowContainer = ({setOpenAdd, theme}) => {
 
     return (
         <MovieCreateRow
-            theme={theme} movieState={movieState}
+            theme={theme} moviesState={movieState}
             handleSubmitCreateClick={handleSubmitCreateClick}
             handleCloseClick={handleCloseClick}
             uploadImageState={uploadImageState}

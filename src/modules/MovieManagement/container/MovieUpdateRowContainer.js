@@ -43,6 +43,8 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
             values.Countries = values.Countries.split(',')
             values.Genres = values.Genres.split(',')
             await dispatch(await updateMovie(values, movie.id))
+            values.Countries = values.Countries.join(',')
+            values.Genres = values.Genres.join(',')
             setIsUpdate(true)
         }
     }
