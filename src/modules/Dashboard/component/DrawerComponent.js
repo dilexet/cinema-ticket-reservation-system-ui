@@ -4,8 +4,9 @@ import {Divider, IconButton, List, Toolbar} from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import {AdminListItems} from "../constants/AdminListItems";
 import {ManagerListItems} from "../constants/ManagerListItems";
+import {AdminRole, ManagerRole} from "../../Shared/constants/RoleNames";
 
-const DrawerComponent = ({open, toggleDrawer}) => {
+const DrawerComponent = ({open, toggleDrawer, role}) => {
     return (
         <Drawer variant="permanent" open={open}>
             <Toolbar
@@ -21,13 +22,16 @@ const DrawerComponent = ({open, toggleDrawer}) => {
                 </IconButton>
             </Toolbar>
             <Divider/>
-            <List>
-                <AdminListItems/>
-            </List>
-            <Divider/>
-            <List>
-                <ManagerListItems/>
-            </List>
+            {
+                role === AdminRole ?
+                    <List>
+                        <AdminListItems/>
+                    </List> :
+                    role === ManagerRole ?
+                        <List>
+                            <ManagerListItems/>
+                        </List> : <></>
+            }
         </Drawer>
     )
 }

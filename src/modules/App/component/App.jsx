@@ -9,8 +9,8 @@ import LoginContainer from "../../Login/container/LoginContainer";
 import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
 import RegisterContainer from "../../Register/container/RegisterContainer";
 import Footer from "../../Footer/component/Footer";
-import PublicRoute from "../../Shared/components/PublicRoute";
-import PrivateRoute from "../../Shared/components/PrivateRoute";
+import PublicRoute from "../../Shared/components/Routes/PublicRoute";
+import PrivateRoute from "../../Shared/components/Routes/PrivateRoute";
 import LogoutContainer from "../../Logout/container/LogoutContainer";
 import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
 import Dashboard from "../../Dashboard/component/Dashboard";
@@ -20,6 +20,8 @@ import CinemaManagementContainer from "../../CinemaManagement/container/CinemaMa
 import AdditionalServiceManagementContainer from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
+import AdminRoute from "../../Shared/components/Routes/AdminRoute";
+import ManagerRoute from "../../Shared/components/Routes/ManagerRoute";
 
 const App = ({
                  darkMode,
@@ -65,19 +67,19 @@ const App = ({
                                                       component={Dashboard} restricted={false}/>}>
                             <Route index={true} element={<NotFound/>}/>
                             <Route exact path='user-management'
-                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                   element={<AdminRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={UserManagementContainer} restricted={false}/>}/>
                             <Route exact path='movie-management'
-                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={MovieManagementContainer} restricted={false}/>}/>
                             <Route exact path='cinema-management'
-                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={CinemaManagementContainer} restricted={false}/>}/>
                             <Route exact path='additional-service-management'
-                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={AdditionalServiceManagementContainer} restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>

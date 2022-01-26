@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom';
-import Loading from "../../Loading/component/Loading";
-import {isAuthorize} from '../utils/TokenServices';
+import Loading from "../../../Loading/component/Loading";
+import {isAuthorize, isManager} from '../../utils/TokenServices';
 
-const PrivateRoute = ({
+const ManagerRoute = ({
                           component: Component, isAuthenticate,
                           isLoading, setIsAuthenticate, ...props
                       }) => {
@@ -13,7 +13,10 @@ const PrivateRoute = ({
 
     useEffect(() => {
         async function checkAuthorize() {
-            if (authenticateState.isAuthenticate === false) {
+            if (!isManager()) {
+                setIsAuthenticate(false)
+                console.log("You don't have access to this resource. You are not Manager.")
+            } else if (authenticateState.isAuthenticate === false) {
                 setIsAuthenticate(false)
             } else if (isLoading === false && isAuthenticate === false) {
                 const result = await isAuthorize();
@@ -33,4 +36,4 @@ const PrivateRoute = ({
     }
 };
 
-export default PrivateRoute;
+export default ManagerRoute;
