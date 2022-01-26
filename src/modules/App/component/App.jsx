@@ -16,6 +16,8 @@ import UserManagementContainer from "../../UserManagement/container/UserManageme
 import Dashboard from "../../Dashboard/component/Dashboard";
 import NotFound from "../../NotFound/component/NotFound";
 import MovieManagementContainer from "../../MovieManagement/container/MovieManagementContainer";
+import CinemaManagementContainer from "../../CinemaManagement/container/CinemaManagementContainer";
+import AdditionalServiceManagementContainer from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
@@ -70,6 +72,14 @@ const App = ({
                                    element={<PrivateRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={MovieManagementContainer} restricted={false}/>}/>
+                            <Route exact path='cinema-management'
+                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                          component={CinemaManagementContainer} restricted={false}/>}/>
+                            <Route exact path='additional-service-management'
+                                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                          component={AdditionalServiceManagementContainer} restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Route>
 
