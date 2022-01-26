@@ -1,10 +1,13 @@
 import React from "react";
+import {getName} from "../../Shared/utils/TokenServices";
 import TopAppBar from "../component/TopAppBar";
 
 const TopAppBarContainer = ({darkMode, setDarkMode, setCookie, isAuthenticate}) => {
     const menuId = 'primary-search-account-menu';
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(null);
+    const [userName, setUserName] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -24,10 +27,20 @@ const TopAppBarContainer = ({darkMode, setDarkMode, setCookie, isAuthenticate}) 
         setDarkMode(!darkMode);
     }
 
+    React.useEffect(() => {
+        if (isLoading === true) {
+            const name = getName();
+            setUserName(name)
+        }
+        if (isLoading === null) {
+            setIsLoading(true)
+        }
+    }, [isLoading, userName]);
+
     return (
         <TopAppBar darkMode={darkMode} onChangeTheme={onChangeTheme} isAuthenticate={isAuthenticate}
                    menuId={menuId} anchorEl={anchorEl} handleProfileMenuOpen={handleProfileMenuOpen}
-                   isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose}/>
+                   isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} userName={userName}/>
     );
 }
 
