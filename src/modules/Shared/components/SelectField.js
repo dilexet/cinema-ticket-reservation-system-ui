@@ -4,7 +4,7 @@ import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/ma
 const SelectField = ({
                          id, value, name, label, onChange,
                          onBlur, error, helperText, defaultField, data,
-                         ...props
+                         itemField, ...props
                      }) => {
     return (
         <FormControl
@@ -27,7 +27,7 @@ const SelectField = ({
                 </MenuItem>
                 {
                     data?.map((item, index) => (
-                        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                        <MenuItem key={index} value={item[itemField]}>{item.name}</MenuItem>
                     ))
                 }
             </Select>
