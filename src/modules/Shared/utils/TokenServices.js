@@ -19,7 +19,13 @@ export const isAuthorize = async () => {
     const result = isTokenExpired();
 
     if (result === true) {
-        return await refreshTokenAsyncAction();
+        const isRefresh = await refreshTokenAsyncAction();
+        if (isRefresh === true) {
+            return true;
+        } else {
+            removeTokens();
+            return false;
+        }
     } else {
         return result === false;
     }
