@@ -16,4 +16,6 @@ export const AdditionalServiceManagementURL = "additionalService/"
 
 export const SessionManagementURL = "session/"
 
+export const SeatTypeURL = "seatType/"
+
 export const ImageUploadURL = "file/"
