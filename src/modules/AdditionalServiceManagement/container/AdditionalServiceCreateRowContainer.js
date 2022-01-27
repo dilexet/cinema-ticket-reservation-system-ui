@@ -35,12 +35,9 @@ const AdditionalServiceCreateRowContainer = ({setOpenAdd, theme}) => {
     }
 
     useEffect(() => {
-        const close = () => {
-            if (isCreate === true && serviceState.error === null) {
-                handleCloseClick()
-            }
+        if (isCreate === true && serviceState.error === null) {
+            handleCloseClick()
         }
-        close()
     }, [isCreate, serviceState.error]);
 
 

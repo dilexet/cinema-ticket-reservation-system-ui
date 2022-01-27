@@ -95,9 +95,7 @@ const AdditionalServicesTable = ({
                                 ))}
                                 {
                                     openAdd === true ?
-                                        <React.Fragment>
-                                            <AdditionalServiceCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
-                                        </React.Fragment>
+                                        <AdditionalServiceCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
                                         : <></>
                                 }
                             </TableBody>

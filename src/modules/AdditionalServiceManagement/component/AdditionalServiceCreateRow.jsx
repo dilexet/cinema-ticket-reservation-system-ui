@@ -51,6 +51,7 @@ const AdditionalServiceCreateRow = ({
                                 id='cinemaId' value={values.CinemaId} name="CinemaId"
                                 label="Cinema" onChange={handleChange} onBlur={handleBlur}
                                 defaultField="None" data={cinemaState?.dataList?.cinemas}
+                                itemField='id'
                                 {...handleErrorService(serviceState, errors, touched,
                                     "CinemaId")}
                             />
