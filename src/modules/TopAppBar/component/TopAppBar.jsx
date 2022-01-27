@@ -12,7 +12,7 @@ import TopMenu from "./TopMenu";
 const TopAppBar = ({
                        darkMode, onChangeTheme, isAuthenticate, menuId,
                        handleProfileMenuOpen, anchorEl, isMenuOpen,
-                       handleMenuClose, userName
+                       handleMenuClose
                    }) => {
     return (
         <Box>
@@ -82,12 +82,6 @@ const TopAppBar = ({
                         >
                             Support
                         </LinkMaterial>
-                        {
-                            isAuthenticate === true ?
-                                <Typography style={{margin: "0 5px 0 20px"}}>
-                                    {"Hello, " + userName}
-                                </Typography> : <></>
-                        }
                         <IconButton
                             size="large"
                             edge="end"
