@@ -21,12 +21,12 @@ export const clearErrors = () => {
     }
 }
 
-export const getMovies = (filter) => {
+export const getMovies = () => {
     return async (dispatch) => {
         dispatch(get_movies_loading())
 
         try {
-            const response = await defaultApi(MovieManagementURL).get(filter)
+            const response = await defaultApi(MovieManagementURL).get()
             dispatch(get_movies_success(response.data))
         } catch (error) {
             if (error.response) {

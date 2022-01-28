@@ -9,7 +9,6 @@ import movieSchema from "../constants/MovieSchema";
 
 const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
     const initialValues = {
-        "Id": movie.id,
         "Name": movie.name,
         "PosterUrl": movie.posterUrl,
         "StartDate": toDateStringInputFormat(movie.startDate),
@@ -43,6 +42,8 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
             values.Countries = values.Countries.split(',')
             values.Genres = values.Genres.split(',')
             await dispatch(await updateMovie(values, movie.id))
+            values.Countries = values.Countries.join(',')
+            values.Genres = values.Genres.join(',')
             setIsUpdate(true)
         }
     }

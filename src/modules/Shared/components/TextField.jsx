@@ -5,6 +5,7 @@ const TextField = ({
                        error, helperText,
                        value, onChange, onBlur,
                        variant, size, margin, style, inputProps,
+                       outlinedInputStyle, formControlStyle,
                        ...props
                    }) => {
     return (
@@ -14,6 +15,7 @@ const TextField = ({
             margin={margin}
             required={true}
             fullWidth={true}
+            style={formControlStyle}
             error={error}
         >
             <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
@@ -24,9 +26,9 @@ const TextField = ({
                 type={props.type}
                 autoFocus={props.autoFocus}
                 autoComplete={props.autoComplete}
-                style={style}
                 inputProps={inputProps}
                 value={value}
+                style={outlinedInputStyle}
                 onChange={onChange}
                 onBlur={onBlur}
                 {...props}

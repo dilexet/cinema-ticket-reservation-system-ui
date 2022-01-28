@@ -5,15 +5,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {AccountCircle} from "@mui/icons-material";
-import MoreIcon from '@mui/icons-material/MoreVert';
 import {WEB_SITE_NAME, WEB_SHORT_SITE_NAME} from "../../Shared/constants/WebSiteName";
 import {Search, SearchIconWrapper, StyledInputBase} from "../constants/SearchStyled";
 import TopMenu from "./TopMenu";
 
 const TopAppBar = ({
-                       darkMode, onChangeTheme, isAuthenticate, menuId, mobileMenuId,
-                       handleProfileMenuOpen, handleMobileMenuOpen,
-                       anchorEl, isMenuOpen, handleMenuClose
+                       darkMode, onChangeTheme, isAuthenticate, menuId,
+                       handleProfileMenuOpen, anchorEl, isMenuOpen,
+                       handleMenuClose
                    }) => {
     return (
         <Box>
@@ -93,19 +92,6 @@ const TopAppBar = ({
                             color="inherit"
                         >
                             <AccountCircle/>
-                        </IconButton>
-                    </Box>
-
-                    <Box sx={{display: {xs: 'block', md: 'none'}}}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon/>
                         </IconButton>
                     </Box>
                 </Toolbar>

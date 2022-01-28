@@ -9,7 +9,7 @@ import {getUsers} from "../store/action-creator/UserManagementActions";
 const UserManagementContainer = () => {
     const dispatch = useDispatch();
     const usersState = useSelector((state) => state.userManagement);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(null);
 
     const theme = useTheme();
     const [openEditId, setOpenEditId] = React.useState(-1);
@@ -26,12 +26,16 @@ const UserManagementContainer = () => {
             setIsLoading(false)
         }
 
+        if (isLoading === null) {
+            setIsLoading(true)
+        }
+
         if (isLoading === true) {
             getUsersList()
         }
     }, [dispatch, isLoading, setIsLoading]);
 
-    if (isLoading) {
+    if (isLoading === null || isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
         return (

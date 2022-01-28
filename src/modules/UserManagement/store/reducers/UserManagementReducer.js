@@ -9,7 +9,7 @@ const initialState = {
     dataItem: {
         code: null,
         success: false,
-        users: null
+        user: null
     },
     loading: false,
     error: null,

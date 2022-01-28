@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
+import {AdminRole, ManagerRole, UserRole} from "../constants/RoleNames";
 
 export const isTokenExpired = () => {
 
@@ -18,7 +19,13 @@ export const isAuthorize = async () => {
     const result = isTokenExpired();
 
     if (result === true) {
-        return await refreshTokenAsyncAction();
+        const isRefresh = await refreshTokenAsyncAction();
+        if (isRefresh === true) {
+            return true;
+        } else {
+            removeTokens();
+            return false;
+        }
     } else {
         return result === false;
     }
@@ -58,6 +65,50 @@ export const getLocalAccessToken = () => {
         }
     }
     return null;
+}
+
+export const getRole = () => {
+    const payload = getJwtPayload();
+    if (payload === null) {
+        return null;
+    }
+    return payload.Role;
+}
+
+export const isAdmin = () => {
+    const role = getRole();
+    if (role === null) {
+        return false;
+    }
+    return role === AdminRole
+}
+
+export const isManager = () => {
+    const role = getRole();
+    if (role === null) {
+        return false;
+    }
+    return role === ManagerRole
+}
+
+export const isUser = () => {
+    const role = getRole();
+    if (role === null) {
+        return false;
+    }
+    return role === UserRole
+}
+
+export const getName = () => {
+    const payload = getJwtPayload();
+    if (payload === null) {
+        return 'Unknown';
+    }
+    const name = payload.Name;
+    if (!name) {
+        return 'Unknown'
+    }
+    return name;
 }
 
 export const removeTokens = () => {

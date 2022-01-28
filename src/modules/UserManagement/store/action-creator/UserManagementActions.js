@@ -21,12 +21,12 @@ export const clearErrors = () => {
     }
 }
 
-export const getUsers = (filter) => {
+export const getUsers = () => {
     return async (dispatch) => {
         dispatch(get_users_loading())
 
         try {
-            const response = await defaultApi(UserManagementURL).get(filter)
+            const response = await defaultApi(UserManagementURL).get()
             dispatch(get_users_success(response.data))
         } catch (error) {
             if (error.response) {

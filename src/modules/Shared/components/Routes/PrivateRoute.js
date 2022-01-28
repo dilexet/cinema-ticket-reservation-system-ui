@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom';
-import Loading from "../../Loading/component/Loading";
-import {isAuthorize} from '../utils/TokenServices';
+import Loading from "../../../Loading/component/Loading";
+import {isAuthorize} from '../../utils/TokenServices';
 
-const PublicRoute = ({
-                         component: Component, isAuthenticate,
-                         setIsAuthenticate, isLoading, restricted, ...props
-                     }) => {
+const PrivateRoute = ({
+                          component: Component, isAuthenticate,
+                          isLoading, setIsAuthenticate, ...props
+                      }) => {
 
     const authenticateState = useSelector((state) => state.authenticate);
 
@@ -26,11 +26,11 @@ const PublicRoute = ({
 
     if (isAuthenticate === null) {
         return <Loading isLoading={true}/>
-    } else if (isAuthenticate === true && restricted) {
-        return <Navigate to='/'/>
+    } else if (isAuthenticate === true) {
+        return <Component isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate} {...props}/>
     } else {
-        return <Component {...props}/>
+        return <Navigate to='/login'/>
     }
 };
 
-export default PublicRoute;
+export default PrivateRoute;

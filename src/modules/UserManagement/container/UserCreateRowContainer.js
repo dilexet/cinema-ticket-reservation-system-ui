@@ -1,27 +1,27 @@
 import React, {useEffect} from 'react';
-import {useSelector} from "react-redux";
-import {useActions} from "../hooks/UseActions";
+import {useSelector, useDispatch} from "react-redux";
 import UserCreateRow from "../component/UserCreateRow";
 import createUserSchema from "../constants/CreateUserSchema";
+import {clearErrors, createUser} from "../store/action-creator/UserManagementActions";
 
 const UserCreateRowContainer = ({setOpenAdd, theme}) => {
 
     const [isCreate, setIsCreate] = React.useState(false)
 
-    const {createUser, clearErrors} = useActions();
+    const dispatch = useDispatch();
 
     const userManagementState = useSelector((state) => state.userManagement);
 
-    const handleCloseClick = () => {
+    const handleCloseClick = async () => {
         setIsCreate(false)
         setOpenAdd(false)
-        clearErrors()
+        await dispatch(clearErrors())
     }
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
         if (await createUserSchema.isValid(values)) {
-            await createUser(values)
+            await dispatch(await createUser(values))
             setIsCreate(true)
         }
     }

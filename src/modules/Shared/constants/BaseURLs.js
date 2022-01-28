@@ -8,4 +8,14 @@ export const UserManagementURL = "userManagement/"
 
 export const MovieManagementURL = "movie/"
 
+export const CinemaManagementURL = "cinema/"
+
+export const HallManagementURL = "hall/"
+
+export const AdditionalServiceManagementURL = "additionalService/"
+
+export const SessionManagementURL = "session/"
+
+export const SeatTypeURL = "seatType/"
+
 export const ImageUploadURL = "file/"

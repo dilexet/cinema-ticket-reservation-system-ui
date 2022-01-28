@@ -11,7 +11,7 @@ const MovieManagementContainer = () => {
     const moviesState = useSelector((state) => state.movieManagement);
 
     const theme = useTheme();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(null);
     const [openEditId, setOpenEditId] = React.useState(-1);
     const [openDeleteId, setOpenDeleteId] = React.useState(-1);
     const [openAdd, setOpenAdd] = React.useState(false);
@@ -26,12 +26,17 @@ const MovieManagementContainer = () => {
             setIsLoading(false)
         }
 
+        if (isLoading === null) {
+            setIsLoading(true)
+        }
+
+
         if (isLoading === true) {
             getMoviesList()
         }
-    }, [dispatch, isLoading, setIsLoading]);
+    }, [dispatch, isLoading]);
 
-    if (isLoading) {
+    if (isLoading === null || isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
         return (
