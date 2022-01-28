@@ -22,8 +22,8 @@ import AdditionalServiceManagementContainer
     from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
-import AdminRoute from "../../Shared/components/Routes/AdminRoute";
-import ManagerRoute from "../../Shared/components/Routes/ManagerRoute";
+import RoleRoute from "../../Shared/components/Routes/RoleRoute";
+import {AdminRole, ManagerRole} from "../../Shared/constants/RoleNames";
 
 const App = ({
                  darkMode,
@@ -46,11 +46,10 @@ const App = ({
                     <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
                                         isAuthenticate={isAuthenticate}/>
                     <Routes>
-
                         <Route exact path='/'
-                               element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                      component={HomeContainer}/>}/>
+                               element={<PublicRoute isAuthenticate={isAuthenticate}
+                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                     component={HomeContainer}/>}/>
                         <Route exact path='/logout'
                                element={<PrivateRoute isAuthenticate={isAuthenticate}
                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
@@ -69,30 +68,28 @@ const App = ({
                                                       component={Dashboard} restricted={false}/>}>
                             <Route index={true} element={<NotFound/>}/>
                             <Route exact path='user-management'
-                                   element={<AdminRoute isAuthenticate={isAuthenticate}
-                                                        setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                        component={UserManagementContainer} restricted={false}/>}/>
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={AdminRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={UserManagementContainer} restricted={false}/>}/>
                             <Route exact path='movie-management'
-                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={MovieManagementContainer} restricted={false}/>}/>
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={MovieManagementContainer} restricted={false}/>}/>
                             <Route exact path='cinema-management'
-                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={CinemaManagementContainer} restricted={false}/>}/>
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={CinemaManagementContainer} restricted={false}/>}/>
                             <Route exact path='hall-management'
-                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={HallManagementContainer} restricted={false}/>}/>
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={HallManagementContainer} restricted={false}/>}/>
                             <Route exact path='additional-service-management'
-                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={AdditionalServiceManagementContainer}
-                                                          restricted={false}/>}/>
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={AdditionalServiceManagementContainer}
+                                                       restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Route>
-
-
                     </Routes>
                     <Footer description={"Some description"}/>
                 </CssBaseline>
