@@ -11,11 +11,11 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import SeatRowCreate from "./SeatRowCreate";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import SeatRowChangeContainer from "../../container/Shared/SeatRowChangeContainer";
 
-const CollapsibleSeatTableCreate = ({
+const CollapsibleSeatTableChange = ({
                                         indexRow,
                                         openSeats,
                                         values,
@@ -27,13 +27,13 @@ const CollapsibleSeatTableCreate = ({
                                         handleRemoveClick,
                                         hallManagementState,
                                         seatTypeState,
-                                        numberSeats
+                                        setFieldValue
                                     }) => {
     return (
         <TableRow>
-            <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={3}>
+            <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={openSeats} timeout="auto" unmountOnExit>
-                    <Box sx={{margin: 1, marginLeft: '100px', display: 'block'}}>
+                    <Box sx={{margin: 1, maxWidth: 'sm'}}>
                         <Box display='block' justifyContent='center'>
                             <Typography component="h2" variant="h6" gutterBottom color="secondary" style={{
                                 display: 'inline-block',
@@ -61,7 +61,7 @@ const CollapsibleSeatTableCreate = ({
                                 </IconButton>
                             </ButtonGroup>
                         </Box>
-                        <Table size="small" aria-label="purchases">
+                        <Table width='auto' size="small" aria-label="purchases">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align='left'>id</TableCell>
@@ -71,18 +71,19 @@ const CollapsibleSeatTableCreate = ({
                             </TableHead>
                             <TableBody>
                                 {
-                                    numberSeats.map((id, index) => (
-                                        <React.Fragment key={index}>
-                                            <SeatRowCreate
-                                                values={values} errors={errors} touched={touched}
-                                                handleChange={handleChange}
-                                                hallManagementState={hallManagementState}
-                                                seatTypeState={seatTypeState}
-                                                handleBlur={handleBlur}
-                                                index={index} indexRow={indexRow}
-                                            />
-                                        </React.Fragment>
-                                    ))
+                                    values.rows[indexRow].seats ?
+                                        values.rows[indexRow].seats.map((seat, index) => (
+                                            <React.Fragment key={index}>
+                                                <SeatRowChangeContainer
+                                                    values={values} errors={errors} touched={touched}
+                                                    handleChange={handleChange}
+                                                    hallManagementState={hallManagementState}
+                                                    seatTypeState={seatTypeState}
+                                                    handleBlur={handleBlur}
+                                                    index={index} indexRow={indexRow} setFieldValue={setFieldValue}
+                                                />
+                                            </React.Fragment>
+                                        )) : <></>
                                 }
                             </TableBody>
                         </Table>
@@ -93,4 +94,4 @@ const CollapsibleSeatTableCreate = ({
     )
 }
 
-export default CollapsibleSeatTableCreate;
+export default CollapsibleSeatTableChange;

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {TableCell, TableRow} from "@mui/material";
-import HallCreateRow from "../../component/Create/HallCreateRow";
-import hallSchema from "../../constants/HallSchema";
-import {getSeatTypes} from "../../../SeatType/store/action-creator/SeatTypeActions";
-import {getCinemas} from "../../../CinemaManagement/store/action-creator/CinemaManagementActions";
-import Loading from "../../../Loading/component/Loading";
-import {createHall, clearErrors} from "../../store/action-creator/HallManagementActions";
+import HallCreateRow from "../component/HallCreateRow";
+import hallSchema from "../constants/HallSchema";
+import {getSeatTypes} from "../../SeatType/store/action-creator/SeatTypeActions";
+import {getCinemas} from "../../CinemaManagement/store/action-creator/CinemaManagementActions";
+import Loading from "../../Loading/component/Loading";
+import {createHall, clearErrors} from "../store/action-creator/HallManagementActions";
 
 const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const [isCreate, setIsCreate] = React.useState(false)
@@ -28,7 +28,7 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
         setIsCreate(false)
         if (await hallSchema.isValid(values)) {
             console.log(values)
-            await dispatch(await createHall(values, values.CinemaId))
+            await dispatch(await createHall(values, values.cinemaId))
             setIsCreate(true)
         }
     }

@@ -3,15 +3,14 @@ import {Formik} from "formik";
 import {ButtonGroup, IconButton, TableCell, TableRow} from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import handleErrorService from "../../../Shared/utils/HandleErrorService";
-import TextField from "../../../Shared/components/TextField"
-import hallSchema from "../../constants/HallSchema";
-import {InitialHallFieldValues} from "../../constants/InitialFieldValues";
-import SelectField from "../../../Shared/components/SelectField";
+import handleErrorService from "../../Shared/utils/HandleErrorService";
+import TextField from "../../Shared/components/TextField"
+import hallSchema from "../constants/HallSchema";
+import {InitialHallFieldValues} from "../constants/InitialFieldValues";
+import SelectField from "../../Shared/components/SelectField";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CollapsibleRowsTableCreate from "./CollapsibleRowsTableCreate";
-import CollapsibleRowsTableCreateContainer from "../../container/Create/CollapsibleRowsTableCreateContainer";
+import CollapsibleRowsTableChangeContainer from "../container/Shared/CollapsibleRowsTableChangeContainer";
 
 const HallCreateRow = ({
                            theme, hallManagementState, cinemaState,
@@ -29,6 +28,7 @@ const HallCreateRow = ({
             {
                 ({
                      values,
+                     setFieldValue,
                      errors,
                      touched,
                      handleChange,
@@ -53,12 +53,12 @@ const HallCreateRow = ({
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
                                 <SelectField
-                                    id='cinemaId' value={values.CinemaId} name="CinemaId"
+                                    id='cinemaId' value={values.cinemaId} name="cinemaId"
                                     label="Cinema" onChange={handleChange} onBlur={handleBlur}
                                     defaultField="None" data={cinemaState?.dataList?.cinemas}
                                     itemField='id'
                                     {...handleErrorService(hallManagementState, errors, touched,
-                                        "CinemaId")}
+                                        "cinemaId")}
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
@@ -66,15 +66,16 @@ const HallCreateRow = ({
                                     id="name"
                                     label="Name"
                                     type="text"
-                                    name="Name"
+                                    name="name"
                                     variant="outlined"
                                     inputProps={{style: {textAlign: 'center'}}}
-                                    value={values.Name}
+                                    value={values.name}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     autoFocus={true}
+                                    autoComplete='HallName'
                                     {...handleErrorService(hallManagementState, errors, touched,
-                                        "Name", "HallRequest.Name")}
+                                        "name", "HallRequest.Name")}
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
@@ -93,8 +94,9 @@ const HallCreateRow = ({
                                 </ButtonGroup>
                             </TableCell>
                         </TableRow>
-                        <CollapsibleRowsTableCreateContainer
+                        <CollapsibleRowsTableChangeContainer
                             openRows={openRows}
+                            setFieldValue={setFieldValue}
                             values={values}
                             errors={errors}
                             touched={touched}

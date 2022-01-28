@@ -1,16 +1,18 @@
 import React from 'react'
 import {TableCell, TableRow} from "@mui/material";
-import handleErrorService from "../../../Shared/utils/HandleErrorService";
+import {
+    handleSeatsNumberError,
+    handleSeatsTypeError,
+} from "../../../Shared/utils/HandleErrorService";
 import TextField from "../../../Shared/components/TextField";
 import SelectField from "../../../Shared/components/SelectField";
 
-const SeatRowCreate = ({
+const SeatRowChange = ({
                            index,
                            values,
                            handleChange,
                            handleBlur,
                            errors,
-                           touched,
                            hallManagementState,
                            seatTypeState,
                            indexRow
@@ -20,35 +22,32 @@ const SeatRowCreate = ({
             <TableCell align='left'>{index + 1}</TableCell>
             <TableCell align='center'>
                 <TextField
-                    id={`rows[${indexRow}].Seats[${index}].NumberSeat`}
+                    id={`rows[${indexRow}].seats[${index}].numberSeat`}
                     label="NumberSeat"
                     type="number"
-                    name={`Rows[${indexRow}].Seats[${index}].NumberSeat`}
+                    name={`rows[${indexRow}].seats[${index}].numberSeat`}
                     formControlStyle={{maxWidth: '200px'}}
                     variant="outlined"
                     inputProps={{style: {textAlign: 'center'}, min: '0'}}
-                    value={values.Rows[indexRow].Seats[index].NumberSeat}
+                    value={values.rows[indexRow].seats[index].numberSeat}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    autoFocus={true}
-                    {...handleErrorService(hallManagementState, errors, touched,
-                        `Rows[${indexRow}].Seats[${index}].NumberSeat`, `HallRequest.Rows[${indexRow}].Seats[${index}].NumberSeat`)}
+                    {...handleSeatsNumberError(hallManagementState, errors, indexRow, index)}
                 />
             </TableCell>
             <TableCell align='center'>
                 <SelectField
-                    id={`rows[${indexRow}].Seats[${index}].SeatType`}
-                    value={values.Rows[indexRow].Seats[index].SeatType}
-                    name={`Rows[${indexRow}].Seats[${index}].SeatType`}
+                    id={`rows[${indexRow}].seats[${index}].seatType`}
+                    value={values.rows[indexRow].seats[index].seatType}
+                    name={`rows[${indexRow}].seats[${index}].seatType`}
                     label="SeatType" onChange={handleChange} onBlur={handleBlur}
                     defaultField="None" data={seatTypeState?.data?.seatTypes}
                     itemField='name'
-                    {...handleErrorService(hallManagementState, errors, touched,
-                        `Rows[${indexRow}].Seats[${index}].SeatType`)}
+                    {...handleSeatsTypeError(hallManagementState, errors, indexRow, index)}
                 />
             </TableCell>
         </TableRow>
     )
 }
 
-export default SeatRowCreate;
+export default SeatRowChange;

@@ -1,7 +1,7 @@
 import React from 'react';
-import RowCreate from "../../component/Create/RowCreate";
+import RowChange from "../../component/Shared/RowChange";
 
-const RowCreateContainer = ({
+const RowChangeContainer = ({
                                 index,
                                 values,
                                 handleChange,
@@ -9,15 +9,24 @@ const RowCreateContainer = ({
                                 errors,
                                 touched,
                                 hallManagementState,
+                                setFieldValue
                             }) => {
     const [openSeats, setOpenSeats] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        if (isLoading === true) {
+            setIsLoading(false)
+            setFieldValue(`rows[${index}].numberRow`, index + 1)
+        }
+    }, [index, isLoading, setFieldValue])
 
     return (
-        <RowCreate
+        <RowChange
             values={values} errors={errors} touched={touched} handleChange={handleChange}
             hallManagementState={hallManagementState} handleBlur={handleBlur}
-            index={index} setOpenSeats={setOpenSeats} openSeats={openSeats}/>
+            index={index} setOpenSeats={setOpenSeats} openSeats={openSeats} setFieldValue={setFieldValue}/>
     )
 }
 
-export default RowCreateContainer;
+export default RowChangeContainer;

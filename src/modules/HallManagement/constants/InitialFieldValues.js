@@ -1,27 +1,27 @@
 export const InitialHallFieldValues = {
-    Name: "",
-    CinemaId: "",
-    NumberOfRows: 1,
-    Rows: [{
-        NumberRow: 0,
-        NumberOfSeats: 1,
-        Seats: [{
-            NumberSeat: 0,
-            SeatType: "",
+    name: "",
+    cinemaId: "",
+    numberOfRows: 1,
+    rows: [{
+        numberRow: 0,
+        numberOfSeats: 1,
+        seats: [{
+            numberSeat: 0,
+            seatType: "",
         }]
     }]
 }
 
 export const InitialRowFieldValues = {
-    NumberRow: 0,
-    NumberOfSeats: 1,
-    Seats: [{
-        NumberSeat: 0,
-        SeatType: "",
+    numberRow: 0,
+    numberOfSeats: 1,
+    seats: [{
+        numberSeat: 0,
+        seatType: "",
     }]
 }
 
 export const InitialSeatFieldValues = {
-    NumberSeat: 0,
-    SeatType: "",
+    numberSeat: 0,
+    seatType: "",
 }

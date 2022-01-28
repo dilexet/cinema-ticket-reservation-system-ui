@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import {
     Box,
     ButtonGroup,
@@ -11,11 +11,11 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import RowCreateContainer from "../../container/Create/RowCreateContainer";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import RowChangeContainer from "../../container/Shared/RowChangeContainer";
 
-const CollapsibleRowsTableCreate = ({
+const CollapsibleRowsTableChange = ({
                                         openRows,
                                         errors,
                                         touched,
@@ -25,13 +25,13 @@ const CollapsibleRowsTableCreate = ({
                                         handleAddClick,
                                         handleRemoveClick,
                                         hallManagementState,
-                                        numberRows
+                                        setFieldValue
                                     }) => {
     return (
         <TableRow>
             <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={openRows} timeout="auto" unmountOnExit>
-                    <Box sx={{margin: 1}}>
+                    <Box sx={{margin: 1, maxWidth: "md"}}>
                         <Box display='block' justifyContent='center'>
                             <Typography component="h2" variant="h6" gutterBottom color="secondary" style={{
                                 display: 'inline-block',
@@ -71,14 +71,14 @@ const CollapsibleRowsTableCreate = ({
                             </TableHead>
                             <TableBody>
                                 {
-                                    numberRows ?
-                                        numberRows.map((id, index) => (
+                                    values.rows ?
+                                        values.rows.map((row, index) => (
                                             <React.Fragment key={index}>
-                                                <RowCreateContainer
+                                                <RowChangeContainer
                                                     values={values} errors={errors} touched={touched}
                                                     handleChange={handleChange}
                                                     hallManagementState={hallManagementState} handleBlur={handleBlur}
-                                                    index={id}
+                                                    index={index} setFieldValue={setFieldValue}
                                                 />
                                             </React.Fragment>
                                         )) : <></>
@@ -92,4 +92,4 @@ const CollapsibleRowsTableCreate = ({
     )
 }
 
-export default CollapsibleRowsTableCreate;
+export default CollapsibleRowsTableChange;

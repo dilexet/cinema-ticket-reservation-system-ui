@@ -1,12 +1,12 @@
-import React from "react"
+import React from 'react'
 import {IconButton, TableCell, TableRow} from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TextField from "../../../Shared/components/TextField";
-import handleErrorService from "../../../Shared/utils/HandleErrorService";
-import CollapsibleSeatTableCreateContainer from "../../container/Create/CollapsibleSeatTableCreateContainer";
+import {handleRowsError} from "../../../Shared/utils/HandleErrorService";
+import CollapsibleSeatTableChangeContainer from "../../container/Shared/CollapsibleSeatTableChangeContainer";
 
-const RowCreate = ({
+const RowChange = ({
                        index,
                        values,
                        handleChange,
@@ -15,7 +15,8 @@ const RowCreate = ({
                        touched,
                        hallManagementState,
                        setOpenSeats,
-                       openSeats
+                       openSeats,
+                       setFieldValue
                    }) => {
     return (
         <React.Fragment>
@@ -32,24 +33,23 @@ const RowCreate = ({
                 </TableCell>
                 <TableCell component="th" scope="row" align='center'>
                     <TextField
-                        id={`rows[${index}].NumberRow`}
+                        id={`rows[${index}].numberRow`}
                         label="NumberRow"
                         type="number"
-                        name={`Rows[${index}].NumberRow`}
+                        name={`rows[${index}].numberRow`}
                         formControlStyle={{maxWidth: '200px'}}
                         variant="outlined"
                         inputProps={{style: {textAlign: 'center'}, min: '0'}}
-                        value={values.Rows[index].NumberRow}
+                        value={values.rows[index].numberRow}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        autoFocus={true}
-                        {...handleErrorService(hallManagementState, errors, touched,
-                            `Rows[${index}].NumberRow`, `HallRequest.Rows[${index}].NumberRow`)}
+                        {...handleRowsError(hallManagementState, errors, index)}
                     />
                 </TableCell>
-                <TableCell component="th" scope="row" align='center'>{values.Rows[index].NumberOfSeats}</TableCell>
+                <TableCell component="th" scope="row" align='center'>{values.rows[index].numberOfSeats}</TableCell>
             </TableRow>
-            <CollapsibleSeatTableCreateContainer
+            <CollapsibleSeatTableChangeContainer
+                setFieldValue={setFieldValue}
                 indexRow={index}
                 values={values}
                 handleChange={handleChange}
@@ -60,4 +60,4 @@ const RowCreate = ({
     )
 }
 
-export default RowCreate;
+export default RowChange;

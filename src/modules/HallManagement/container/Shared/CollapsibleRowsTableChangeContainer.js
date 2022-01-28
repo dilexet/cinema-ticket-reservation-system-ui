@@ -1,36 +1,34 @@
-import React, {useState} from 'react'
-import CollapsibleRowsTableCreate from "../../component/Create/CollapsibleRowsTableCreate";
+import React from 'react'
 import {useSelector} from "react-redux";
 import {InitialRowFieldValues} from "../../constants/InitialFieldValues";
+import CollapsibleRowsTableChange from "../../component/Shared/CollapsibleRowsTableChange";
 
-const CollapsibleRowsTableCreateContainer = ({
+const CollapsibleRowsTableChangeContainer = ({
                                                  openRows,
                                                  errors,
                                                  touched,
                                                  handleChange,
                                                  handleBlur,
                                                  values,
+                                                 setFieldValue
                                              }) => {
     const hallState = useSelector((state) => state.hallManagement);
 
-    const [numberRows, setNumberRows] = useState([0]);
-
     const handleAddClick = () => {
-        ++values.NumberOfRows
-        setNumberRows(numberRows => [...numberRows, numberRows.length])
-        values.Rows.push(InitialRowFieldValues)
+        setFieldValue("numberOfRows", values.numberOfRows + 1)
+        setFieldValue("rows", [...values.rows, InitialRowFieldValues])
     }
 
     const handleRemoveClick = () => {
-        if (numberRows.length !== 1) {
-            --values.NumberOfRows
-            setNumberRows(numberRows => numberRows.filter(x => x !== numberRows.length - 1))
-            values.Rows.pop();
+        if (values.rows.length !== 1) {
+            setFieldValue("numberOfRows", values.numberOfRows - 1)
+            setFieldValue("rows", values.rows.slice(0, values.rows.length - 1))
         }
     }
 
     return (
-        <CollapsibleRowsTableCreate
+        <CollapsibleRowsTableChange
+            setFieldValue={setFieldValue}
             openRows={openRows}
             values={values}
             errors={errors}
@@ -39,10 +37,9 @@ const CollapsibleRowsTableCreateContainer = ({
             handleBlur={handleBlur}
             handleAddClick={handleAddClick}
             hallManagementState={hallState}
-            numberRows={numberRows}
             handleRemoveClick={handleRemoveClick}
         />
     )
 }
 
-export default CollapsibleRowsTableCreateContainer;
+export default CollapsibleRowsTableChangeContainer;

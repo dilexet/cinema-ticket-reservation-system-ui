@@ -1,40 +1,36 @@
-import React, {useState} from 'react'
-import CollapsibleSeatTableCreate from "../../component/Create/CollapsibleSeatTableCreate";
+import React from 'react'
 import {useSelector} from "react-redux";
 import {InitialSeatFieldValues} from "../../constants/InitialFieldValues";
+import CollapsibleSeatTableChange from "../../component/Shared/CollapsibleSeatTableChange";
 
-const CollapsibleSeatTableCreateContainer = ({
+const CollapsibleSeatTableChangeContainer = ({
                                                  indexRow,
                                                  values,
                                                  handleChange,
                                                  handleBlur,
                                                  errors,
                                                  touched,
-                                                 openSeats
+                                                 openSeats,
+                                                 setFieldValue
                                              }) => {
     const hallState = useSelector((state) => state.hallManagement);
     const seatTypeState = useSelector((state) => state.seatTypes);
 
-    const [numberSeats, setNumberSeats] = useState([0]);
-
     const handleAddClick = () => {
-        ++values.Rows[indexRow].NumberOfSeats
-        setNumberSeats(numberSeats => [...numberSeats, numberSeats.length])
-        values.Rows[indexRow].Seats.push(InitialSeatFieldValues)
+        setFieldValue(`rows[${indexRow}].numberOfSeats`, values.rows[indexRow].numberOfSeats + 1)
+        setFieldValue(`rows[${indexRow}].seats`, [...values.rows[indexRow].seats, InitialSeatFieldValues])
     }
 
     const handleRemoveClick = () => {
-        if (numberSeats.length !== 1) {
-            --values.Rows[indexRow].NumberOfSeats
-            setNumberSeats(numberSeats => numberSeats.filter(x => x !== numberSeats.length - 1))
-            values.Rows[indexRow].Seats.pop()
-
+        if (values.rows[indexRow].seats.length !== 1) {
+            setFieldValue(`rows[${indexRow}].numberOfSeats`, values.rows[indexRow].numberOfSeats - 1)
+            setFieldValue(`rows[${indexRow}].seats`, values.rows[indexRow].seats.slice(0, values.rows[indexRow].seats.length - 1))
         }
     }
+
     return (
-        <CollapsibleSeatTableCreate
+        <CollapsibleSeatTableChange
             indexRow={indexRow}
-            numberSeats={numberSeats}
             openSeats={openSeats}
             values={values}
             handleChange={handleChange}
@@ -45,8 +41,9 @@ const CollapsibleSeatTableCreateContainer = ({
             handleRemoveClick={handleRemoveClick}
             hallManagementState={hallState}
             seatTypeState={seatTypeState}
+            setFieldValue={setFieldValue}
         />
     )
 }
 
-export default CollapsibleSeatTableCreateContainer;
+export default CollapsibleSeatTableChangeContainer;

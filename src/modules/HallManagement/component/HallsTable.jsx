@@ -17,7 +17,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import Loading from "../../Loading/component/Loading";
 import HallUpdateRowContainer from "../container/HallUpdateRowContainer";
 import HallRowContainer from "../container/Get/HallRowContainer";
-import HallCreateRowContainer from "../container/Create/HallCreateRowContainer";
+import HallCreateRowContainer from "../container/HallCreateRowContainer";
 
 const HallsTable = ({
                         theme, hallsState, setOpenEditId, setOpenDeleteId,
@@ -76,13 +76,13 @@ const HallsTable = ({
                                 {hallsState.dataList.halls.map((hall, index) => (
                                     <React.Fragment key={index}>
                                         {
-                                            // openEditId === index ?
-                                            //     <HallUpdateRowContainer
-                                            //         hall={hall}
-                                            //         index={index}
-                                            //         setOpenEditId={setOpenEditId}
-                                            //         theme={theme}
-                                            //     /> :
+                                            openEditId === index ?
+                                                <HallUpdateRowContainer
+                                                    hall={hall}
+                                                    index={index}
+                                                    setOpenEditId={setOpenEditId}
+                                                    theme={theme}
+                                                /> :
                                             <HallRowContainer
                                                 hall={hall}
                                                 index={index}
