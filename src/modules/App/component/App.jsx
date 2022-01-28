@@ -17,7 +17,9 @@ import Dashboard from "../../Dashboard/component/Dashboard";
 import NotFound from "../../NotFound/component/NotFound";
 import MovieManagementContainer from "../../MovieManagement/container/MovieManagementContainer";
 import CinemaManagementContainer from "../../CinemaManagement/container/CinemaManagementContainer";
-import AdditionalServiceManagementContainer from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
+import HallManagementContainer from "../../HallManagement/container/HallManagementContainer";
+import AdditionalServiceManagementContainer
+    from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import AdminRoute from "../../Shared/components/Routes/AdminRoute";
@@ -37,7 +39,7 @@ const App = ({
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    minHeight: '100vh',
+                    minHeight: '100vh'
                 }}
             >
                 <CssBaseline>
@@ -68,8 +70,8 @@ const App = ({
                             <Route index={true} element={<NotFound/>}/>
                             <Route exact path='user-management'
                                    element={<AdminRoute isAuthenticate={isAuthenticate}
-                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={UserManagementContainer} restricted={false}/>}/>
+                                                        setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                        component={UserManagementContainer} restricted={false}/>}/>
                             <Route exact path='movie-management'
                                    element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
@@ -78,10 +80,15 @@ const App = ({
                                    element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                           component={CinemaManagementContainer} restricted={false}/>}/>
+                            <Route exact path='hall-management'
+                                   element={<ManagerRoute isAuthenticate={isAuthenticate}
+                                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                          component={HallManagementContainer} restricted={false}/>}/>
                             <Route exact path='additional-service-management'
                                    element={<ManagerRoute isAuthenticate={isAuthenticate}
                                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                          component={AdditionalServiceManagementContainer} restricted={false}/>}/>
+                                                          component={AdditionalServiceManagementContainer}
+                                                          restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Route>
 
