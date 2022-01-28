@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {useSelector} from "react-redux";
-import {useActions} from "../hooks/UseActions";
+import {useSelector, useDispatch} from "react-redux";
 import UserUpdateRow from "../component/UserUpdateRow";
 import updateUserSchema from "../constants/UpdateUserSchema";
+import {clearErrors, updateUser} from "../store/action-creator/UserManagementActions";
 
 const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
     const initialValues = {
@@ -13,20 +13,20 @@ const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
 
     const [isUpdate, setIsUpdate] = React.useState(false)
 
-    const {updateUser, clearErrors} = useActions();
+    const dispatch = useDispatch();
 
     const userManagementState = useSelector((state) => state.userManagement);
 
-    const handleCloseClick = () => {
+    const handleCloseClick = async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
-        clearErrors()
+        await dispatch(clearErrors())
     }
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
         if (await updateUserSchema.isValid(values)) {
-            await updateUser(values, user.id)
+            await dispatch(await updateUser(values, user.id))
             setIsUpdate(true)
         }
     }

@@ -1,6 +1,7 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import UserRow from "../component/UserRow";
-import {useActions} from "../hooks/UseActions";
+import {deleteUser} from "../store/action-creator/UserManagementActions";
 
 const UserRowContainer = ({
                               index, user, openEditId, setOpenEditId,
@@ -11,7 +12,7 @@ const UserRowContainer = ({
 
     const isDisable = isEdit || isDelete || openAdd;
 
-    const {deleteUser} = useActions();
+    const dispatch = useDispatch();
 
     const handleEditClick = () => {
         setOpenEditId(index)
@@ -22,7 +23,7 @@ const UserRowContainer = ({
     }
 
     const handleSubmitDeleteClick = async () => {
-        await deleteUser(user.id)
+        await dispatch(await deleteUser(user.id))
         handleCloseClick()
     }
 
