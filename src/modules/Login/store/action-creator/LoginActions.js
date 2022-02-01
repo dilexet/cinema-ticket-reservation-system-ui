@@ -3,8 +3,14 @@ import {
     authenticate_success,
     authenticate_error
 } from "../../../Authenticate/store/reducers/AuthenticateReducer"
-import {login_loading, login_success, login_error} from "../reducers/LoginReducer"
+import {login_loading, login_success, login_error, clear_errors} from "../reducers/LoginReducer"
 import {loginAPI} from "./LoginAPI";
+
+export const clearErrors = () => {
+    return (dispatch) => {
+        dispatch(clear_errors())
+    }
+}
 
 export const loginAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {
