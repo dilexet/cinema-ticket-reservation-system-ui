@@ -1,5 +1,5 @@
 import {defaultApi} from "../../../Shared/constants/DefaultApi";
-import {AdditionalServiceManagementURL} from "../../../Shared/constants/BaseURLs";
+import {AdditionalServiceManagementURL, HallManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
@@ -12,13 +12,36 @@ import {
     create_additionalService_success,
     update_additionalService_success,
     remove_additionalService_success,
-    change_additionalServices_error
+    change_additionalServices_error,
+    clearDataList,
 } from "../reducers/AdditionalServiceManagementReducer"
 import {additionalServiceApi} from "./AdditionalServiceApi";
 
 export const clearErrors = () => {
     return (dispatch) => {
         dispatch(clearError())
+    }
+}
+
+export const clearData = () => {
+    return (dispatch) => {
+        dispatch(clearError())
+        dispatch(clearDataList())
+    }
+}
+
+export const getAdditionalServicesByCinemaId = (cinemaId) => {
+    return async (dispatch) => {
+        dispatch(get_additionalServices_loading())
+
+        try {
+            const response = await additionalServiceApi(AdditionalServiceManagementURL).get_services_by_cinema_id(cinemaId)
+            dispatch(get_additionalServices_success(response.data))
+        } catch (error) {
+            if (error.response) {
+                dispatch(get_additionalServices_error(error.response.data))
+            }
+        }
     }
 }
 
