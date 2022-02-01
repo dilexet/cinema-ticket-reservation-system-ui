@@ -30,7 +30,11 @@ const seatTypesSlice = createSlice({
         },
         get_seatTypes_error(state, action) {
             state.loading = false;
-            state.data = null;
+            state.data = {
+                code: null,
+                success: false,
+                seatTypes: []
+            };
             state.error = action.payload;
         },
     }
