@@ -26,7 +26,6 @@ const HallUpdateRowContainer = ({hall, index, setOpenEditId, theme}) => {
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
         if (await hallSchema.isValid(values)) {
-            console.log(values)
             await dispatch(await updateHall(values, hall.id, hall.cinemaId))
             setIsUpdate(true)
         }

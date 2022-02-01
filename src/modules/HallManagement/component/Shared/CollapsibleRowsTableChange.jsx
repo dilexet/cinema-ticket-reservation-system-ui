@@ -40,7 +40,7 @@ const CollapsibleRowsTableChange = ({
                         maxWidth: 'md'
                     }}>
 
-                        <Grid container xs={12} spacing={1}>
+                        <Grid container spacing={1}>
                             <Grid container item xs={12}>
                                 <Grid item xs={4}>
                                     <Typography component="h2" variant="h6" gutterBottom color="secondary" style={{

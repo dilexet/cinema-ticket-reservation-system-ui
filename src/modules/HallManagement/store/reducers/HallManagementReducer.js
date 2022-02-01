@@ -27,6 +27,13 @@ const hallManagementSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+        clearDataList(state) {
+            state.dataList = {
+                code: null,
+                success: false,
+                halls: []
+            };
+        },
         get_halls_loading(state) {
             state.loading = false;
             state.dataList = null;
@@ -43,7 +50,11 @@ const hallManagementSlice = createSlice({
         },
         get_halls_error(state, action) {
             state.loading = false;
-            state.dataList = null;
+            state.dataList = {
+                code: null,
+                success: false,
+                halls: []
+            };
             state.error = action.payload;
         },
 
@@ -63,7 +74,11 @@ const hallManagementSlice = createSlice({
         },
         get_hall_by_id_error(state, action) {
             state.loading = false;
-            state.dataItem = null;
+            state.dataItem = {
+                code: null,
+                success: false,
+                hall: null
+            };
             state.error = action.payload;
         },
         create_hall_success(state, action) {
@@ -71,7 +86,7 @@ const hallManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                halls: [...state.dataList.halls, action.payload.hall]
+                halls: [...state.dataList?.halls, action.payload.hall]
             };
             state.error = null;
         },
@@ -108,6 +123,7 @@ export default hallManagementSlice.reducer;
 export const {
     loading,
     clearError,
+    clearDataList,
     get_halls_loading,
     get_halls_success,
     get_halls_error,
@@ -117,5 +133,5 @@ export const {
     create_hall_success,
     update_hall_success,
     remove_hall_success,
-    change_halls_error
+    change_halls_error,
 } = hallManagementSlice.actions;

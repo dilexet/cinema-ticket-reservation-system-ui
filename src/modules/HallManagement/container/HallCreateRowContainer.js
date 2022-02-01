@@ -27,7 +27,6 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
         if (await hallSchema.isValid(values)) {
-            console.log(values)
             await dispatch(await createHall(values, values.cinemaId))
             setIsCreate(true)
         }

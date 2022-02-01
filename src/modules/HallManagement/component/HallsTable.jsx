@@ -73,28 +73,31 @@ const HallsTable = ({
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {hallsState.dataList.halls.map((hall, index) => (
-                                    <React.Fragment key={index}>
-                                        {
-                                            openEditId === index ?
-                                                <HallUpdateRowContainer
-                                                    hall={hall}
-                                                    index={index}
-                                                    setOpenEditId={setOpenEditId}
-                                                    theme={theme}
-                                                /> :
-                                            <HallRowContainer
-                                                hall={hall}
-                                                index={index}
-                                                openEditId={openEditId}
-                                                setOpenEditId={setOpenEditId}
-                                                openDeleteId={openDeleteId}
-                                                setOpenDeleteId={setOpenDeleteId}
-                                                theme={theme} openAdd={openAdd}
-                                            />
-                                        }
-                                    </React.Fragment>
-                                ))}
+                                {
+                                    hallsState?.dataList ?
+                                        hallsState?.dataList?.halls?.map((hall, index) => (
+                                            <React.Fragment key={index}>
+                                                {
+                                                    openEditId === index ?
+                                                        <HallUpdateRowContainer
+                                                            hall={hall}
+                                                            index={index}
+                                                            setOpenEditId={setOpenEditId}
+                                                            theme={theme}
+                                                        /> :
+                                                        <HallRowContainer
+                                                            hall={hall}
+                                                            index={index}
+                                                            openEditId={openEditId}
+                                                            setOpenEditId={setOpenEditId}
+                                                            openDeleteId={openDeleteId}
+                                                            setOpenDeleteId={setOpenDeleteId}
+                                                            theme={theme} openAdd={openAdd}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        )) : <></>
+                                }
                                 {
                                     openAdd === true ?
                                         <React.Fragment>

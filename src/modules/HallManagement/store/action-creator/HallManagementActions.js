@@ -3,6 +3,7 @@ import {HallManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
+    clearDataList,
     get_halls_loading,
     get_halls_success,
     get_halls_error,
@@ -19,6 +20,28 @@ import {hallManagementApi} from "./HallManagementApi";
 export const clearErrors = () => {
     return (dispatch) => {
         dispatch(clearError())
+    }
+}
+
+export const clearData = () => {
+    return (dispatch) => {
+        dispatch(clearError())
+        dispatch(clearDataList())
+    }
+}
+
+export const getHallsByCinemaId = (cinemaId) => {
+    return async (dispatch) => {
+        dispatch(get_halls_loading())
+
+        try {
+            const response = await hallManagementApi(HallManagementURL).get_hall_by_cinema_id(cinemaId)
+            dispatch(get_halls_success(response.data))
+        } catch (error) {
+            if (error.response) {
+                dispatch(get_halls_error(error.response.data))
+            }
+        }
     }
 }
 
