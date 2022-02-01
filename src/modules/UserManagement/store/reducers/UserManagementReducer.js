@@ -43,7 +43,11 @@ const userManagementSlice = createSlice({
         },
         get_users_error(state, action) {
             state.loading = false;
-            state.dataList = null;
+            state.dataList = {
+                code: null,
+                success: false,
+                users: []
+            };
             state.error = action.payload;
         },
 
@@ -63,7 +67,11 @@ const userManagementSlice = createSlice({
         },
         get_user_by_id_error(state, action) {
             state.loading = false;
-            state.dataItem = null;
+            state.dataItem = {
+                code: null,
+                success: false,
+                user: null
+            };
             state.error = action.payload;
         },
         create_user_success(state, action) {
@@ -71,7 +79,7 @@ const userManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                users: [...state.dataList.users, action.payload.user]
+                users: [...state.dataList?.users, action.payload.user]
             };
             state.error = null;
         },

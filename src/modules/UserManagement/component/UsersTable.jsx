@@ -73,26 +73,29 @@ const UsersTable = ({
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {usersState.dataList.users.map((user, index) => (
-                                    <React.Fragment key={index}>
-                                        {
-                                            openEditId === index ?
-                                                <UserUpdateRowContainer
-                                                    user={user}
-                                                    index={index}
-                                                    setOpenEditId={setOpenEditId}
-                                                    theme={theme}
-                                                /> :
-                                                <UserRowContainer user={user} index={index}
-                                                                  openEditId={openEditId}
-                                                                  setOpenEditId={setOpenEditId}
-                                                                  openDeleteId={openDeleteId}
-                                                                  setOpenDeleteId={setOpenDeleteId}
-                                                                  theme={theme} openAdd={openAdd}
-                                                />
-                                        }
-                                    </React.Fragment>
-                                ))}
+                                {
+                                    usersState?.dataList ?
+                                        usersState?.dataList?.users?.map((user, index) => (
+                                            <React.Fragment key={index}>
+                                                {
+                                                    openEditId === index ?
+                                                        <UserUpdateRowContainer
+                                                            user={user}
+                                                            index={index}
+                                                            setOpenEditId={setOpenEditId}
+                                                            theme={theme}
+                                                        /> :
+                                                        <UserRowContainer user={user} index={index}
+                                                                          openEditId={openEditId}
+                                                                          setOpenEditId={setOpenEditId}
+                                                                          openDeleteId={openDeleteId}
+                                                                          setOpenDeleteId={setOpenDeleteId}
+                                                                          theme={theme} openAdd={openAdd}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        )) : <></>
+                                }
                                 {
                                     openAdd === true ?
                                         <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
