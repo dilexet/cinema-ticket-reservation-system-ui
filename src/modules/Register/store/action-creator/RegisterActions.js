@@ -3,8 +3,14 @@ import {
     authenticate_success,
     authenticate_error
 } from "../../../Authenticate/store/reducers/AuthenticateReducer"
-import {register_loading, register_success, register_error} from "../reducers/RegisterReducer"
+import {register_loading, register_success, register_error, clear_errors} from "../reducers/RegisterReducer"
 import {registerAPI} from "./RegisterAPI";
+
+export const clearErrors = () => {
+    return (dispatch) => {
+        dispatch(clear_errors())
+    }
+}
 
 export const registerAsyncAction = (data, rememberMe) => {
     return async (dispatch) => {

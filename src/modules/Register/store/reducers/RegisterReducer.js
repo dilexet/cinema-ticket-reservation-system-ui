@@ -10,6 +10,10 @@ const registerSlice = createSlice({
     name: "register",
     initialState: initialState,
     reducers: {
+        clear_errors(state) {
+            state.loading = false;
+            state.error = null;
+        },
         register_loading(state) {
             state.loading = true;
             state.data = null;
@@ -29,4 +33,4 @@ const registerSlice = createSlice({
 })
 
 export default registerSlice.reducer;
-export const {register_loading, register_success, register_error} = registerSlice.actions;
+export const {register_loading, register_success, register_error, clear_errors} = registerSlice.actions;
