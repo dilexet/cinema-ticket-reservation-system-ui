@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Loading from "../../Loading/component/Loading";
-import HallRowContainer from "../container/Get/SessionRowContainer";
 import SessionRowContainer from "../container/Get/SessionRowContainer";
 import SessionCreateRowContainer from "../container/Create/SessionCreateRowContainer";
 

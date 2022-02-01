@@ -1,5 +1,5 @@
 import {defaultApi} from "../../../Shared/constants/DefaultApi";
-import {AdditionalServiceManagementURL, HallManagementURL} from "../../../Shared/constants/BaseURLs";
+import {AdditionalServiceManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
