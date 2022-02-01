@@ -43,7 +43,11 @@ const cinemaManagementSlice = createSlice({
         },
         get_cinemas_error(state, action) {
             state.loading = false;
-            state.dataList = null;
+            state.dataList = {
+                code: null,
+                success: false,
+                cinemas: []
+            };
             state.error = action.payload;
         },
 
@@ -63,7 +67,11 @@ const cinemaManagementSlice = createSlice({
         },
         get_cinema_by_id_error(state, action) {
             state.loading = false;
-            state.dataItem = null;
+            state.dataItem = {
+                code: null,
+                success: false,
+                cinema: null
+            };
             state.error = action.payload;
         },
         create_cinema_success(state, action) {
@@ -71,7 +79,7 @@ const cinemaManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                cinemas: [...state.dataList.cinemas, action.payload.cinema]
+                cinemas: [...state.dataList?.cinemas, action.payload.cinema]
             };
             state.error = null;
         },
