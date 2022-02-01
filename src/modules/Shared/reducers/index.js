@@ -9,6 +9,7 @@ import hallManagementSlice from "../../HallManagement/store/reducers/HallManagem
 import additionalServiceManagementSlice
     from "../../AdditionalServiceManagement/store/reducers/AdditionalServiceManagementReducer";
 import uploadImageSlice from "../../UploadImage/store/reducers/UploadImageReducer";
+import sessionManagementSlice from "../../SessionManagement/store/reducers/SessionManagementReducer";
 import seatTypesSlice from "../../SeatType/store/reducers/SeatTypeReducer";
 
 export const rootReducer = combineReducers({
@@ -21,5 +22,6 @@ export const rootReducer = combineReducers({
     cinemaManagement: cinemaManagementSlice,
     hallManagement: hallManagementSlice,
     additionalServiceManagement: additionalServiceManagementSlice,
+    sessionManagement: sessionManagementSlice,
     seatTypes: seatTypesSlice
 })
