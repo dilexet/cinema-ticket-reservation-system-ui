@@ -49,10 +49,10 @@ const SessionUpdateRowContainer = ({session, index, setOpenEditId, theme}) => {
             })
 
             const sessionSeatTypes = []
-            session?.sessionSeats?.forEach(value => {
+            session?.sessionSeatTypes?.forEach(value => {
                 sessionSeatTypes?.push({
-                    seatType: value?.sessionSeatType?.seatType,
-                    price: value?.sessionSeatType?.price,
+                    seatType: value?.seatType,
+                    price: value?.price,
                 })
             })
 
