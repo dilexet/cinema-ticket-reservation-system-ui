@@ -2,7 +2,7 @@ import React from 'react'
 import CollapsibleSessionSeatTypeTableChange from "../../component/Shared/CollapsibleSessionSeatTypeTableChange";
 import {useSelector} from "react-redux";
 
-const CollapsibleSessionSeatTypeTableChangeContainer = ({
+const CollapsibleSessionSeatTypeTableCreateContainer = ({
                                                             openRows,
                                                             errors,
                                                             touched,
@@ -47,4 +47,4 @@ const CollapsibleSessionSeatTypeTableChangeContainer = ({
     )
 }
 
-export default CollapsibleSessionSeatTypeTableChangeContainer;
+export default CollapsibleSessionSeatTypeTableCreateContainer;

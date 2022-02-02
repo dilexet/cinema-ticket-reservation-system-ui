@@ -1,8 +1,7 @@
-import React from 'react';
+import React from 'react'
 import CollapsibleSessionAddServicesTableChange from "../../component/Shared/CollapsibleSessionAddServicesTableChange";
-import {useSelector} from "react-redux";
 
-const CollapsibleSessionAddServicesTableChangeContainer = ({
+const CollapsibleSessionAddServicesTableUpdateContainer = ({
                                                                openRows,
                                                                errors,
                                                                touched,
@@ -12,27 +11,6 @@ const CollapsibleSessionAddServicesTableChangeContainer = ({
                                                                setFieldValue,
                                                                sessionState
                                                            }) => {
-    const serviceState = useSelector((state) => state.additionalServiceManagement);
-
-    const initializeAdditionalServices = () => {
-        const services = []
-        serviceState?.dataList?.additionalServices?.forEach((value) => {
-            const service = {
-                'name': value.name,
-                'price': 0
-            }
-            services.push(service)
-        })
-        setFieldValue("sessionAdditionalServices", services)
-    }
-
-    React.useEffect(() => {
-        if (values.cinemaId !== '' && serviceState?.dataList?.additionalServices?.length > 0) {
-            initializeAdditionalServices();
-        }
-    }, [serviceState?.dataList?.additionalServices, values.cinemaId])
-
-
     return (
         <CollapsibleSessionAddServicesTableChange
             openRows={openRows}
@@ -47,4 +25,4 @@ const CollapsibleSessionAddServicesTableChangeContainer = ({
     )
 }
 
-export default CollapsibleSessionAddServicesTableChangeContainer;
+export default CollapsibleSessionAddServicesTableUpdateContainer;

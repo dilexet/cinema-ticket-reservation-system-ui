@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {TableCell, TableRow} from "@mui/material";
-import {getCinemas} from "../../../CinemaManagement/store/action-creator/CinemaManagementActions";
-import {getMoviesWithParams} from "../../../MovieManagement/store/action-creator/MovieManagementActions";
-import Loading from "../../../Loading/component/Loading";
-import sessionSchema from "../../constants/SessionSchema";
-import {clearErrors, createSession} from "../../store/actions-creator/SessionManagementActions";
-import {clearData, getHallsByCinemaId} from "../../../HallManagement/store/action-creator/HallManagementActions";
-import SessionCreateRow from "../../component/Create/SessionCreateRow";
+import {getCinemas} from "../../CinemaManagement/store/action-creator/CinemaManagementActions";
+import {getMoviesWithParams} from "../../MovieManagement/store/action-creator/MovieManagementActions";
+import Loading from "../../Loading/component/Loading";
+import sessionSchema from "../constants/SessionSchema";
+import {clearErrors, createSession} from "../store/actions-creator/SessionManagementActions";
+import {clearData, getHallsByCinemaId} from "../../HallManagement/store/action-creator/HallManagementActions";
+import SessionCreateRow from "../component/SessionCreateRow";
 import {
     getAdditionalServicesByCinemaId, clearData as clearAddServices
-} from "../../../AdditionalServiceManagement/store/action-creator/AdditionalServiceManagementActions";
+} from "../../AdditionalServiceManagement/store/action-creator/AdditionalServiceManagementActions";
 
 const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const [isCreate, setIsCreate] = React.useState(false)
@@ -41,12 +41,12 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
 
     useEffect(() => {
         const close = () => {
-            if (isCreate === true && hallState.error === null) {
+            if (isCreate === true && sessionState.error === null) {
                 handleCloseClick()
             }
         }
         close()
-    }, [isCreate, hallState.error]);
+    }, [isCreate, sessionState.error]);
 
 
     useEffect(() => {

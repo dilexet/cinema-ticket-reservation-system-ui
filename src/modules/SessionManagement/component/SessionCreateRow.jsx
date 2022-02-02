@@ -5,15 +5,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import SelectField from "../../../Shared/components/SelectField";
-import handleErrorService from "../../../Shared/utils/HandleErrorService";
-import TextField from "../../../Shared/components/TextField";
-import {InitialSessionFieldValues} from "../../constants/InitialFieldValues";
-import sessionSchema from "../../constants/SessionSchema";
-import CollapsibleSessionAddServicesTableChangeContainer
-    from "../../container/Shared/CollapsibleSessionAddServicesTableChangeContainer";
-import CollapsibleSessionSeatTypeTableChangeContainer
-    from "../../container/Shared/CollapsibleSessionSeatTypeTableChangeContainer";
+import SelectField from "../../Shared/components/SelectField";
+import handleErrorService from "../../Shared/utils/HandleErrorService";
+import TextField from "../../Shared/components/TextField";
+import {InitialSessionFieldValues} from "../constants/InitialFieldValues";
+import sessionSchema from "../constants/SessionSchema";
+import CollapsibleSessionAddServicesTableCreateContainer
+    from "../container/Create/CollapsibleSessionAddServicesTableCreateContainer";
+import CollapsibleSessionSeatTypeTableCreateContainer
+    from "../container/Create/CollapsibleSessionSeatTypeTableCreateContainer";
 
 const SessionCreateRow = ({
                               cinemaState, hallState, movieState, sessionState,
@@ -95,6 +95,7 @@ const SessionCreateRow = ({
                                         "movieId")}
                                 />
                             </TableCell>
+
                             <TableCell component="th" scope="row" align="center">
                                 <TextField
                                     id="startDate"
@@ -125,7 +126,7 @@ const SessionCreateRow = ({
                                 </ButtonGroup>
                             </TableCell>
                         </TableRow>
-                        <CollapsibleSessionSeatTypeTableChangeContainer
+                        <CollapsibleSessionSeatTypeTableCreateContainer
                             openRows={openRows}
                             setFieldValue={setFieldValue}
                             values={values}
@@ -134,7 +135,7 @@ const SessionCreateRow = ({
                             handleChange={handleChange}
                             handleBlur={handleBlur} sessionState={sessionState}
                         />
-                        <CollapsibleSessionAddServicesTableChangeContainer
+                        <CollapsibleSessionAddServicesTableCreateContainer
                             openRows={openRows}
                             setFieldValue={setFieldValue}
                             values={values}

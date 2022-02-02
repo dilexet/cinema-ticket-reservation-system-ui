@@ -14,7 +14,8 @@ import {
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Loading from "../../Loading/component/Loading";
 import SessionRowContainer from "../container/Get/SessionRowContainer";
-import SessionCreateRowContainer from "../container/Create/SessionCreateRowContainer";
+import SessionCreateRowContainer from "../container/SessionCreateRowContainer";
+import SessionUpdateRowContainer from "../container/SessionUpdateRowContainer";
 
 const SessionsTable = ({
                            theme, sessionState, setOpenEditId, setOpenDeleteId,
@@ -76,13 +77,13 @@ const SessionsTable = ({
                                         sessionState?.dataList?.sessions?.map((session, index) => (
                                             <React.Fragment key={index}>
                                                 {
-                                                    // openEditId === index ?
-                                                    //     <SessionUpdateRowContainer
-                                                    //         hall={hall}
-                                                    //         index={index}
-                                                    //         setOpenEditId={setOpenEditId}
-                                                    //         theme={theme}
-                                                    //     /> :
+                                                    openEditId === index ?
+                                                        <SessionUpdateRowContainer
+                                                            session={session}
+                                                            index={index}
+                                                            setOpenEditId={setOpenEditId}
+                                                            theme={theme}
+                                                        /> :
                                                     <SessionRowContainer
                                                         session={session}
                                                         index={index}

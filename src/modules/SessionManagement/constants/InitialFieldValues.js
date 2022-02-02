@@ -1,7 +1,7 @@
 import moment from "moment";
 
 export const InitialSessionFieldValues = {
-    startDate: moment(new Date(Date.now())).format('YYYY-MM-DDTHH:mm:ss'),
+    startDate: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'),
     movieId: "",
     cinemaId: "",
     hallId: "",
