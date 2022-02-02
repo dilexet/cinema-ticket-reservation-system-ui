@@ -30,6 +30,8 @@ const RoleRoute = ({
     useEffect(() => {
         if (haveAccess == null) {
             setHaveAccess(getRole() === role);
+        }
+        if (haveAccess === false) {
             console.log(`You don't have access to this resource. You are not ${role}.`)
         }
     }, [haveAccess, role])

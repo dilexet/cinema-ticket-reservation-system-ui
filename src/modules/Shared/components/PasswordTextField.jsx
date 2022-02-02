@@ -3,11 +3,11 @@ import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, Out
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const PasswordTextField = ({
-                                    error, helperText,
-                                    value, onChange, onBlur,
-                                    variant, size, margin, style,
-                                    ...props
-                                }) => {
+                               error, helperText,
+                               value, onChange, onBlur,
+                               variant, size, margin, style,
+                               ...props
+                           }) => {
     const [showPassword, setShowPassword] = useState(false)
     return (
         <FormControl
@@ -44,7 +44,7 @@ const PasswordTextField = ({
                     </InputAdornment>
                 }
             />
-            <FormHelperText>{helperText}</FormHelperText>
+            <FormHelperText style={{minWidth: '150px', minHeight: '20px'}}>{helperText}</FormHelperText>
         </FormControl>
     )
 }

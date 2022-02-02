@@ -43,7 +43,11 @@ const movieManagementSlice = createSlice({
         },
         get_movies_error(state, action) {
             state.loading = false;
-            state.dataList = null;
+            state.dataList = {
+                code: null,
+                success: false,
+                movies: [],
+            };
             state.error = action.payload;
         },
 
@@ -63,7 +67,11 @@ const movieManagementSlice = createSlice({
         },
         get_movie_by_id_error(state, action) {
             state.loading = false;
-            state.dataItem = null;
+            state.dataItem = {
+                code: null,
+                success: false,
+                movie: null
+            };
             state.error = action.payload;
         },
         create_movie_success(state, action) {
@@ -71,7 +79,7 @@ const movieManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                movies: [...state.dataList.movies, action.payload.movie]
+                movies: [...state.dataList?.movies, action.payload.movie]
             };
             state.error = null;
         },

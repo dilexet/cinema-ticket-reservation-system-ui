@@ -24,6 +24,7 @@ import AdditionalServiceManagementContainer
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import RoleRoute from "../../Shared/components/Routes/RoleRoute";
 import {AdminRole, ManagerRole} from "../../Shared/constants/RoleNames";
+import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
 
 const App = ({
                  darkMode,
@@ -87,6 +88,11 @@ const App = ({
                                    element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
                                                        setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                        component={AdditionalServiceManagementContainer}
+                                                       restricted={false}/>}/>
+                            <Route exact path='session-management'
+                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
+                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                       component={SessionManagementContainer}
                                                        restricted={false}/>}/>
                             <Route path="*" element={<NotFound/>}/>
                         </Route>

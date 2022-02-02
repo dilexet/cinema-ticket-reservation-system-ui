@@ -5,6 +5,7 @@ import MovieCreationIcon from "@mui/icons-material/MovieCreation";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import TvIcon from '@mui/icons-material/Tv';
 import WeekendIcon from '@mui/icons-material/Weekend';
+import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 
 export const ManagerListItems = () => {
     return (
@@ -52,6 +53,17 @@ export const ManagerListItems = () => {
                     <FastfoodIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Additional service management"/>
+            </ListItem>
+
+            <ListItem style={{
+                color: 'inherit',
+                textDecoration: 'none',
+            }}
+                      component={Link} to={`session-management`}>
+                <ListItemIcon>
+                    <SmartDisplayIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Session management"/>
             </ListItem>
         </div>
     )

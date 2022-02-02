@@ -10,6 +10,10 @@ const loginSlice = createSlice({
     name: "login",
     initialState: initialState,
     reducers: {
+        clear_errors(state) {
+            state.loading = false;
+            state.error = null;
+        },
         login_loading(state) {
             state.loading = true;
             state.data = null;
@@ -29,4 +33,4 @@ const loginSlice = createSlice({
 })
 
 export default loginSlice.reducer;
-export const {login_loading, login_success, login_error} = loginSlice.actions;
+export const {login_loading, login_success, login_error, clear_errors} = loginSlice.actions;

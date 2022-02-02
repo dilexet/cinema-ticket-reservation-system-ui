@@ -27,6 +27,13 @@ const additionalServiceManagementSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+        clearDataList(state) {
+            state.dataList = {
+                code: null,
+                success: false,
+                additionalServices: []
+            };
+        },
         get_additionalServices_loading(state) {
             state.loading = false;
             state.dataList = null;
@@ -43,7 +50,11 @@ const additionalServiceManagementSlice = createSlice({
         },
         get_additionalServices_error(state, action) {
             state.loading = false;
-            state.dataList = null;
+            state.dataList = {
+                code: null,
+                success: false,
+                additionalServices: []
+            };
             state.error = action.payload;
         },
 
@@ -63,7 +74,11 @@ const additionalServiceManagementSlice = createSlice({
         },
         get_additionalService_by_id_error(state, action) {
             state.loading = false;
-            state.dataItem = null;
+            state.dataItem = {
+                code: null,
+                success: false,
+                additionalService: null
+            };
             state.error = action.payload;
         },
         create_additionalService_success(state, action) {
@@ -71,7 +86,7 @@ const additionalServiceManagementSlice = createSlice({
             state.dataList = {
                 code: action.payload.code,
                 success: action.payload.success,
-                additionalServices: [...state.dataList.additionalServices, action.payload.additionalService]
+                additionalServices: [...state.dataList?.additionalServices, action.payload.additionalService]
             };
             state.error = null;
         },
@@ -108,6 +123,7 @@ export default additionalServiceManagementSlice.reducer;
 export const {
     loading,
     clearError,
+    clearDataList,
     get_additionalServices_loading,
     get_additionalServices_success,
     get_additionalServices_error,

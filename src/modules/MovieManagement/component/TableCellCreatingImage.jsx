@@ -19,8 +19,8 @@ const TableCellCreatingImage = ({uploadImageState, theme, movieState}) => {
             <FormHelperText
                 style={{minWidth: '150px', color: theme.palette.error.main, textAlign: 'center'}}>
                 {uploadImageState?.data === null ? 'Please upload poster' : ''}
-                {movieState?.error?.validationErrors !== null &&
-                movieState?.error?.validationErrors["MovieRequest.PosterUrl"] !== null ?
+                {movieState?.error?.validationErrors &&
+                movieState?.error?.validationErrors["MovieRequest.PosterUrl"] ?
                     movieState?.error?.validationErrors["MovieRequest.PosterUrl"] : ''}
             </FormHelperText>
         </TableCell>

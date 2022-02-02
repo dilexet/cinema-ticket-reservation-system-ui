@@ -14,6 +14,7 @@ import {
     remove_movie_success,
     change_movies_error
 } from "../reducers/MovieManagementReducer"
+import {movieManagementAPI} from "./MovieManagementAPI";
 
 export const clearErrors = () => {
     return (dispatch) => {
@@ -27,6 +28,26 @@ export const getMovies = () => {
 
         try {
             const response = await defaultApi(MovieManagementURL).get()
+            dispatch(get_movies_success(response.data))
+        } catch (error) {
+            if (error.response) {
+                dispatch(get_movies_error(error.response.data))
+            }
+        }
+    }
+}
+
+export const getMoviesWithParams = (stillShowing, fromDate, toDate) => {
+    return async (dispatch) => {
+        dispatch(get_movies_loading())
+
+        try {
+            const params = {
+                stillShowing: stillShowing,
+                toDate: toDate,
+                fromDate: fromDate
+            }
+            const response = await movieManagementAPI(MovieManagementURL, params).get()
             dispatch(get_movies_success(response.data))
         } catch (error) {
             if (error.response) {

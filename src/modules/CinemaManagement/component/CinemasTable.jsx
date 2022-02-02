@@ -72,24 +72,27 @@ const CinemasTable = ({
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {cinemasState.dataList.cinemas.map((cinema, index) => (
-                                    <React.Fragment key={index}>
-                                        {
-                                            openEditId === index ?
-                                                <CinemaUpdateRowContainer
-                                                    cinema={cinema} index={index}
-                                                    setOpenEditId={setOpenEditId} theme={theme}
-                                                /> :
-                                                <CinemaRowContainer cinema={cinema} index={index}
-                                                                    openEditId={openEditId}
-                                                                    setOpenEditId={setOpenEditId}
-                                                                    openDeleteId={openDeleteId}
-                                                                    setOpenDeleteId={setOpenDeleteId}
-                                                                    theme={theme} openAdd={openAdd}
-                                                />
-                                        }
-                                    </React.Fragment>
-                                ))}
+                                {
+                                    cinemasState?.dataList ?
+                                        cinemasState?.dataList?.cinemas?.map((cinema, index) => (
+                                            <React.Fragment key={index}>
+                                                {
+                                                    openEditId === index ?
+                                                        <CinemaUpdateRowContainer
+                                                            cinema={cinema} index={index}
+                                                            setOpenEditId={setOpenEditId} theme={theme}
+                                                        /> :
+                                                        <CinemaRowContainer cinema={cinema} index={index}
+                                                                            openEditId={openEditId}
+                                                                            setOpenEditId={setOpenEditId}
+                                                                            openDeleteId={openDeleteId}
+                                                                            setOpenDeleteId={setOpenDeleteId}
+                                                                            theme={theme} openAdd={openAdd}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        )) : <></>
+                                }
                                 {
                                     openAdd === true ?
                                         <CinemaCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>

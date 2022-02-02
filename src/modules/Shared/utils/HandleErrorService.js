@@ -16,6 +16,34 @@ const handleErrorService = (state, errors, touched, name, field) => {
     }
 }
 
+export const handleServicesError = (state, errors, index) => {
+    if (errors?.sessionAdditionalServices && errors?.sessionAdditionalServices[index]?.price) {
+        return (((errors?.sessionAdditionalServices[index]?.price) && {
+            error: true, helperText: errors?.sessionAdditionalServices[index]?.price
+        }))
+    } else if (state?.error?.validationErrors &&
+        state?.error?.validationErrors?.SessionRequest?.sessionAdditionalServices[index]?.price) {
+        return ((state?.error?.validationErrors?.SessionRequest?.sessionAdditionalServices[index]?.price && {
+            error: true,
+            helperText: state?.error?.validationErrors?.SessionRequest?.sessionAdditionalServices[index]?.price
+        }))
+    }
+}
+
+export const handleSessionSeatsTypeError = (state, errors, index) => {
+    if (errors?.sessionSeatTypes && errors?.sessionSeatTypes[index]?.price) {
+        return (((errors?.sessionSeatTypes[index]?.price) && {
+            error: true, helperText: errors?.sessionSeatTypes[index]?.price
+        }))
+    } else if (state?.error?.validationErrors &&
+        state?.error?.validationErrors?.SessionRequest?.sessionSeatTypes[index]?.price) {
+        return ((state?.error?.validationErrors?.SessionRequest?.sessionSeatTypes[index]?.price && {
+            error: true,
+            helperText: state?.error?.validationErrors?.SessionRequest?.sessionSeatTypes[index]?.price
+        }))
+    }
+}
+
 export const handleRowsError = (state, errors, index) => {
     if (errors?.rows && errors?.rows[index]?.numberRow) {
         return (((errors?.rows[index]?.numberRow) && {
