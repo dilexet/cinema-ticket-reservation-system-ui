@@ -23,7 +23,7 @@ const MoviesTable = ({
                          handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
                      }) => {
     return (
-        <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="lg">
+        <Container component="main" sx={{mt: 2, mb: 2}} style={{minWidth: '1300px'}}>
             <Grid item>
                 <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
                     <Box display='block' justifyContent='center'>
@@ -65,7 +65,7 @@ const MoviesTable = ({
                                 <TableRow>
                                     <TableCell align="left">Id</TableCell>
                                     <TableCell align="center">Poster</TableCell>
-                                    <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center" style={{minWidth: '150px'}}>Name</TableCell>
                                     <TableCell align="center">Start date</TableCell>
                                     <TableCell align="center">End date</TableCell>
                                     <TableCell align="center">Release year</TableCell>
