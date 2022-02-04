@@ -110,7 +110,7 @@ const SessionCreateRow = ({
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     {...handleErrorService(sessionState, errors, touched,
-                                        "startDate", "HallRequest.StartDate")}
+                                        "startDate", "SessionRequest.StartDate")}
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="right">
