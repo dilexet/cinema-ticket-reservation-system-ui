@@ -11,6 +11,7 @@ import additionalServiceManagementSlice
 import uploadImageSlice from "../../UploadImage/store/reducers/UploadImageReducer";
 import sessionManagementSlice from "../../SessionManagement/store/reducers/SessionManagementReducer";
 import seatTypesSlice from "../../SeatType/store/reducers/SeatTypeReducer";
+import movieFilterSlice from "../../MoviePage/store/reducers/MovieReducer";
 
 export const rootReducer = combineReducers({
     login: loginSlice,
@@ -23,5 +24,6 @@ export const rootReducer = combineReducers({
     hallManagement: hallManagementSlice,
     additionalServiceManagement: additionalServiceManagementSlice,
     sessionManagement: sessionManagementSlice,
-    seatTypes: seatTypesSlice
+    seatTypes: seatTypesSlice,
+    movieFilter: movieFilterSlice,
 })

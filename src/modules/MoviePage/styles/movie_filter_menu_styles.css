@@ -1,0 +1,20 @@
+.main-box {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nested-box {
+    width: 20%;
+    box-sizing: border-box;
+}
+
+.nested-box-border-right {
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.content-box {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative
+}

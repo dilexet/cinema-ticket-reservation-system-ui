@@ -35,16 +35,16 @@ const MovieRow = ({
                 {toDateString(movie.endDate)}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {toDateString(movie.movieDescriptionViewModel.releaseDate)}
+                {toDateString(movie.movieDescription.releaseDate)}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {movie.movieDescriptionViewModel.description}
+                {movie.movieDescription.description}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {movie.movieDescriptionViewModel.countries.join(`, `)}
+                {movie.movieDescription.countries.join(`, `)}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {movie.movieDescriptionViewModel.genres.join(`, `)}
+                {movie.movieDescription.genres.join(`, `)}
             </TableCell>
             <TableCell component="th" scope="row" align="right">
                 {openDeleteId === index ?
