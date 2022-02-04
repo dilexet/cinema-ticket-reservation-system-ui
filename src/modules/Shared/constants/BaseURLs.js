@@ -19,3 +19,5 @@ export const SessionManagementURL = "session/"
 export const SeatTypeURL = "seatType/"
 
 export const ImageUploadURL = "file/"
+
+export const MovieFilterURL = "movieFilter/"
