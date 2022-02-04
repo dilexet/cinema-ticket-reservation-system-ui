@@ -16,7 +16,6 @@ const MoviePageContainer = () => {
 
     useEffect(() => {
         async function getMoviesList() {
-            console.log(filterParams)
             await dispatch(await getMoviesByFilter(filterParams));
             setIsLoading(false)
         }

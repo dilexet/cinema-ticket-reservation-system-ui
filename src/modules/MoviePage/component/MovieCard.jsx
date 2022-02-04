@@ -82,7 +82,7 @@ const MovieCard = ({movie, theme}) => {
                         marginRight: 'auto',
                     }}
                     component={Link}
-                    to='/'
+                    to={`/movie-page/${movie.id}`}
                 >
                     Buy ticket
                 </Button>
