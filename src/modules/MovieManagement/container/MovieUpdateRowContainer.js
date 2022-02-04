@@ -13,10 +13,10 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
         "PosterUrl": movie.posterUrl,
         "StartDate": toDateStringInputFormat(movie.startDate),
         "EndDate": toDateStringInputFormat(movie.endDate),
-        "ReleaseDate": toDateStringInputFormat(movie.movieDescriptionViewModel.releaseDate),
-        "Description": movie.movieDescriptionViewModel.description,
-        "Countries": movie.movieDescriptionViewModel.countries.join(`,`),
-        "Genres": movie.movieDescriptionViewModel.genres.join(`,`),
+        "ReleaseDate": toDateStringInputFormat(movie.movieDescription.releaseDate),
+        "Description": movie.movieDescription.description,
+        "Countries": movie.movieDescription.countries.join(`,`),
+        "Genres": movie.movieDescription.genres.join(`,`),
     }
 
     const [isUpdate, setIsUpdate] = React.useState(false)
