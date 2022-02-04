@@ -25,6 +25,7 @@ import MoviePageContainer from "../../MoviePage/container/MoviePageContainer";
 import RoleRoute from "../../Shared/components/Routes/RoleRoute";
 import {AdminRole, ManagerRole, UserRole} from "../../Shared/constants/RoleNames";
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
+import MovieSessionPage from "../../MovieSessionsPage/component/MovieSessionPage";
 
 const App = ({
                  darkMode,
@@ -63,10 +64,16 @@ const App = ({
                                element={<PublicRoute isAuthenticate={isAuthenticate}
                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                      component={RegisterContainer} restricted={true}/>}/>
-                        <Route path='/movie-page'
+                        <Route path='/movie-page/'
                                element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
                                                    setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                    component={MoviePageContainer} restricted={false}/>}/>
+                        <Route path='/movie-page/:movieId'
+                               element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                                   setIsAuthenticate={setIsAuthenticate}
+                                                   isLoading={isLoading}
+                                                   component={MovieSessionPage}
+                                                   restricted={false}/>}/>
                         <Route exact path='/dashboard/*'
                                element={<PrivateRoute isAuthenticate={isAuthenticate}
                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
