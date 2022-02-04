@@ -20,11 +20,11 @@ import CinemaManagementContainer from "../../CinemaManagement/container/CinemaMa
 import HallManagementContainer from "../../HallManagement/container/HallManagementContainer";
 import AdditionalServiceManagementContainer
     from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
-
-import {darkTheme, lightTheme} from "../utils/DarkModeService";
-import RoleRoute from "../../Shared/components/Routes/RoleRoute";
-import {AdminRole, ManagerRole} from "../../Shared/constants/RoleNames";
 import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
+import MoviePageContainer from "../../MoviePage/container/MoviePageContainer";
+import RoleRoute from "../../Shared/components/Routes/RoleRoute";
+import {AdminRole, ManagerRole, UserRole} from "../../Shared/constants/RoleNames";
+import {darkTheme, lightTheme} from "../utils/DarkModeService";
 
 const App = ({
                  darkMode,
@@ -63,6 +63,10 @@ const App = ({
                                element={<PublicRoute isAuthenticate={isAuthenticate}
                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                                      component={RegisterContainer} restricted={true}/>}/>
+                        <Route path='/movie-page'
+                               element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                                   setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                                   component={MoviePageContainer} restricted={false}/>}/>
                         <Route exact path='/dashboard/*'
                                element={<PrivateRoute isAuthenticate={isAuthenticate}
                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
