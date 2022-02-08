@@ -40,7 +40,7 @@ const MovieCard = ({movie, theme}) => {
                         {movie.movieDescription.countries.join(', ')}
                     </Typography>
                 </Box>
-                <Box>
+                <Box style={{height: '80px'}}>
                     <Typography variant="body2"
                                 style={{
                                     color: theme.palette.mode === 'dark'
@@ -82,7 +82,7 @@ const MovieCard = ({movie, theme}) => {
                         marginRight: 'auto',
                     }}
                     component={Link}
-                    to={`/movie-page/${movie.id}`}
+                    to={`/afisha/movieId=${movie.id}`}
                 >
                     Buy ticket
                 </Button>
