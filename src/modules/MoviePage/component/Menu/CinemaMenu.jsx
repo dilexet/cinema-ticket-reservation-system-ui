@@ -32,7 +32,7 @@ const CinemaMenu = ({open, handleChange, movieFilterState, filter, handleCinemaC
                 <Box style={{margin: '15px 0'}}>
                     <List>
                         {
-                            movieFilterState?.cinemaNamesState ?
+                            movieFilterState?.cinemaNamesState?.listOfTitles?.length !== 0 ?
                                 movieFilterState?.cinemaNamesState?.listOfTitles?.map((name, index) => (
                                     filter.CinemaName === name ?
                                         <ListItemButton key={index}

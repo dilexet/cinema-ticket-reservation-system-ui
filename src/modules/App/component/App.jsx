@@ -1,111 +1,28 @@
 import React from 'react';
-import {
-    Routes,
-    Route,
-} from "react-router-dom";
 import {ThemeProvider, CssBaseline, Box} from '@mui/material';
-import HomeContainer from "../../Home/container/HomeContainer";
-import LoginContainer from "../../Login/container/LoginContainer";
 import TopAppBarContainer from "../../TopAppBar/container/TopAppBarContainer";
-import RegisterContainer from "../../Register/container/RegisterContainer";
 import Footer from "../../Footer/component/Footer";
-import PublicRoute from "../../Shared/components/Routes/PublicRoute";
-import PrivateRoute from "../../Shared/components/Routes/PrivateRoute";
-import LogoutContainer from "../../Logout/container/LogoutContainer";
-import UserManagementContainer from "../../UserManagement/container/UserManagementContainer";
-import Dashboard from "../../Dashboard/component/Dashboard";
-import NotFound from "../../NotFound/component/NotFound";
-import MovieManagementContainer from "../../MovieManagement/container/MovieManagementContainer";
-import CinemaManagementContainer from "../../CinemaManagement/container/CinemaManagementContainer";
-import HallManagementContainer from "../../HallManagement/container/HallManagementContainer";
-import AdditionalServiceManagementContainer
-    from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
-import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
-import MoviePageContainer from "../../MoviePage/container/MoviePageContainer";
-import RoleRoute from "../../Shared/components/Routes/RoleRoute";
-import {AdminRole, ManagerRole, UserRole} from "../../Shared/constants/RoleNames";
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
+import AppRoutes from "./AppRoutes";
 
 const App = ({
-                 darkMode,
-                 setDarkMode,
-                 setCookie,
-                 isLoading,
-                 isAuthenticate,
-                 setIsAuthenticate
+                 darkMode, setDarkMode, setCookie, isLoading, isAuthenticate, setIsAuthenticate
              }) => {
-    return (
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: '100vh'
-                }}
-            >
-                <CssBaseline>
-                    <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
-                                        isAuthenticate={isAuthenticate}/>
-                    <Routes>
-                        <Route exact path='/'
-                               element={<PublicRoute isAuthenticate={isAuthenticate}
-                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                     component={HomeContainer}/>}/>
-                        <Route exact path='/logout'
-                               element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                      component={LogoutContainer}/>}/>
-                        <Route path='/login'
-                               element={<PublicRoute isAuthenticate={isAuthenticate}
-                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                     component={LoginContainer} restricted={true}/>}/>
-                        <Route path='/register'
-                               element={<PublicRoute isAuthenticate={isAuthenticate}
-                                                     setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                     component={RegisterContainer} restricted={true}/>}/>
-                        <Route path='/movie-page'
-                               element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                                   setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                   component={MoviePageContainer} restricted={false}/>}/>
-                        <Route exact path='/dashboard/*'
-                               element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                                      setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                      component={Dashboard} restricted={false}/>}>
-                            <Route index={true} element={<NotFound/>}/>
-                            <Route exact path='user-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={AdminRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={UserManagementContainer} restricted={false}/>}/>
-                            <Route exact path='movie-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={MovieManagementContainer} restricted={false}/>}/>
-                            <Route exact path='cinema-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={CinemaManagementContainer} restricted={false}/>}/>
-                            <Route exact path='hall-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={HallManagementContainer} restricted={false}/>}/>
-                            <Route exact path='additional-service-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={AdditionalServiceManagementContainer}
-                                                       restricted={false}/>}/>
-                            <Route exact path='session-management'
-                                   element={<RoleRoute isAuthenticate={isAuthenticate} role={ManagerRole}
-                                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                                       component={SessionManagementContainer}
-                                                       restricted={false}/>}/>
-                            <Route path="*" element={<NotFound/>}/>
-                        </Route>
-                    </Routes>
-                    <Footer description={"Some description"}/>
-                </CssBaseline>
-            </Box>
-        </ThemeProvider>
-    );
+    return (<ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <Box
+            sx={{
+                display: 'flex', flexDirection: 'column', minHeight: '100vh'
+            }}
+        >
+            <CssBaseline>
+                <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
+                                    isAuthenticate={isAuthenticate}/>
+                <AppRoutes isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate}
+                           isLoading={isLoading}/>
+                <Footer description={"Some description"}/>
+            </CssBaseline>
+        </Box>
+    </ThemeProvider>);
 }
 
 export default App;

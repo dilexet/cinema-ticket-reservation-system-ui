@@ -12,6 +12,7 @@ import uploadImageSlice from "../../UploadImage/store/reducers/UploadImageReduce
 import sessionManagementSlice from "../../SessionManagement/store/reducers/SessionManagementReducer";
 import seatTypesSlice from "../../SeatType/store/reducers/SeatTypeReducer";
 import movieFilterSlice from "../../MoviePage/store/reducers/MovieReducer";
+import movieSessionSlice from "../../MovieSessionsPage/store/reducers/MovieSessionReducer";
 
 export const rootReducer = combineReducers({
     login: loginSlice,
@@ -26,4 +27,5 @@ export const rootReducer = combineReducers({
     sessionManagement: sessionManagementSlice,
     seatTypes: seatTypesSlice,
     movieFilter: movieFilterSlice,
+    movieSession: movieSessionSlice
 })
