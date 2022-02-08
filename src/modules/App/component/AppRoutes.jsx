@@ -23,6 +23,7 @@ import AdditionalServiceManagementContainer
     from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
 import BookingPage from "../../BookingPage/component/BookingPage";
+import BookingContainer from "../../BookingPage/container/BookingContainer";
 
 const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
     return (
@@ -58,7 +59,7 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                    element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
                                        setIsAuthenticate={setIsAuthenticate}
                                        isLoading={isLoading}
-                                       component={BookingPage}
+                                       component={BookingContainer}
                                        restricted={false}/>}/>
             <Route exact path='/dashboard/*'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
