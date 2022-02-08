@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import {Box, IconButton, Typography} from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
-const MovieSessionPageHeader = ({sessionState, theme, handleClose}) => {
+const MovieHeader = ({movieName, theme, handleClose}) => {
     return (
         <Box
             style={{
@@ -41,7 +41,7 @@ const MovieSessionPageHeader = ({sessionState, theme, handleClose}) => {
                         fontWeight: '700',
                         fontSize: '1.125em'
                     }}>
-                        {sessionState?.dataList?.movie?.name}
+                        {movieName}
                     </Typography>
                 </Box>
                 <Box style={{boxSizing: 'border-box'}}>
@@ -59,4 +59,4 @@ const MovieSessionPageHeader = ({sessionState, theme, handleClose}) => {
     )
 }
 
-export default MovieSessionPageHeader;
+export default MovieHeader;
