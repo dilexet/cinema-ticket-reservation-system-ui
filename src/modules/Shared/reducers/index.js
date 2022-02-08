@@ -13,6 +13,7 @@ import sessionManagementSlice from "../../SessionManagement/store/reducers/Sessi
 import seatTypesSlice from "../../SeatType/store/reducers/SeatTypeReducer";
 import movieFilterSlice from "../../MoviePage/store/reducers/MovieReducer";
 import movieSessionSlice from "../../MovieSessionsPage/store/reducers/MovieSessionReducer";
+import bookingSlice from "../../BookingPage/store/reducers/BookingReducer";
 
 export const rootReducer = combineReducers({
     login: loginSlice,
@@ -27,5 +28,6 @@ export const rootReducer = combineReducers({
     sessionManagement: sessionManagementSlice,
     seatTypes: seatTypesSlice,
     movieFilter: movieFilterSlice,
-    movieSession: movieSessionSlice
+    movieSession: movieSessionSlice,
+    booking: bookingSlice
 })
