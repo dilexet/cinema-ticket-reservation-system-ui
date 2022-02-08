@@ -2,7 +2,7 @@ import {
     get_sessions_error,
     get_sessions_loading,
     get_sessions_success
-} from "../../../SessionManagement/store/reducers/SessionManagementReducer";
+} from "../reducers/MovieSessionReducer";
 import {sessionAPI} from "./SessionAPI";
 
 export const getSessionsForMovie = (id) => {

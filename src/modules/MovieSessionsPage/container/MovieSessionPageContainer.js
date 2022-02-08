@@ -11,7 +11,7 @@ const MovieSessionPageContainer = () => {
     const {movieId} = useParams();
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
-    const sessionState = useSelector((state) => state.sessionManagement);
+    const sessionState = useSelector((state) => state.movieSession);
 
     const navigate = useNavigate();
 
