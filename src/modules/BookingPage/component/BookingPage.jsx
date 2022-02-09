@@ -1,10 +1,171 @@
 import React from 'react'
-import {Box, CardMedia, Container, Divider, Grid, Paper, Typography} from "@mui/material";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import {Box, Button, Container, Divider, Grid, IconButton, Paper, SvgIcon, Typography} from "@mui/material";
+import CropSquareIcon from "@mui/icons-material/CropSquare";
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 import MovieHeader from "../../Shared/components/MovieHeader";
+import {ColorSeatsType, SeatBookedColor, SeatSelectedColor} from "../constants/ColorSeatsType";
+import ContentHeader from "./ContentHeader";
+import SeatsTypeContent from "./SeatsTypeContent";
+
+const ConfirmSelectedSeatsContent = ({theme}) => {
+    return (
+        <Box>
+            <Box>
+
+            </Box>
+            <Box
+                style={{
+                    margin: '25px 0'
+                }}>
+                <Button variant="outlined" fullWidth style={{
+                    color: theme.palette.mode === 'dark' ?
+                        "rgba(255, 255, 255, 0.35)" :
+                        "rgba(0, 0, 0, 0.35)",
+                    textTransform: 'none',
+                    borderRadius: '22px',
+                    border: '2px solid #FFFFFF',
+                    fontSize: '1em'
+
+                }}>
+                    Confirm
+                </Button>
+            </Box>
+        </Box>
+    )
+}
+
+const RowNumbers = ({theme, numberRow}) => {
+    return (
+        <Box
+            style={{
+                margin: '0 10px'
+            }}>
+            <Typography
+                style={{
+                    fontSize: '15px',
+                    fontWeight: '400',
+                    color: theme.palette.mode === 'dark' ?
+                        'rgba(255, 255, 255, 0.35)' :
+                        'rgba(0, 0, 0, 0.35)'
+                }}>
+                {numberRow}
+            </Typography>
+        </Box>
+    )
+}
+
+const HallPlan = ({theme, session}) => {
+    return (
+        <Box
+            style={{
+                textAlign: 'center',
+                margin: '25px 0',
+                padding: '10px'
+            }}>
+            <Box
+                style={{
+                    verticalAlign: 'top',
+                    position: 'relative',
+                    maxWidth: '100%'
+                }}>
+                <Box style={{
+                    overflow: 'hidden',
+                    position: 'relative',
+                    maxWidth: '100%'
+                }}>
+                    <Box
+                        style={{
+                            margin: '10px 0 150px',
+                        }}>
+                        <Box style={{
+                            border: theme.palette.mode === 'dark' ?
+                                "2px solid rgba(255, 255, 255, 0.8)" :
+                                "2px solid rgba(0, 0, 0, 0.8)",
+                            maxWidth: '75%',
+                            margin: 'auto',
+                        }}/>
+                        <Typography
+                            style={{
+                                marginTop: '10px',
+                                fontSize: '18px',
+                                fontWeight: '700',
+                                color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)'
+                            }}>
+                            Screen
+                        </Typography>
+                    </Box>
+                    <Box
+                        style={{
+                            maxWidth: '75%',
+                            margin: 'auto'
+                        }}>
+                        <Box>
+                            {
+                                session?.hall?.rows?.map((row, index) => (
+                                    <Box key={index} style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        margin: '20px 0'
+                                    }}>
+                                        <RowNumbers theme={theme} numberRow={row?.numberRow}/>
+                                        <Box
+                                            style={{
+                                                margin: '0 10px'
+                                            }}>
+                                            {
+                                                row?.seats?.map((seat, index) => (
+                                                    <Box key={index}
+                                                         style={{
+                                                             display: 'inline-block'
+                                                         }}>
+                                                        <CheckSessionSeat seatId={seat.id} session={session}/>
+                                                    </Box>
+                                                ))
+                                            }
+                                        </Box>
+                                        <RowNumbers theme={theme} numberRow={row?.numberRow}/>
+                                    </Box>
+                                ))
+                            }
+                        </Box>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+    )
+}
+
+const CheckSessionSeat = ({seatId, session}) => {
+    const sessionSeat = session?.sessionSeats?.find(el => el.seat.id === seatId)
+    return (
+        <Box>
+            {
+                sessionSeat?.ticketState === "Free" ?
+                    <Box style={{
+                        margin: '0 2px',
+                        cursor: 'pointer',
+                    }}>
+                        <CropSquareIcon style={{
+                            fontSize: '40px',
+                            color: ColorSeatsType[sessionSeat?.seat?.seatType],
+                        }}/>
+                    </Box> :
+                    <Box style={{
+                        margin: '0 2px',
+                    }}>
+                        <CropSquareIcon style={{
+                            fontSize: '40px',
+                            color: SeatBookedColor,
+                        }}/>
+                    </Box>
+            }
+        </Box>
+    )
+}
 
 const BookingPage = ({theme, bookingState, handleClose}) => {
+    const [selectedSeats, setSelectedSeats] = React.useState(0);
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} style={{minHeight: '1000px'}}>
             <Grid item>
@@ -20,111 +181,21 @@ const BookingPage = ({theme, bookingState, handleClose}) => {
                     <Divider/>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
-                            <Box
-                                style={{
-                                    padding: '20px 0',
-                                    display: 'flex'
-                                }}>
-                                <Box
-                                    style={{
-                                        flex: '0 0 auto',
-                                        margin: '10px 20px 10px 0'
-                                    }}>
-                                    <CardMedia
-                                        component='img'
-                                        style={{
-                                            width: '55px', height: '80px',
-                                            borderRadius: '5px',
-                                            position: 'relative',
-                                            overflow: 'hidden',
-                                            opacity: '0.9',
-                                        }}
-                                        image={bookingState?.sessionState?.session?.movie?.posterUrl}
-                                        alt={bookingState?.sessionState?.session?.movie?.name}
-                                    />
-                                </Box>
-                                <Box
-                                    style={{
-                                        flex: '1 1 auto',
-                                        marginLeft: '20px'
-                                    }}>
-                                    <Typography
-                                        style={{
-                                            fontSize: '2.25em',
-                                            fontWeight: '700',
-                                            lineHeight: '34px',
-                                            marginBottom: '6px',
-                                            opacity: '0.8'
-                                        }}>
-                                        {bookingState?.sessionState?.session?.movie?.name}
-                                    </Typography>
-                                    <Box
-                                        style={{
-                                            display: 'inline-block',
-                                            verticalAlign: 'top',
-                                        }}>
-                                        <Box
-                                            style={{
-                                                margin: '10px 0',
-                                                display: 'inline-flex',
-                                                verticalAlign: 'top',
-                                                alignItems: 'center',
-                                            }}>
-                                            <Box
-                                                style={{
-                                                    display: 'flex',
-                                                    paddingRight: '12px'
-                                                }}>
-                                                <LocationOnIcon sx={{fontSize: 26}} style={{
-                                                    color: theme.palette.mode === 'dark' ?
-                                                        'rgba(255, 255, 255, 0.35)' :
-                                                        'rgba(0, 0, 0, 0.35)'
-                                                }}/>
-                                            </Box>
-                                            <Box>
-                                                <Typography
-                                                    style={{
-                                                        fontSize: '17px',
-                                                        fontWeight: 'bold',
-                                                        color: theme.palette.mode === 'dark' ?
-                                                            'rgba(255, 255, 255, 0.8)' :
-                                                            'rgba(0, 0, 0, 0.8)'
-                                                    }}>
-                                                    <span>
-                                                         {bookingState?.sessionState?.session?.hall?.cinemaName}
-                                                        &nbsp;in&nbsp;
-                                                        {bookingState?.sessionState?.session?.hall?.cityName}
-                                                        ,&nbsp;
-                                                        {bookingState?.sessionState?.session?.hall?.street}
-                                                    </span>
-                                                    <span
-                                                        style={{
-                                                            color: theme.palette.mode === 'dark' ?
-                                                                'rgba(255, 255, 255, 0.35)' :
-                                                                'rgba(0, 0, 0, 0.35)'
-                                                        }}>
-                                                        &nbsp;/&nbsp;
-                                                    </span>
-                                                    <span>
-                                                        {bookingState?.sessionState?.session?.hall?.name}
-                                                    </span>
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                        <Box>
-                                            <CalendarTodayIcon label='8'/>
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            </Box>
+                            <ContentHeader theme={theme} session={bookingState?.sessionState?.session}/>
                             <Divider/>
                         </Grid>
                         <Grid container item xs={12}>
                             <Grid item xs={8}>
-                                Left content
+                                <HallPlan theme={theme} session={bookingState?.sessionState?.session}/>
                             </Grid>
                             <Grid item xs={4}>
-                                Right content
+                                {
+                                    selectedSeats === 0 ?
+                                        <SeatsTypeContent theme={theme}
+                                                          session={bookingState?.sessionState?.session}/> :
+                                        <ConfirmSelectedSeatsContent theme={theme}
+                                                                     session={bookingState?.sessionState?.session}/>
+                                }
                             </Grid>
                         </Grid>
                     </Grid>
