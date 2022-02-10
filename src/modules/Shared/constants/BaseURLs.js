@@ -23,3 +23,5 @@ export const ImageUploadURL = "file/"
 export const MovieFilterURL = "movieFilter/"
 
 export const BookingURL = "booking/"
+
+export const HubURL = BaseURL + '/seat-booking-hub'
