@@ -1,29 +1,15 @@
 import React from 'react'
 import {Box, Grid, IconButton, Typography} from "@mui/material";
-import SquareRoundedIcon from "@mui/icons-material/SquareRounded";
-import ClearIcon from "@mui/icons-material/Clear";
-import {SeatSelectedColor} from "../constants/ColorSeatsType";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
+const SelectedAdditionalServices = ({theme, value, selectedAddServices, handleAdd, handleRemove}) => {
     return (
         <Grid container spacing={1}
               style={{
                   margin: '20px 0'
               }}>
-            <Grid item xs={2}>
-                <Box
-                    style={{
-                        width: '85px',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}>
-                    <SquareRoundedIcon style={{
-                        fontSize: '40px',
-                        fill: SeatSelectedColor
-                    }}/>
-                </Box>
-            </Grid>
-            <Grid item xs={8}
+            <Grid item xs={9}
                   style={{
                       padding: '0 10px'
                   }}>
@@ -41,10 +27,7 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
                                     'rgba(255, 255, 255, 0.8)' :
                                     'rgba(0, 0, 0, 0.8)'
                             }}>
-                            {value?.seat?.numberRow}
-                            &nbsp;row&nbsp;/&nbsp;
-                            {value?.seat?.numberSeat}
-                            &nbsp;seat
+                            {value?.additionalService?.name}
                         </Typography>
                     </Box>
                     <Box
@@ -59,7 +42,7 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
                                     'rgba(255, 255, 255, 0.8)' :
                                     'rgba(0, 0, 0, 0.8)'
                             }}>
-                            {value?.sessionSeatType?.price}
+                            {value?.price}
                             &nbsp;$
                         </Typography>
                     </Box>
@@ -76,12 +59,12 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
                                 'rgba(200, 199, 199, 0.8)' :
                                 'rgba(50, 51, 51, 0.8)'
                         }}>
-                        SeatType:&nbsp;
-                        {value?.sessionSeatType?.seatType}
+                        Number of selected services:&nbsp;
+                        {selectedAddServices?.filter(service => service.id === value.id)?.length}
                     </Typography>
                 </Box>
             </Grid>
-            <Grid item xs={2}
+            <Grid item xs={3}
                   style={{
                       padding: '0 0 0 10px'
                   }}>
@@ -90,14 +73,28 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
                         padding: 0,
                         margin: 0
                     }}>
-                    <IconButton onClick={() => handleCancelSelectSeat(value.seat.id)}
+                    <IconButton onClick={() => handleAdd(value)}
                                 style={{
                                     color: theme.palette.mode === 'dark' ?
                                         'rgba(255, 255, 255, 0.35)' :
                                         'rgba(0, 0, 0, 0.35)',
-                                    padding: '0'
+                                    padding: '0 5px',
+                                    width: '25px',
+                                    height: '25px',
                                 }}>
-                        <ClearIcon/>
+                        <AddIcon/>
+                    </IconButton>
+                    <IconButton onClick={() => handleRemove(value)}
+                                disabled={selectedAddServices.find(el => el.id === value.id) === undefined}
+                                style={{
+                                    color: theme.palette.mode === 'dark' ?
+                                        'rgba(255, 255, 255, 0.35)' :
+                                        'rgba(0, 0, 0, 0.35)',
+                                    padding: '0 5px',
+                                    width: '25px',
+                                    height: '25px',
+                                }}>
+                        <RemoveIcon/>
                     </IconButton>
                 </Box>
             </Grid>
@@ -105,4 +102,4 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
     )
 }
 
-export default SelectedSeats;
+export default SelectedAdditionalServices;

@@ -1,17 +1,40 @@
 import React from "react";
 import {Box, Button, Divider, Typography} from "@mui/material";
 import SelectedSeats from "./SelectedSeats";
+import SelectedAdditionalServices from "./SelectedAdditionalServices";
 
 const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCancelSelectSeat}) => {
-    console.log(selectedSeats)
     const [totalPrice, setTotalPrice] = React.useState(0);
+
+    const [selectedAdditionalServices, setSelectedAdditionalServices] = React.useState([])
+
     React.useEffect(() => {
         let price = 0
         selectedSeats.forEach((seat) => {
             price = price + seat?.sessionSeatType?.price
         })
+        selectedAdditionalServices.forEach((service) => {
+            price = price + service?.price
+        })
         setTotalPrice(price)
-    }, [selectedSeats])
+    }, [selectedAdditionalServices, selectedSeats])
+
+
+    const handleAddService = (service) => {
+        setSelectedAdditionalServices([...selectedAdditionalServices, service])
+    }
+
+    const handleRemoveService = (service) => {
+        const index = selectedAdditionalServices.indexOf(service)
+        if (index > -1) {
+            setSelectedAdditionalServices(selectedAdditionalServices.filter((_, i) => i !== index))
+        }
+    }
+
+    const handleConfirmOrder = (selectedSeats, selectedAdditionalServices) => {
+
+    }
+
     return (
         <Box
             style={{
@@ -64,6 +87,39 @@ const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCance
                 </Box>
                 <Box
                     style={{
+                        display: 'inline', textAlign: 'left',
+                    }}>
+                    <Typography
+                        style={{
+                            fontSize: '1.47em',
+                            fontWeight: '700',
+                            margin: '50px 0',
+                            color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)'
+                        }}>
+                        You can select additional services
+                    </Typography>
+                </Box>
+                <Box>
+                    {
+                        session.sessionAdditionalServices?.map((value, index) => (
+                                <Box key={index}
+                                     style={{
+                                         borderBottom: theme.palette.mode === 'dark' ?
+                                             '1px solid rgba(255, 255, 255, 0.15' :
+                                             '1px solid rgba(0, 0, 0, 0.15',
+                                     }}>
+                                    <SelectedAdditionalServices theme={theme} value={value}
+                                                                selectedAddServices={selectedAdditionalServices}
+                                                                handleAdd={handleAddService}
+                                                                handleRemove={handleRemoveService}
+                                    />
+                                </Box>
+                            )
+                        )
+                    }
+                </Box>
+                <Box
+                    style={{
                         marginTop: '25px', textAlign: 'center'
                     }}>
                     <Typography
@@ -90,14 +146,15 @@ const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCance
                 style={{
                     margin: '25px 0'
                 }}>
-                <Button variant="outlined" fullWidth style={{
-                    color: theme.palette.mode === 'dark' ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
-                    textTransform: 'none',
-                    borderRadius: '22px',
-                    border: theme.palette.mode === 'dark' ? '2px solid #FFFFFF' : '2px solid #000000',
-                    fontSize: '1em'
-
-                }}>
+                <Button variant="outlined" fullWidth
+                        onClick={() => handleConfirmOrder(selectedSeats, selectedAdditionalServices)}
+                        style={{
+                            color: theme.palette.mode === 'dark' ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
+                            textTransform: 'none',
+                            borderRadius: '22px',
+                            border: theme.palette.mode === 'dark' ? '2px solid #FFFFFF' : '2px solid #000000',
+                            fontSize: '1em'
+                        }}>
                     Confirm
                 </Button>
             </Box>

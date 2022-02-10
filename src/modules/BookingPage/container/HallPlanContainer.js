@@ -1,6 +1,6 @@
 import React from 'react'
 import HallPlan from "../component/HallPlan";
-import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr";
+import {HubConnectionBuilder} from "@microsoft/signalr";
 import {HubURL} from "../../Shared/constants/BaseURLs";
 import {blockTicket, cancelBlockTicket} from "../store/action-creator/BookingActions";
 import {useDispatch} from "react-redux";
@@ -16,7 +16,6 @@ const HallPlanContainer = ({
         const newConnection = new HubConnectionBuilder()
             .withUrl(HubURL)
             .withAutomaticReconnect()
-            .configureLogging(LogLevel.Information)
             .build();
         setConnection(newConnection);
     }, [setConnection])
