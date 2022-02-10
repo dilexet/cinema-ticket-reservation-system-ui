@@ -4,7 +4,9 @@ import {
     get_session_by_id_error,
     book_tickets_loading,
     book_tickets_success,
-    book_tickets_error
+    book_tickets_error,
+    block_seat,
+    cancel_block_seat
 } from "../reducers/BookingReducer";
 import {bookingAPI} from "./BookingAPI";
 
@@ -35,5 +37,18 @@ export const bookTickets = (id, data) => {
                 dispatch(book_tickets_error(error.response.data))
             }
         }
+    }
+}
+
+
+export const blockTicket = (seatId) => {
+    return async (dispatch) => {
+        dispatch(block_seat(seatId))
+    }
+}
+
+export const cancelBlockTicket = (seatId) => {
+    return async (dispatch) => {
+        dispatch(cancel_block_seat(seatId))
     }
 }

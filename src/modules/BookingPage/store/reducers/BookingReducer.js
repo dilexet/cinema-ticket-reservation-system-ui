@@ -65,6 +65,26 @@ const bookingSlice = createSlice({
             };
             state.error = action.payload;
         },
+        block_seat(state, action) {
+            state.sessionState = {
+                ...state.sessionState,
+                session: {
+                    ...state.sessionState.session,
+                    sessionSeats: state.sessionState.session.sessionSeats.map(x =>
+                        x.seat.id !== action.payload ? x : {...x, ticketState: "Blocked"})
+                }
+            }
+        },
+        cancel_block_seat(state, action) {
+            state.sessionState = {
+                ...state.sessionState,
+                session: {
+                    ...state.sessionState.session,
+                    sessionSeats: state.sessionState.session.sessionSeats.map(x =>
+                        x.seat.id !== action.payload ? x : {...x, ticketState: "Free"})
+                }
+            }
+        }
     }
 })
 
@@ -77,4 +97,6 @@ export const {
     book_tickets_loading,
     book_tickets_success,
     book_tickets_error,
+    block_seat,
+    cancel_block_seat
 } = bookingSlice.actions;
