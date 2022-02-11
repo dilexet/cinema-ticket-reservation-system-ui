@@ -82,12 +82,13 @@ const HallPlan = ({theme, session, selectedSeats, handleSelectSeat, handleCancel
                                                 margin: '0 10px'
                                             }}>
                                             {
-                                                row?.seats?.map((seat, index) => (
-                                                    <Box key={index}
+                                                row?.seats?.map((seat) => (
+                                                    <Box key={seat.id}
                                                          style={{
                                                              display: 'inline-block'
                                                          }}>
-                                                        <CheckSessionSeatContainer seatId={seat.id} session={session} theme={theme}
+                                                        <CheckSessionSeatContainer seatId={seat.id} session={session}
+                                                                                   theme={theme}
                                                                                    selectedSeats={selectedSeats}
                                                                                    handleSelectSeat={handleSelectSeat}
                                                                                    handleCancelSelectSeat={handleCancelSelectSeat}/>
