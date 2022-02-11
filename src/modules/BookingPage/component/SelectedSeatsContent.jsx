@@ -1,40 +1,13 @@
 import React from "react";
 import {Box, Button, Divider, Typography} from "@mui/material";
-import SelectedSeats from "./SelectedSeats";
+import SelectedSeat from "./SelectedSeat";
 import SelectedAdditionalServices from "./SelectedAdditionalServices";
 
-const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCancelSelectSeat}) => {
-    const [totalPrice, setTotalPrice] = React.useState(0);
-
-    const [selectedAdditionalServices, setSelectedAdditionalServices] = React.useState([])
-
-    React.useEffect(() => {
-        let price = 0
-        selectedSeats.forEach((seat) => {
-            price = price + seat?.sessionSeatType?.price
-        })
-        selectedAdditionalServices.forEach((service) => {
-            price = price + service?.price
-        })
-        setTotalPrice(price)
-    }, [selectedAdditionalServices, selectedSeats])
-
-
-    const handleAddService = (service) => {
-        setSelectedAdditionalServices([...selectedAdditionalServices, service])
-    }
-
-    const handleRemoveService = (service) => {
-        const index = selectedAdditionalServices.indexOf(service)
-        if (index > -1) {
-            setSelectedAdditionalServices(selectedAdditionalServices.filter((_, i) => i !== index))
-        }
-    }
-
-    const handleConfirmOrder = (selectedSeats, selectedAdditionalServices) => {
-
-    }
-
+const SelectedSeatsContent = ({
+                                         theme, session, selectedSeats, handleCancelSelectSeat,
+                                         selectedAdditionalServices, handleAddService, handleRemoveService,
+                                         totalPrice, handleConfirmOrder
+                                     }) => {
     return (
         <Box
             style={{
@@ -78,8 +51,8 @@ const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCance
                                              '1px solid rgba(255, 255, 255, 0.15' :
                                              '1px solid rgba(0, 0, 0, 0.15',
                                      }}>
-                                    <SelectedSeats theme={theme} value={value}
-                                                   handleCancelSelectSeat={handleCancelSelectSeat}/>
+                                    <SelectedSeat theme={theme} value={value}
+                                                  handleCancelSelectSeat={handleCancelSelectSeat}/>
                                 </Box>
                             )
                         )
@@ -162,4 +135,4 @@ const ConfirmSelectedSeatsContent = ({theme, session, selectedSeats, handleCance
     )
 }
 
-export default ConfirmSelectedSeatsContent;
+export default SelectedSeatsContent;

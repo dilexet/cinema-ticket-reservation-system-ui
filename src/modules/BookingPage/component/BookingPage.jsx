@@ -4,7 +4,7 @@ import MovieHeader from "../../Shared/components/MovieHeader";
 import ContentHeader from "./ContentHeader";
 import SeatsTypeContent from "./SeatsTypeContent";
 import HallPlanContainer from "../container/HallPlanContainer";
-import ConfirmSelectedSeatsContent from "./ConfirmSelectedSeatsContent";
+import SelectedSeatsContentContainer from "../container/SelectedSeatsContentContainer";
 
 const BookingPage = ({
                          theme, bookingState, handleClose, selectedSeats,
@@ -41,9 +41,9 @@ const BookingPage = ({
                                     selectedSeats.length < 1 ?
                                         <SeatsTypeContent theme={theme}
                                                           session={bookingState?.sessionState?.session}/> :
-                                        <ConfirmSelectedSeatsContent theme={theme} selectedSeats={selectedSeats}
-                                                                     handleCancelSelectSeat={handleCancelSelectSeat}
-                                                                     session={bookingState?.sessionState?.session}/>
+                                        <SelectedSeatsContentContainer theme={theme} selectedSeats={selectedSeats}
+                                                                       handleCancelSelectSeat={handleCancelSelectSeat}
+                                                                       session={bookingState?.sessionState?.session}/>
                                 }
                             </Grid>
                         </Grid>

@@ -2,9 +2,6 @@ import {
     get_session_by_id_loading,
     get_session_by_id_success,
     get_session_by_id_error,
-    book_tickets_loading,
-    book_tickets_success,
-    book_tickets_error,
     block_seat,
     cancel_block_seat
 } from "../reducers/BookingReducer";
@@ -24,22 +21,6 @@ export const getSessionById = (id) => {
         }
     }
 }
-
-export const bookTickets = (id, data) => {
-    return async (dispatch) => {
-        dispatch(book_tickets_loading())
-
-        try {
-            const response = await bookingAPI().book_tickets(id, data)
-            dispatch(book_tickets_success(response.data))
-        } catch (error) {
-            if (error.response) {
-                dispatch(book_tickets_error(error.response.data))
-            }
-        }
-    }
-}
-
 
 export const blockTicket = (seatId) => {
     return async (dispatch) => {

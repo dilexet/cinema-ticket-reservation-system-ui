@@ -4,7 +4,7 @@ import SquareRoundedIcon from "@mui/icons-material/SquareRounded";
 import ClearIcon from "@mui/icons-material/Clear";
 import {SeatSelectedColor} from "../constants/ColorSeatsType";
 
-const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
+const SelectedSeat = ({theme, value, handleCancelSelectSeat}) => {
     return (
         <Grid container spacing={1}
               style={{
@@ -76,7 +76,7 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
                                 'rgba(200, 199, 199, 0.8)' :
                                 'rgba(50, 51, 51, 0.8)'
                         }}>
-                        SeatType:&nbsp;
+                        Seat type:&nbsp;
                         {value?.sessionSeatType?.seatType}
                     </Typography>
                 </Box>
@@ -105,4 +105,4 @@ const SelectedSeats = ({theme, value, handleCancelSelectSeat}) => {
     )
 }
 
-export default SelectedSeats;
+export default SelectedSeat;

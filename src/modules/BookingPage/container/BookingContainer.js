@@ -31,6 +31,7 @@ const BookingContainer = () => {
             console.log("no connection")
         }
     }
+
     const handleCancelSelectSeat = async (seatId) => {
         if (connection) {
             try {
