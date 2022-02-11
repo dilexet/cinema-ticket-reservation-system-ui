@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
+import {TicketState} from "../../../Shared/constants/TicketState";
 
 const initialState = {
     sessionState: {
@@ -43,7 +44,7 @@ const bookingSlice = createSlice({
                 session: {
                     ...state.sessionState.session,
                     sessionSeats: state.sessionState.session.sessionSeats.map(x =>
-                        x.seat.id !== action.payload ? x : {...x, ticketState: "Blocked"})
+                        x.seat.id !== action.payload ? x : {...x, ticketState: TicketState.Blocked})
                 }
             }
         },
@@ -53,7 +54,7 @@ const bookingSlice = createSlice({
                 session: {
                     ...state.sessionState.session,
                     sessionSeats: state.sessionState.session.sessionSeats.map(x =>
-                        x.seat.id !== action.payload ? x : {...x, ticketState: "Free"})
+                        x.seat.id !== action.payload ? x : {...x, ticketState: TicketState.Free})
                 }
             }
         }

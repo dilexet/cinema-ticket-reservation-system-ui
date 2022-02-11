@@ -2,6 +2,7 @@ import React from "react";
 import {Box, Fade, Tooltip} from "@mui/material";
 import CropSquareIcon from "@mui/icons-material/CropSquare";
 import SquareRoundedIcon from "@mui/icons-material/SquareRounded";
+import {TicketState} from "../../Shared/constants/TicketState";
 import {ColorSeatsType, SeatBookedColor, SeatSelectedColor} from "../constants/ColorSeatsType";
 import ToolTipSeatMenu from "./ToolTipSeatMenu";
 
@@ -9,7 +10,7 @@ const CheckSessionSeat = ({theme, seatId, handleSelectSeat, handleCancelSelectSe
     return (
         <Box>
             {
-                sessionSeat?.ticketState === "Free" ?
+                sessionSeat?.ticketState === TicketState.Free ?
                     <Tooltip TransitionComponent={Fade} arrow placement="top"
                              TransitionProps={{timeout: 400}}
                              title={<ToolTipSeatMenu theme={theme} sessionSeat={sessionSeat}/>}
