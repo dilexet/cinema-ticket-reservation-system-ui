@@ -12,6 +12,10 @@ const NumberSeatsMenu = ({open, filter, handleNumberSeatsChange}) => {
                 color: 'rgb(39, 39, 42)',
                 overflow: 'hidden auto',
                 maxHeight: '250px',
+                position: 'absolute',
+                zIndex: '10',
+                opacity: '0.8',
+                maxWidth: '242px'
             }}>
                 <Box style={{margin: '5px 0'}}>
                     <List>

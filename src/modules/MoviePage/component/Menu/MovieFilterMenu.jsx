@@ -8,24 +8,25 @@ import CityMenuContainer from "../../container/CityMenuContainer";
 import StartDateMenuContainer from "../../container/StartDateMenuContainer";
 import NumberSeatsMenuContainer from "../../container/NumberSeatsMenuContainer";
 
-const MovieFilterMenu = ({theme, filter, setFilter}) => {
-    const [openMovieMenu, setOpenMovieMenu] = React.useState(false);
-    const [openCinemaMenu, setOpenCinemaMenu] = React.useState(false);
-    const [openCityMenu, setOpenCityMenu] = React.useState(false);
-    const [openStartDateMenu, setOpenStartDateMenu] = React.useState(false);
-    const [openNumberSeatMenu, setOpenNumberSeatMenu] = React.useState(false);
-
-    const handleCloseMenu = () => {
-        setOpenMovieMenu(false)
-        setOpenCinemaMenu(false)
-        setOpenCityMenu(false)
-        setOpenStartDateMenu(false)
-        setOpenNumberSeatMenu(false)
-    }
+const MovieFilterMenu = ({
+                             theme,
+                             filter,
+                             setFilter,
+                             openMovieMenu,
+                             openCinemaMenu,
+                             openStartDateMenu,
+                             openCityMenu,
+                             openNumberSeatMenu,
+                             handleCloseMenu,
+                             setOpenNumberSeatMenu,
+                             setOpenCinemaMenu,
+                             setOpenMovieMenu,
+                             setOpenStartDateMenu,
+                             setOpenCityMenu
+                         }) => {
 
     return (
         <Box className='main-box'>
-
             <Box className='nested-box'>
                 <Box className='nested-box-border-right'>
                     <Box className='content-box'>
