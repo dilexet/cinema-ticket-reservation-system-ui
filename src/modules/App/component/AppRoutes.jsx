@@ -22,7 +22,9 @@ import HallManagementContainer from "../../HallManagement/container/HallManageme
 import AdditionalServiceManagementContainer
     from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
-import BookingPage from "../../BookingPage/component/BookingPage";
+import BookingContainer from "../../BookingPage/container/BookingContainer";
+import ConfirmBookingPageContainer from "../../ConfirmBookingPage/container/ConfirmBookingPageContainer";
+import ProfilePageContainer from "../../ProfilePage/container/ProfilePageContainer";
 
 const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
     return (
@@ -59,6 +61,18 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                                        setIsAuthenticate={setIsAuthenticate}
                                        isLoading={isLoading}
                                        component={BookingPage}
+                                       restricted={false}/>}/>
+            <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
+                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                       isLoading={isLoading}
+                                       setIsAuthenticate={setIsAuthenticate}
+                                       component={ConfirmBookingPageContainer}
+                                       restricted={false}/>}/>
+                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+            <Route path='/profile'
+                                       setIsAuthenticate={setIsAuthenticate}
+                                       isLoading={isLoading}
+                                       component={ProfilePageContainer}
                                        restricted={false}/>}/>
             <Route exact path='/dashboard/*'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
