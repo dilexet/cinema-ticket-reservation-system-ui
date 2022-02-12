@@ -33,7 +33,8 @@ const TextField = ({
                 onBlur={onBlur}
                 {...props}
             />
-            <FormHelperText style={{minWidth: '150px', minHeight: '20px'}}>{helperText}</FormHelperText>
+            <FormHelperText
+                style={{minWidth: '150px', minHeight: '20px'}}>{helperText}</FormHelperText>
         </FormControl>
     )
 }
