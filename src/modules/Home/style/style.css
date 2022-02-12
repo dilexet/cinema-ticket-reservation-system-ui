@@ -1,0 +1,14 @@
+.scheduleLink {
+    flex: 0 0 auto;
+    padding: 0 15px 20px;
+    display: inline-flex;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+}
+
+.scheduleLink:hover {
+    color: rgb(212, 7, 84) !important;
+}
