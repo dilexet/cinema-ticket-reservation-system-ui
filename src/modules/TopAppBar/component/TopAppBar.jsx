@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom'
-import {Toolbar, Typography, IconButton, AppBar, Box, Link as LinkMaterial} from '@mui/material'
+import {Toolbar, Typography, IconButton, AppBar, Box, Link as LinkMaterial, ButtonGroup} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -12,7 +12,7 @@ import TopMenu from "./TopMenu";
 const TopAppBar = ({
                        darkMode, onChangeTheme, isAuthenticate, menuId,
                        handleProfileMenuOpen, anchorEl, isMenuOpen,
-                       handleMenuClose
+                       handleMenuClose, theme
                    }) => {
     return (
         <Box>
@@ -49,50 +49,48 @@ const TopAppBar = ({
 
                     <Box sx={{flexGrow: 1}}/>
 
-                    <IconButton sx={{display: {xs: {ml: 0, mr: 0}, md: {ml: 1, mr: 1}}}} onClick={onChangeTheme}
-                                color="inherit">
-                        {darkMode ? <Brightness7Icon/> : <Brightness4Icon/>}
-                    </IconButton>
-
-                    <Box sx={{display: {xs: 'none', md: 'flex'}, alignItems: 'center'}}>
-                        <LinkMaterial
-                            style={{textDecoration: 'none', textTransform: "capitalize"}}
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Features
-                        </LinkMaterial>
-                        <LinkMaterial
-                            style={{textDecoration: 'none', textTransform: "capitalize"}}
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Enterprise
-                        </LinkMaterial>
-                        <LinkMaterial
-                            style={{textDecoration: 'none', textTransform: "capitalize"}}
-                            variant="button"
-                            color="text.primary"
-                            href="#"
-                            sx={{my: 1, mx: 1.5}}
-                        >
-                            Support
-                        </LinkMaterial>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle/>
-                        </IconButton>
+                    <Box sx={{display: {xs: 'none', md: 'flex'}, alignItems: 'center'}} style={{
+                        margin: '0 50px'
+                    }}>
+                        <Box style={{
+                            margin: '0 20px'
+                        }}>
+                            <LinkMaterial sx={{my: 1, mx: 1.5}}
+                                          variant="button" component={Link} to='/afisha'
+                                          style={{
+                                              color: theme.palette.mode === 'dark' ?
+                                                  "rgb(255, 255, 255)" :
+                                                  "rgb(0, 0, 0)",
+                                              textDecoration: 'none',
+                                              marginLeft: '20px',
+                                              opacity: '0.9',
+                                              fontSize: '1em',
+                                              fontWeight: '400',
+                                              textTransform: 'none'
+                                          }}>
+                                Afisha
+                            </LinkMaterial>
+                        </Box>
+                        <Box>
+                            <ButtonGroup size="middle">
+                                <IconButton sx={{display: {xs: {ml: 0, mr: 0}, md: {ml: 1, mr: 1}}}}
+                                            onClick={onChangeTheme}
+                                            color="inherit">
+                                    {darkMode ? <Brightness7Icon/> : <Brightness4Icon/>}
+                                </IconButton>
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <AccountCircle/>
+                                </IconButton>
+                            </ButtonGroup>
+                        </Box>
                     </Box>
                 </Toolbar>
             </AppBar>

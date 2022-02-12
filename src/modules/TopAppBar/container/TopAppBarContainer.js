@@ -1,8 +1,11 @@
 import React from "react";
+import {useTheme} from "@mui/material";
 import TopAppBar from "../component/TopAppBar";
 
 const TopAppBarContainer = ({darkMode, setDarkMode, setCookie, isAuthenticate}) => {
     const menuId = 'primary-search-account-menu';
+
+    const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -27,7 +30,7 @@ const TopAppBarContainer = ({darkMode, setDarkMode, setCookie, isAuthenticate}) 
     return (
         <TopAppBar darkMode={darkMode} onChangeTheme={onChangeTheme} isAuthenticate={isAuthenticate}
                    menuId={menuId} anchorEl={anchorEl} handleProfileMenuOpen={handleProfileMenuOpen}
-                   isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose}/>
+                   isMenuOpen={isMenuOpen} handleMenuClose={handleMenuClose} theme={theme}/>
     );
 }
 
