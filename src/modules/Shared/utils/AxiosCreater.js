@@ -14,12 +14,14 @@ axiosInstance.interceptors.request.use(
             const res = getLocalAccessToken();
             if (res) {
                 config.headers = {
+                    ...config.headers,
                     'Authorization': `Bearer ${res.jwt}`,
                     'Accept': '*/*',
                     'Content-Type': 'application/json-patch+json'
                 }
                 if (config.url.includes('/' + ImageUploadURL)) {
                     config.headers = {
+                        ...config.headers,
                         'Authorization': `Bearer ${res.jwt}`,
                         'Accept': '*/*',
                         'Content-Type': 'multipart/form-data'
