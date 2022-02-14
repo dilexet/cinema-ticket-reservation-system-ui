@@ -9,11 +9,11 @@ const PublicRoute = ({
                          setIsAuthenticate, isLoading, restricted, ...props
                      }) => {
 
-    const authenticateState = useSelector((state) => state.authenticate);
+    const errorHandlerState = useSelector((state) => state.errorHandler);
 
     useEffect(() => {
         async function checkAuthorize() {
-            if (authenticateState.isAuthenticate === false) {
+            if (errorHandlerState.isAuthenticate === false) {
                 setIsAuthenticate(false)
             } else if (isLoading === false && isAuthenticate === false) {
                 const result = await isAuthorize();
@@ -22,7 +22,7 @@ const PublicRoute = ({
         }
 
         checkAuthorize()
-    }, [authenticateState.isAuthenticate, isAuthenticate, isLoading, setIsAuthenticate]);
+    }, [errorHandlerState.isAuthenticate, isAuthenticate, isLoading, setIsAuthenticate]);
 
     if (isAuthenticate === null) {
         return <Loading isLoading={true}/>
