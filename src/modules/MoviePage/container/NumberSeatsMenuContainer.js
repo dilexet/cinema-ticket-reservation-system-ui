@@ -7,7 +7,6 @@ const NumberSeatsMenuContainer = ({open, filter, setFilter}) => {
 
     const handleNumberSeatsChange = (event) => {
         if (event.target.value === '') {
-            console.log()
             setFilter({...filter, NumberAvailableSeats: 0})
         } else {
             setFilter({...filter, NumberAvailableSeats: event.target.value})

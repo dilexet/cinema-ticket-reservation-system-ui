@@ -60,7 +60,13 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                    element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
                                        setIsAuthenticate={setIsAuthenticate}
                                        isLoading={isLoading}
-                                       component={BookingPage}
+                                       component={BookingContainer}
+                                       restricted={false}/>}/>
+            <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
+                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                       setIsAuthenticate={setIsAuthenticate}
+                                       isLoading={isLoading}
+                                       component={ConfirmBookingPageContainer}
                                        restricted={false}/>}/>
             <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
                    element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}

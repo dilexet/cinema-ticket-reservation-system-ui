@@ -1,7 +1,7 @@
 import React from 'react'
 import {Box, Container, Divider, Grid, Paper} from "@mui/material";
 import '../styles/style.css';
-import MovieSessionPageHeader from "./MovieSessionPageHeader";
+import MovieHeader from "../../Shared/components/MovieHeader";
 import MovieSessionPageLeftContent from "./MovieSessionPageLeftContent";
 import SessionsList from "./SessionsList";
 import MovieSessionPageRightContent from "./MovieSessionPageRightContent";
@@ -16,7 +16,7 @@ const MovieSessionPage = ({theme, sessionState, handleClose}) => {
                     border: "none",
                     boxShadow: 'none'
                 }}>
-                    <MovieSessionPageHeader theme={theme} sessionState={sessionState} handleClose={handleClose}/>
+                    <MovieHeader theme={theme} movieName={sessionState?.dataList?.movie?.name} handleClose={handleClose}/>
                     <Divider/>
                     <Box
                         style={{
