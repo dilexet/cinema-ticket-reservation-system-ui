@@ -71,34 +71,35 @@ const AdditionalServicesTable = ({
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {additionalServicesState?.dataList ?
-                                    additionalServicesState?.dataList?.additionalServices?.map((additionalService, index) => (
-                                        <React.Fragment key={index}>
-                                            {
-                                                openEditId === index ?
-                                                    <AdditionalServiceUpdateRowContainer
-                                                        additionalService={additionalService}
-                                                        index={index}
-                                                        setOpenEditId={setOpenEditId}
-                                                        theme={theme}
-                                                    /> :
-                                                    <AdditionalServiceRowContainer
-                                                        additionalService={additionalService}
-                                                        index={index}
-                                                        openEditId={openEditId}
-                                                        setOpenEditId={setOpenEditId}
-                                                        openDeleteId={openDeleteId}
-                                                        setOpenDeleteId={setOpenDeleteId}
-                                                        theme={theme} openAdd={openAdd}
-                                                    />
-                                            }
-                                        </React.Fragment>
-                                    )) : <></>
-                                }
                                 {
                                     openAdd === true ?
                                         <AdditionalServiceCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
                                         : <></>
+                                }
+                                {
+                                    additionalServicesState?.dataList ?
+                                        additionalServicesState?.dataList?.additionalServices?.map((additionalService, index) => (
+                                            <React.Fragment key={index}>
+                                                {
+                                                    openEditId === index ?
+                                                        <AdditionalServiceUpdateRowContainer
+                                                            additionalService={additionalService}
+                                                            index={index}
+                                                            setOpenEditId={setOpenEditId}
+                                                            theme={theme}
+                                                        /> :
+                                                        <AdditionalServiceRowContainer
+                                                            additionalService={additionalService}
+                                                            index={index}
+                                                            openEditId={openEditId}
+                                                            setOpenEditId={setOpenEditId}
+                                                            openDeleteId={openDeleteId}
+                                                            setOpenDeleteId={setOpenDeleteId}
+                                                            theme={theme} openAdd={openAdd}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        )) : <></>
                                 }
                             </TableBody>
                         </Table>

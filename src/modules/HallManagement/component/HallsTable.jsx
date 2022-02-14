@@ -74,6 +74,13 @@ const HallsTable = ({
                             </TableHead>
                             <TableBody>
                                 {
+                                    openAdd === true ?
+                                        <React.Fragment>
+                                            <HallCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        </React.Fragment>
+                                        : <></>
+                                }
+                                {
                                     hallsState?.dataList ?
                                         hallsState?.dataList?.halls?.map((hall, index) => (
                                             <React.Fragment key={index}>
@@ -97,13 +104,6 @@ const HallsTable = ({
                                                 }
                                             </React.Fragment>
                                         )) : <></>
-                                }
-                                {
-                                    openAdd === true ?
-                                        <React.Fragment>
-                                            <HallCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
-                                        </React.Fragment>
-                                        : <></>
                                 }
                             </TableBody>
                         </Table>
