@@ -1,12 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
+    error: {
+        code: 0,
+        messages: [],
+    },
     isAuthenticate: null,
     loading: false,
 }
 
-const authenticateSlice = createSlice({
-    name: "authenticate",
+const errorHandlerSlice = createSlice({
+    name: "error-handler",
     initialState: initialState,
     reducers: {
         authenticate_loading(state) {
@@ -20,9 +24,18 @@ const authenticateSlice = createSlice({
         authenticate_error(state) {
             state.loading = false;
             state.isAuthenticate = false;
+        },
+        api_error(state, action) {
+            state.error = {
+                code: action?.payload?.code,
+                messages: action?.payload?.messages
+            }
         }
     }
 })
 
-export default authenticateSlice.reducer;
-export const {authenticate_loading, authenticate_success, authenticate_error} = authenticateSlice.actions;
+export default errorHandlerSlice.reducer;
+export const {
+    authenticate_loading, authenticate_success, authenticate_error,
+    api_error
+} = errorHandlerSlice.actions;
