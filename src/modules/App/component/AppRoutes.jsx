@@ -74,12 +74,12 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                                        setIsAuthenticate={setIsAuthenticate}
                                        component={ConfirmBookingPageContainer}
                                        restricted={false}/>}/>
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
             <Route path='/profile'
-                                       setIsAuthenticate={setIsAuthenticate}
-                                       isLoading={isLoading}
-                                       component={ProfilePageContainer}
-                                       restricted={false}/>}/>
+                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                          isLoading={isLoading}
+                                          setIsAuthenticate={setIsAuthenticate}
+                                          component={ProfilePageContainer}
+                                          restricted={false}/>}/>
             <Route exact path='/dashboard/*'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
