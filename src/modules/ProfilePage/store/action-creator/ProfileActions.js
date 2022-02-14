@@ -8,13 +8,14 @@ import {
     get_user_profile_by_id_success,
     get_user_profile_by_id_error
 } from "../reducers/ProfileReducer";
+import {profileAPI} from "./ProfileAPI";
 
-export const getUserProfileById = (id) => {
+export const getUserProfileById = (id, value) => {
     return async (dispatch) => {
         dispatch(get_user_profile_by_id_loading())
 
         try {
-            const response = await defaultApi(UserProfileURL).getById(id)
+            const response = await profileAPI(UserProfileURL).getById(id, value)
             dispatch(get_user_profile_by_id_success(response.data))
         } catch (error) {
             if (error.response) {

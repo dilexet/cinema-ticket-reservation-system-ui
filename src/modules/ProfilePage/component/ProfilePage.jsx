@@ -13,7 +13,14 @@ import UserProfileContainer from "../container/UserProfileContainer";
 import TicketsList from "./TicketsList";
 
 
-const ProfilePage = ({theme, tabsValue, handleChange, userProfileState}) => {
+const ProfilePage = ({
+                         theme,
+                         tabsValue,
+                         handleChange,
+                         userProfileState,
+                         showPastTickets,
+                         handleChangeShowPastTickets
+                     }) => {
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} style={{minHeight: '1000px'}}>
             <Grid item>
@@ -71,7 +78,9 @@ const ProfilePage = ({theme, tabsValue, handleChange, userProfileState}) => {
                             <Divider/>
                             <Box>
                                 <TabPanel value="tickets">
-                                    <TicketsList theme={theme} tickets={userProfileState?.data?.userProfile?.tickets}/>
+                                    <TicketsList theme={theme} tickets={userProfileState?.data?.userProfile?.tickets}
+                                                 showPastTickets={showPastTickets}
+                                                 handleChangeShowPastTickets={handleChangeShowPastTickets}/>
                                 </TabPanel>
                                 <TabPanel value="profile">
                                     <UserProfileContainer/>

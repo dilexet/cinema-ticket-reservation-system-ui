@@ -1,17 +1,19 @@
 import React from "react";
-import {Box, Divider, Typography} from "@mui/material";
+import {Box, Divider, Typography, FormControlLabel, Switch} from "@mui/material";
 import TicketsEmpty from "./TicketsEmpty";
 import TicketsCardContainer from "../container/TicketsCardContainer";
 
-const TicketsList = ({theme, tickets}) => {
+const TicketsList = ({theme, tickets, showPastTickets, handleChangeShowPastTickets}) => {
+
     return (
         <Box style={{
             marginTop: '60px',
             width: '100%'
         }}>
             <Box style={{
-                display: 'inline',
+                display: 'flex',
                 textAlign: 'left',
+                justifyContent: 'space-between'
             }}>
                 <Typography component='h2' style={{
                     opacity: '0.8',
@@ -22,9 +24,13 @@ const TicketsList = ({theme, tickets}) => {
                 }}>
                     My tickets
                 </Typography>
+                <FormControlLabel
+                    control={<Switch checked={showPastTickets}
+                                     onChange={handleChangeShowPastTickets}/>}
+                    label={showPastTickets === true ? 'Only past tickets' : 'Only future tickets'}/>
             </Box>
             {
-                tickets ?
+                tickets?.length > 0 ?
                     <React.Fragment>
                         <Divider/>
                         {

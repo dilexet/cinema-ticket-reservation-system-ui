@@ -10,6 +10,12 @@ import {getUserProfileById} from "../store/action-creator/ProfileActions";
 const ProfilePageContainer = () => {
     const [tabsValue, setTabsValue] = React.useState('tickets');
 
+    const [showPastTickets, setShowPastTickets] = React.useState(false);
+
+    const handleChangeShowPastTickets = (event) => {
+        setShowPastTickets(event.target.checked);
+    };
+
     const handleChange = (event, newTabValue) => {
         setTabsValue(newTabValue);
     };
@@ -27,18 +33,18 @@ const ProfilePageContainer = () => {
             const {UserProfileId} = getJwtPayload();
 
             if (UserProfileId) {
-                await dispatch(await getUserProfileById(UserProfileId))
+                await dispatch(await getUserProfileById(UserProfileId, showPastTickets))
             } else {
                 navigate('/login')
             }
             setIsLoading(false)
         }
 
-        if (isLoading === true) {
+        if (isLoading === true || showPastTickets !== null) {
             getUserProfile()
         }
 
-    }, [dispatch, isLoading, navigate])
+    }, [dispatch, isLoading, navigate, showPastTickets])
 
     if (isLoading === true) {
         return (
@@ -47,7 +53,8 @@ const ProfilePageContainer = () => {
     } else {
         return (
             <ProfilePage theme={theme} tabsValue={tabsValue} handleChange={handleChange}
-                         userProfileState={userProfileState}/>
+                         userProfileState={userProfileState} showPastTickets={showPastTickets}
+                         handleChangeShowPastTickets={handleChangeShowPastTickets}/>
         )
     }
 }
