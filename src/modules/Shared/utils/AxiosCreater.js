@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
                     'Accept': '*/*',
                     'Content-Type': 'application/json-patch+json'
                 }
-                if (config.url.includes(ImageUploadURL)) {
+                if (config.url.includes('/' + ImageUploadURL)) {
                     config.headers = {
                         'Authorization': `Bearer ${res.jwt}`,
                         'Accept': '*/*',

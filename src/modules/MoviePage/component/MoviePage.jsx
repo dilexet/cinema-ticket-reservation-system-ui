@@ -2,7 +2,7 @@ import React from 'react'
 import {Box, Container, Grid, Paper, Typography} from "@mui/material";
 import Loading from "../../Loading/component/Loading";
 import MovieCard from "./MovieCard";
-import MovieFilterMenu from "./Menu/MovieFilterMenu";
+import MovieFilterMenuContainer from "../container/MovieFilterMenuContainer";
 
 const MoviePage = ({theme, moviesState, filterParams, setFilterParams}) => {
     return (
@@ -35,7 +35,7 @@ const MoviePage = ({theme, moviesState, filterParams, setFilterParams}) => {
                             Cinema poster
                         </Typography>
                     </Box>
-                    <MovieFilterMenu theme={theme} filter={filterParams} setFilter={setFilterParams}/>
+                    <MovieFilterMenuContainer theme={theme} filter={filterParams} setFilter={setFilterParams}/>
                     <Loading isLoading={moviesState?.loading}/>
                     <Box display='block'>
                         <Box style={{

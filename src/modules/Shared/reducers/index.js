@@ -15,6 +15,7 @@ import movieFilterSlice from "../../MoviePage/store/reducers/MovieReducer";
 import movieSessionSlice from "../../MovieSessionsPage/store/reducers/MovieSessionReducer";
 import bookingSlice from "../../BookingPage/store/reducers/BookingReducer";
 import confirmBookingSlice from "../../ConfirmBookingPage/store/reducers/ConfirmBookingReducer";
+import userProfileSlice from "../../ProfilePage/store/reducers/ProfileReducer";
 
 export const rootReducer = combineReducers({
     login: loginSlice,
@@ -31,5 +32,6 @@ export const rootReducer = combineReducers({
     movieFilter: movieFilterSlice,
     movieSession: movieSessionSlice,
     booking: bookingSlice,
-    confirmBooking: confirmBookingSlice
+    confirmBooking: confirmBookingSlice,
+    userProfile: userProfileSlice
 })

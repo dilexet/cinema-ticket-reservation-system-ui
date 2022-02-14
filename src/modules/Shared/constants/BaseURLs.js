@@ -24,4 +24,6 @@ export const MovieFilterURL = "movieFilter/"
 
 export const BookingURL = "booking/"
 
+export const UserProfileURL = "userProfile/"
+
 export const HubURL = BaseURL + '/seat-booking-hub'

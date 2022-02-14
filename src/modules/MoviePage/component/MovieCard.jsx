@@ -11,7 +11,7 @@ const MovieCard = ({movie, theme}) => {
             sx={{maxWidth: 296, paddingLeft: '20px', paddingRight: '20px', boxShadow: 'none'}}
             style={{
                 backgroundImage: 'none',
-                background: 'none'
+                background: 'none',
             }}>
             <CardMedia
                 component='img'
@@ -28,7 +28,11 @@ const MovieCard = ({movie, theme}) => {
                     margin: '24px 0'
                 }}
             >
-                <Box>
+                <Box style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
                     <Typography variant="body2"
                                 style={{
                                     color: theme.palette.mode === 'dark'
@@ -40,7 +44,13 @@ const MovieCard = ({movie, theme}) => {
                         {movie.movieDescription.countries.join(', ')}
                     </Typography>
                 </Box>
-                <Box style={{height: '80px'}}>
+                <Box style={{
+                    height: '80px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    textAlign: 'center'
+                }}>
                     <Typography variant="body2"
                                 style={{
                                     color: theme.palette.mode === 'dark'
@@ -53,7 +63,11 @@ const MovieCard = ({movie, theme}) => {
                         {movie.name}
                     </Typography>
                 </Box>
-                <Box>
+                <Box style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
                     <Typography variant="body2"
                                 style={{
                                     color: theme.palette.mode === 'dark'
