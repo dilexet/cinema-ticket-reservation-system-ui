@@ -2,7 +2,7 @@ import {
     authenticate_loading,
     authenticate_success,
     authenticate_error
-} from "../../../Authenticate/store/reducers/AuthenticateReducer"
+} from "../../../ErrorHandler/store/reducers/ErrorHandlerReducer"
 import {register_loading, register_success, register_error, clear_errors} from "../reducers/RegisterReducer"
 import {registerAPI} from "./RegisterAPI";
 
