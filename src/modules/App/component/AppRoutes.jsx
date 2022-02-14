@@ -22,7 +22,8 @@ import HallManagementContainer from "../../HallManagement/container/HallManageme
 import AdditionalServiceManagementContainer
     from "../../AdditionalServiceManagement/container/AdditionalServiceManagementContainer";
 import SessionManagementContainer from "../../SessionManagement/container/SessionManagementContainer";
-import BookingPage from "../../BookingPage/component/BookingPage";
+import BookingContainer from "../../BookingPage/container/BookingContainer";
+import ConfirmBookingPageContainer from "../../ConfirmBookingPage/container/ConfirmBookingPageContainer";
 
 const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
     return (
@@ -58,7 +59,13 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                    element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
                                        setIsAuthenticate={setIsAuthenticate}
                                        isLoading={isLoading}
-                                       component={BookingPage}
+                                       component={BookingContainer}
+                                       restricted={false}/>}/>
+            <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
+                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                       setIsAuthenticate={setIsAuthenticate}
+                                       isLoading={isLoading}
+                                       component={ConfirmBookingPageContainer}
                                        restricted={false}/>}/>
             <Route exact path='/dashboard/*'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}

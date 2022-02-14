@@ -9,7 +9,6 @@ const RoleRoute = ({
                        component: Component, isAuthenticate,
                        isLoading, setIsAuthenticate, role, ...props
                    }) => {
-
     const authenticateState = useSelector((state) => state.authenticate);
     const [haveAccess, setHaveAccess] = React.useState(null);
 
