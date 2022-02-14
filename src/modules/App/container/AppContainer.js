@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
+import {useSelector} from "react-redux";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
 import App from "../component/App";
 
@@ -10,6 +11,8 @@ const AppContainer = () => {
 
     const [isAuthenticate, setIsAuthenticate] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
+
+    const errorHandlerState = useSelector((state) => state.errorHandler);
 
     useEffect(() => {
         async function checkAuthorize() {
@@ -23,6 +26,18 @@ const AppContainer = () => {
         checkAuthorize()
     }, [isAuthenticate, isLoading]);
 
+    const [openModalError, setOpenModalError] = React.useState(false);
+    const [modalErrorText, setModalErrorText] = React.useState("");
+
+    const handleCloseModalError = () => setOpenModalError(false);
+
+    useEffect(() => {
+        if (errorHandlerState?.error?.code === 500) {
+            console.log("CAAAAAAAAAAAAL")
+            setOpenModalError(true)
+            setModalErrorText("Internal server error! :)")
+        }
+    }, [errorHandlerState?.error?.code])
 
     useEffect(() => {
         if (cookie.DarkMode === undefined) {
@@ -40,6 +55,9 @@ const AppContainer = () => {
              isLoading={isLoading}
              isAuthenticate={isAuthenticate}
              setIsAuthenticate={setIsAuthenticate}
+             openModalError={openModalError}
+             modalErrorText={modalErrorText}
+             handleCloseModalError={handleCloseModalError}
         />
     );
 }

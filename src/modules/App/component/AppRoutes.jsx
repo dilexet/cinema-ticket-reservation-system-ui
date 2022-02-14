@@ -25,6 +25,9 @@ import SessionManagementContainer from "../../SessionManagement/container/Sessio
 import BookingContainer from "../../BookingPage/container/BookingContainer";
 import ConfirmBookingPageContainer from "../../ConfirmBookingPage/container/ConfirmBookingPageContainer";
 import ProfilePageContainer from "../../ProfilePage/container/ProfilePageContainer";
+import DashboardWrapper from "./DashboardWrapper";
+import DashboardRoute from "../../Shared/components/Routes/DashboardRoute";
+import DashboardMainPage from "../../Dashboard/component/DashboardMainPage";
 
 const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
     return (
@@ -32,8 +35,12 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
             <Route exact path='/'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                         component={HomeContainer}/>}/>
+                                         component={DashboardWrapper}/>}/>
             <Route path="*" element={<NotFound/>}/>
+            <Route exact path='/home'
+                   element={<PublicRoute isAuthenticate={isAuthenticate}
+                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                         component={HomeContainer}/>}/>
             <Route exact path='/logout'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
                                           setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
@@ -81,10 +88,10 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                                           component={ProfilePageContainer}
                                           restricted={false}/>}/>
             <Route exact path='/dashboard/*'
-                   element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                          component={Dashboard} restricted={false}/>}>
-                <Route index={true} element={<NotFound/>}/>
+                   element={<DashboardRoute isAuthenticate={isAuthenticate} role={UserRole}
+                                            setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                            component={Dashboard} restricted={false}/>}>
+                <Route index={true} element={<DashboardMainPage/>}/>
                 <Route exact path='user-management'
                        element={<RoleRoute isAuthenticate={isAuthenticate} role={AdminRole}
                                            setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
