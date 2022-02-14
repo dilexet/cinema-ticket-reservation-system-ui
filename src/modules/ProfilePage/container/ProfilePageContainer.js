@@ -40,7 +40,7 @@ const ProfilePageContainer = () => {
             setIsLoading(false)
         }
 
-        if (isLoading === true || showPastTickets !== null) {
+        if (isLoading === true || showPastTickets !== undefined) {
             getUserProfile()
         }
 

@@ -10,16 +10,24 @@ const CollapsibleSelectedAdditionalServices = ({open, selectedServices}) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Service</TableCell>
-                                <TableCell align="center">price</TableCell>
+                                <TableCell align="center">Price</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {selectedServices?.map((value, index) => (
                                 <TableRow key={index}>
                                     <TableCell component="th" scope="row"
-                                               align="left">{value?.additionalService?.name}</TableCell>
+                                               align="left">{value?.selectedSessionAdditionalService?.additionalService?.name}</TableCell>
                                     <TableCell component="th" scope="row"
-                                               align="center">{value?.price}</TableCell>
+                                               align="center">
+                                        {value?.numberOfServices}
+                                        &nbsp;*&nbsp;
+                                        {value?.selectedSessionAdditionalService?.price}
+                                        &nbsp;$
+                                        &nbsp;=&nbsp;
+                                        {value?.selectedSessionAdditionalService?.price * value?.numberOfServices}
+                                        &nbsp;$
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
