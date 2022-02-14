@@ -8,7 +8,7 @@ import ModalError from "./ModalError";
 
 const App = ({
                  darkMode, setDarkMode, setCookie, isLoading, isAuthenticate, setIsAuthenticate,
-                 openModalError, handleCloseModalError, modalErrorText, theme
+                 openModalError, handleCloseModalError, modalErrorText
              }) => {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>

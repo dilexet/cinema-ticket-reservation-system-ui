@@ -33,7 +33,6 @@ const AppContainer = () => {
 
     useEffect(() => {
         if (errorHandlerState?.error?.code === 500) {
-            console.log("CAAAAAAAAAAAAL")
             setOpenModalError(true)
             setModalErrorText("Internal server error! :)")
         }
