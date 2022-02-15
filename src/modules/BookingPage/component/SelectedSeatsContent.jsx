@@ -1,13 +1,17 @@
 import React from "react";
 import {Box, Button, Divider, Typography} from "@mui/material";
+import LoginContainerModal from "../../Login/container/LoginContainerModal";
 import SelectedSeat from "./SelectedSeat";
 import SelectedAdditionalServices from "./SelectedAdditionalServices";
+import RegisterContainerModal from "../../Register/container/RegisterContainerModal";
 
 const SelectedSeatsContent = ({
-                                         theme, session, selectedSeats, handleCancelSelectSeat,
-                                         selectedAdditionalServices, handleAddService, handleRemoveService,
-                                         totalPrice, handleConfirmOrder
-                                     }) => {
+                                  theme, session, selectedSeats, handleCancelSelectSeat,
+                                  selectedAdditionalServices, handleAddService, handleRemoveService,
+                                  totalPrice, handleConfirmOrder,
+                                  openLoginModal, setOpenLoginModal,
+                                  openRegisterModal, setOpenRegisterModal
+                              }) => {
     return (
         <Box
             style={{
@@ -41,6 +45,16 @@ const SelectedSeatsContent = ({
                 </Box>
             </Box>
             <Divider/>
+            <LoginContainerModal confirmOrder={() => handleConfirmOrder(selectedSeats, selectedAdditionalServices)}
+                                 openLoginModal={openLoginModal}
+                                 setOpenLoginModal={setOpenLoginModal}
+                                 setOpenRegisterModal={setOpenRegisterModal}
+            />
+            <RegisterContainerModal confirmOrder={() => handleConfirmOrder(selectedSeats, selectedAdditionalServices)}
+                                    openRegisterModal={openRegisterModal}
+                                    setOpenLoginModal={setOpenLoginModal}
+                                    setOpenRegisterModal={setOpenRegisterModal}
+            />
             <Box>
                 <Box>
                     {
