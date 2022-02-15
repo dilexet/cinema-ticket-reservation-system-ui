@@ -12,13 +12,8 @@ const HomeContainer = () => {
 
     const [isLoading, setIsLoading] = React.useState(true);
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-    };
+    const [sliderSettings, setSliderSettings] = React.useState(null);
+
 
     React.useEffect(() => {
         const getAvailableSessions = async () => {
@@ -32,13 +27,35 @@ const HomeContainer = () => {
 
     }, [dispatch, isLoading])
 
+    React.useEffect(() => {
+        if (moviesState?.dataList?.movies?.length > 4) {
+            const settings = {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+            };
+            setSliderSettings(settings)
+        } else {
+            const settings = {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            };
+            setSliderSettings(settings)
+        }
+    }, [moviesState?.dataList?.movies?.length])
+
     if (isLoading === true) {
         return (
             <Loading isLoading={true}/>
         )
     } else {
         return (
-            <Home theme={theme} moviesState={moviesState} settings={settings}/>
+            <Home theme={theme} moviesState={moviesState} settings={sliderSettings}/>
         );
     }
 }

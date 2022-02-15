@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Collapse, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper} from "@mui/material";
+import {Box, Collapse, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from "@mui/material";
 
 const CollapsibleReservedSessionSeats = ({open, reservedSeats}) => {
     return (
@@ -25,7 +25,7 @@ const CollapsibleReservedSessionSeats = ({open, reservedSeats}) => {
                                     <TableCell component="th" scope="row"
                                                align="center">{value?.sessionSeatType?.seatType}</TableCell>
                                     <TableCell component="th" scope="row"
-                                               align="center">{value?.sessionSeatType?.price}</TableCell>
+                                               align="center">{value?.sessionSeatType?.price}&nbsp;$</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

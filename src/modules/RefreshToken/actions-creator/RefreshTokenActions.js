@@ -1,7 +1,7 @@
 import {refreshTokenAPI} from "./RefreshTokenAPI";
 import {getJwtPayload, getLocalAccessToken} from "../../Shared/utils/TokenServices";
 import {store} from "../../Shared/store";
-import {authenticateAsyncAction} from "../../Authenticate/store/action/AuthenticateAction";
+import {authenticateAsyncAction} from "../../ErrorHandler/store/action/ErrorHandlerActions";
 
 
 export const refreshTokenAsyncAction = async () => {

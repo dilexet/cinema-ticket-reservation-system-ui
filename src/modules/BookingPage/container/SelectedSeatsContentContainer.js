@@ -1,6 +1,7 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom";
 import SelectedSeatsContent from "../component/SelectedSeatsContent";
+import {isAuthorize} from "../../Shared/utils/TokenServices";
 
 const SelectedSeatsContentContainer = ({theme, session, selectedSeats, handleCancelSelectSeat}) => {
     const [totalPrice, setTotalPrice] = React.useState(0);
@@ -33,14 +34,22 @@ const SelectedSeatsContentContainer = ({theme, session, selectedSeats, handleCan
         }
     }
 
-    const handleConfirmOrder = (selectedSeats, selectedAdditionalServices) => {
-        navigate(`/confirm-order/movieId=${session.movie.id}/sessionId=${session.id}`, {
-            state: {
-                selectedSeats: selectedSeats,
-                selectedAdditionalServices: selectedAdditionalServices,
-                totalPrice: totalPrice
-            }
-        })
+    const [openLoginModal, setOpenLoginModal] = React.useState(false);
+    const [openRegisterModal, setOpenRegisterModal] = React.useState(false);
+
+    const handleConfirmOrder = async (selectedSeats, selectedAdditionalServices) => {
+        const isAuth = await isAuthorize();
+        if (isAuth === true) {
+            navigate(`/confirm-order/movieId=${session.movie.id}/sessionId=${session.id}`, {
+                state: {
+                    selectedSeats: selectedSeats,
+                    selectedAdditionalServices: selectedAdditionalServices,
+                    totalPrice: totalPrice
+                }
+            })
+        } else {
+            setOpenLoginModal(true)
+        }
     }
 
     return (
@@ -48,7 +57,11 @@ const SelectedSeatsContentContainer = ({theme, session, selectedSeats, handleCan
                               selectedSeats={selectedSeats}
                               selectedAdditionalServices={selectedAdditionalServices}
                               handleAddService={handleAddService} handleRemoveService={handleRemoveService}
-                              handleConfirmOrder={handleConfirmOrder} totalPrice={totalPrice}/>
+                              handleConfirmOrder={handleConfirmOrder} totalPrice={totalPrice}
+
+                              openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal}
+                              openRegisterModal={openRegisterModal} setOpenRegisterModal={setOpenRegisterModal}
+        />
     )
 }
 

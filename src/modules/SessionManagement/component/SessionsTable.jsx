@@ -22,9 +22,9 @@ const SessionsTable = ({
                            handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
                        }) => {
     return (
-        <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="lg">
+        <Container component="main" sx={{mt: 2, mb: 2, ml: '-100px'}} maxWidth='1400px'>
             <Grid item>
-                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
+                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column', minWidth: '1400px'}}>
                     <Box display='block' justifyContent='center'>
                         <Typography component="h2" variant="h6" color="secondary" style={{
                             display: 'inline-block',
@@ -58,7 +58,10 @@ const SessionsTable = ({
                     </Box>
                     <Loading isLoading={sessionState?.loading}/>
 
-                    <TableContainer>
+                    <TableContainer style={{
+                        overflow: 'hidden',
+                        minWidth: '1350px'
+                    }}>
                         <Table width='auto' aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
@@ -73,6 +76,13 @@ const SessionsTable = ({
                             </TableHead>
                             <TableBody>
                                 {
+                                    openAdd === true ?
+                                        <React.Fragment>
+                                            <SessionCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        </React.Fragment>
+                                        : <></>
+                                }
+                                {
                                     sessionState?.dataList ?
                                         sessionState?.dataList?.sessions?.map((session, index) => (
                                             <React.Fragment key={index}>
@@ -84,26 +94,20 @@ const SessionsTable = ({
                                                             setOpenEditId={setOpenEditId}
                                                             theme={theme}
                                                         /> :
-                                                    <SessionRowContainer
-                                                        session={session}
-                                                        index={index}
-                                                        openEditId={openEditId}
-                                                        setOpenEditId={setOpenEditId}
-                                                        openDeleteId={openDeleteId}
-                                                        setOpenDeleteId={setOpenDeleteId}
-                                                        theme={theme} openAdd={openAdd}
-                                                    />
+                                                        <SessionRowContainer
+                                                            session={session}
+                                                            index={index}
+                                                            openEditId={openEditId}
+                                                            setOpenEditId={setOpenEditId}
+                                                            openDeleteId={openDeleteId}
+                                                            setOpenDeleteId={setOpenDeleteId}
+                                                            theme={theme} openAdd={openAdd}
+                                                        />
                                                 }
                                             </React.Fragment>
                                         )) : <></>
                                 }
-                                {
-                                    openAdd === true ?
-                                        <React.Fragment>
-                                            <SessionCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
-                                        </React.Fragment>
-                                        : <></>
-                                }
+
                             </TableBody>
                         </Table>
                     </TableContainer>

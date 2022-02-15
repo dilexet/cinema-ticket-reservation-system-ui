@@ -1,7 +1,9 @@
 import axios from "axios";
+import {errorHandleAction} from "../../ErrorHandler/store/action/ErrorHandlerActions";
 import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
 import {AuthorizeURL, BaseApiURL, ImageUploadURL} from "../constants/BaseURLs";
 import {getLocalAccessToken} from "./TokenServices";
+import {store} from "../store";
 
 const axiosInstance = axios.create({
     baseURL: BaseApiURL,
@@ -37,7 +39,8 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-    (response) => {
+    async (response) => {
+        await store.dispatch(await errorHandleAction(response?.status))
         return response;
     },
     async (error) => {
@@ -53,6 +56,7 @@ axiosInstance.interceptors.response.use(
                 }
             }
         }
+        await store.dispatch(await errorHandleAction(error?.response?.status, error?.response?.data?.Errors))
         return Promise.reject(error);
     }
 )

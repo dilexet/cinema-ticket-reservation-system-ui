@@ -1,7 +1,7 @@
 import React from 'react'
 import {Formik} from "formik";
 import movieSchema from "../constants/MovieSchema";
-import {ButtonGroup, IconButton, TableCell, TableRow} from "@mui/material";
+import {ButtonGroup, IconButton, TableCell, TableRow, TextareaAutosize} from "@mui/material";
 import TextField from "../../Shared/components/TextField";
 import handleErrorService from "../../Shared/utils/HandleErrorService";
 import DoneIcon from "@mui/icons-material/Done";
@@ -110,15 +110,19 @@ const MovieForm = ({
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
-                                <TextField
+                                <TextareaAutosize
                                     id="description"
                                     label="Description"
                                     type="text"
                                     name="Description"
                                     variant="outlined"
-                                    multiline
-                                    rows={3}
-                                    inputProps={{style: {textAlign: 'center'}}}
+                                    minRows={3}
+                                    style={{
+                                        background: 'none',
+                                        minHeight: '30px',
+                                        color: 'white',
+                                        textAlign: 'center'
+                                    }}
                                     value={values.Description}
                                     onChange={handleChange}
                                     onBlur={handleBlur}

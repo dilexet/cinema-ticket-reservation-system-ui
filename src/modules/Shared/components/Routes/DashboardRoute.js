@@ -3,9 +3,8 @@ import {useSelector} from "react-redux";
 import {Navigate} from 'react-router-dom';
 import Loading from "../../../Loading/component/Loading";
 import {isAuthorize, getRole} from '../../utils/TokenServices';
-import {Alert, AlertTitle, Container, Stack} from "@mui/material";
 
-const RoleRoute = ({
+const DashboardRoute = ({
                        component: Component, isAuthenticate,
                        isLoading, setIsAuthenticate, role, ...props
                    }) => {
@@ -28,10 +27,7 @@ const RoleRoute = ({
 
     useEffect(() => {
         if (haveAccess == null) {
-            setHaveAccess(getRole() === role);
-        }
-        if (haveAccess === false) {
-            console.log(`You don't have access to this resource. You are not ${role}.`)
+            setHaveAccess(getRole() !== role);
         }
     }, [haveAccess, role])
 
@@ -40,19 +36,10 @@ const RoleRoute = ({
     } else if (isAuthenticate === false) {
         return (<Navigate to='/login'/>)
     } else if (haveAccess === false) {
-        return (
-            <Container component="main" sx={{mt: 2, mb: 2}} maxWidth='lg'>
-                <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error">
-                        <AlertTitle>Access denied</AlertTitle>
-                        You don't have access to this resource.&nbsp;<strong>You are not {role}!</strong>
-                    </Alert>
-                </Stack>
-            </Container>
-        )
+        return (<Navigate to='/home'/>)
     } else if (isAuthenticate === true && haveAccess === true) {
         return <Component isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate} {...props}/>
     }
 };
 
-export default RoleRoute;
+export default DashboardRoute;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate, Link} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {Formik, Form} from 'formik';
 import {
     Avatar,
@@ -20,14 +20,9 @@ import {InitialFieldValues} from "../constants/InitialFieldValues";
 import registerSchema from "../constants/RegisterSchema";
 
 const Register = ({
-                      registerState, handleSubmitForm, redirect, rememberMe,
-                      setRememberMe
+                      registerState, handleSubmitForm, rememberMe,
+                      setRememberMe, handleToLoginLinkClick
                   }) => {
-
-    if (!registerState?.loading && registerState?.data?.success && redirect) {
-        return <Navigate to='/'/>
-    }
-
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="sm">
             <Box
@@ -126,7 +121,8 @@ const Register = ({
                             <AuthorizeButton loading={registerState?.loading} buttonText='Sign up'/>
                             <Grid container>
                                 <Grid item>
-                                    <LinkMaterial color='inherit' variant="body2" component={Link} to='/login'>
+                                    <LinkMaterial color='inherit' variant="body2" style={{cursor: 'pointer'}}
+                                                  onClick={handleToLoginLinkClick}>
                                         Already have an account? Sign in
                                     </LinkMaterial>
                                 </Grid>

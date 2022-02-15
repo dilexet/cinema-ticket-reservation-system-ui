@@ -15,11 +15,6 @@ export const InitialSessionFieldValues = {
     }]
 }
 
-export const InitialSessionAdditionalServiceFieldValues = {
-    name: '',
-    price: 0,
-}
-
 export const InitialSessionsSeatFieldValues = {
     seatType: '',
     price: 0,

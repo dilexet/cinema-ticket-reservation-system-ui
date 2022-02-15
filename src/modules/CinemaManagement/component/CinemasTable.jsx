@@ -73,6 +73,11 @@ const CinemasTable = ({
                             </TableHead>
                             <TableBody>
                                 {
+                                    openAdd === true ?
+                                        <CinemaCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        : <></>
+                                }
+                                {
                                     cinemasState?.dataList ?
                                         cinemasState?.dataList?.cinemas?.map((cinema, index) => (
                                             <React.Fragment key={index}>
@@ -92,11 +97,6 @@ const CinemasTable = ({
                                                 }
                                             </React.Fragment>
                                         )) : <></>
-                                }
-                                {
-                                    openAdd === true ?
-                                        <CinemaCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
-                                        : <></>
                                 }
                             </TableBody>
                         </Table>

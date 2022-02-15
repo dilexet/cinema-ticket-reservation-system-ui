@@ -1,19 +1,23 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import Login from "../component/Login";
+import React, {useState} from 'react'
+import {useDispatch, useSelector} from "react-redux";
 import loginSchema from "../constants/LoginSchema";
 import {clearErrors, loginAsyncAction} from "../store/action-creator/LoginActions";
-import Loading from "../../Loading/component/Loading";
 import {removeTokens} from "../../Shared/utils/TokenServices";
+import Loading from "../../Loading/component/Loading";
+import Login from "../component/Login";
+import Modal from "../../App/component/Modal";
 
-const LoginContainer = () => {
+const LoginContainerModal = ({
+                                 confirmOrder,
+                                 openLoginModal,
+                                 setOpenLoginModal,
+                                 setOpenRegisterModal
+                             }) => {
     const [redirect, setRedirect] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const loginState = useSelector((state) => state.login);
 
@@ -25,14 +29,19 @@ const LoginContainer = () => {
     }
 
     const handleToRegisterLinkClick = () => {
-        navigate('/register')
+        setOpenLoginModal(false)
+        setOpenRegisterModal(true)
+    }
+
+    const handleCloseModal = () => {
+        setOpenLoginModal(false)
     }
 
     React.useEffect(() => {
         if (!loginState?.loading && loginState?.data?.success && redirect) {
-            navigate('/')
+            confirmOrder()
         }
-    }, [loginState?.data?.success, loginState?.loading, navigate, redirect])
+    }, [confirmOrder, loginState?.data?.success, loginState?.loading, redirect])
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
@@ -51,12 +60,14 @@ const LoginContainer = () => {
         return <Loading isLoading={true}/>
     } else {
         return (
-            <Login handleSubmitForm={handleSubmit} loginState={loginState}
+            <Modal openModal={openLoginModal} handleCloseModal={handleCloseModal} component={Login}
+                   handleSubmitForm={handleSubmit} loginState={loginState}
                    rememberMe={rememberMe}
                    setRememberMe={setRememberMe}
-                   handleToRegisterLinkClick={handleToRegisterLinkClick}/>
+                   handleToRegisterLinkClick={handleToRegisterLinkClick}
+            />
         );
     }
 }
 
-export default LoginContainer;
+export default LoginContainerModal;

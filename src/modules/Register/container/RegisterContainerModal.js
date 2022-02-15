@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import Register from "../component/Register";
+import React, {useState} from 'react'
+import {useDispatch, useSelector} from "react-redux";
 import registerSchema from "../constants/RegisterSchema";
 import {clearErrors, registerAsyncAction} from "../store/action-creator/RegisterActions";
-import Loading from "../../Loading/component/Loading";
 import {removeTokens} from "../../Shared/utils/TokenServices";
+import Loading from "../../Loading/component/Loading";
+import Register from "../component/Register";
+import Modal from "../../App/component/Modal";
 
-const RegisterContainer = () => {
+const RegisterContainerModal = ({
+                                    confirmOrder, openRegisterModal,
+                                    setOpenLoginModal, setOpenRegisterModal
+                                }) => {
     const [redirect, setRedirect] = useState(false);
     const [rememberMe, setRememberMe] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const registerState = useSelector((state) => state.register);
 
@@ -25,14 +27,19 @@ const RegisterContainer = () => {
     }
 
     const handleToLoginLinkClick = () => {
-        navigate('/login')
+        setOpenRegisterModal(false)
+        setOpenLoginModal(true)
+    }
+
+    const handleCloseModal = () => {
+        setOpenRegisterModal(false)
     }
 
     React.useEffect(() => {
         if (!registerState?.loading && registerState?.data?.success && redirect) {
-            navigate('/')
+            confirmOrder()
         }
-    }, [navigate, redirect, registerState?.data?.success, registerState?.loading])
+    }, [confirmOrder, redirect, registerState?.data?.success, registerState?.loading])
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
@@ -51,12 +58,14 @@ const RegisterContainer = () => {
         return <Loading isLoading={true}/>
     } else {
         return (
-            <Register handleSubmitForm={handleSubmit} registerState={registerState}
-                      rememberMe={rememberMe}
-                      setRememberMe={setRememberMe}
-                      handleToLoginLinkClick={handleToLoginLinkClick}/>
+            <Modal openModal={openRegisterModal} handleCloseModal={handleCloseModal} component={Register}
+                   handleSubmitForm={handleSubmit} registerState={registerState}
+                   rememberMe={rememberMe}
+                   setRememberMe={setRememberMe}
+                   handleToLoginLinkClick={handleToLoginLinkClick}
+            />
         );
     }
 }
 
-export default RegisterContainer;
+export default RegisterContainerModal;
