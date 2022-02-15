@@ -40,6 +40,8 @@ const AppContainer = () => {
             setModalErrorText("Internal server error! :)")
         } else if (errorHandlerState?.error?.code === 404) {
             navigate('/not-found')
+        } else if (errorHandlerState?.error?.code === 401 || errorHandlerState?.error?.code === 403) {
+            navigate('/login')
         }
     }, [errorHandlerState?.error?.code, navigate])
 
