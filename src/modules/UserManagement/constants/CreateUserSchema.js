@@ -10,7 +10,7 @@ const createUserSchema = yup.object({
         .min(5, "Username must be more than 5 characters")
         .max(16, "Username must be less than 16 characters")
         .required('Please enter Username'),
-    RoleName: yup
+    RoleId: yup
         .string()
         .required('Please enter Role'),
     Password: yup

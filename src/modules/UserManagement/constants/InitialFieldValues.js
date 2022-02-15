@@ -1,7 +1,7 @@
 export const InitialFieldValuesForCreate = {
     Name: "",
     Email: "",
-    RoleName: "",
+    RoleId: "",
     Password: "",
     ConfirmPassword: ""
 }
