@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import Login from "../component/Login";
 import loginSchema from "../constants/LoginSchema";
 import {clearErrors, loginAsyncAction} from "../store/action-creator/LoginActions";
@@ -12,6 +13,7 @@ const LoginContainer = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const loginState = useSelector((state) => state.login);
 
@@ -21,6 +23,16 @@ const LoginContainer = () => {
             setRedirect(true)
         }
     }
+
+    const handleToRegisterLinkClick = () => {
+        navigate('/register')
+    }
+
+    React.useEffect(() => {
+        if (!loginState?.loading && loginState?.data?.success && redirect) {
+            navigate('/')
+        }
+    }, [loginState?.data?.success, loginState?.loading, navigate, redirect])
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
@@ -40,8 +52,9 @@ const LoginContainer = () => {
     } else {
         return (
             <Login handleSubmitForm={handleSubmit} loginState={loginState}
-                   redirect={redirect} rememberMe={rememberMe}
-                   setRememberMe={setRememberMe}/>
+                   rememberMe={rememberMe}
+                   setRememberMe={setRememberMe}
+                   handleToRegisterLinkClick={handleToRegisterLinkClick}/>
         );
     }
 }
