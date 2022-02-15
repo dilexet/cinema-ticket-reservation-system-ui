@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTheme} from "@mui/material";
 import Loading from "../../Loading/component/Loading";
 import UsersTable from "../component/UsersTable";
-import {getUsers} from "../store/action-creator/UserManagementActions";
+import {getRoles, getUsers} from "../store/action-creator/UserManagementActions";
 
 
 const UserManagementContainer = () => {
@@ -23,6 +23,7 @@ const UserManagementContainer = () => {
     useEffect(() => {
         async function getUsersList() {
             await dispatch(await getUsers());
+            await dispatch(await getRoles());
             setIsLoading(false)
         }
 
