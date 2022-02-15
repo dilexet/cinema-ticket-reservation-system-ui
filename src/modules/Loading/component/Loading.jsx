@@ -1,5 +1,6 @@
 import React from 'react'
-import {Box, CircularProgress, Backdrop} from "@mui/material";
+import {BallTriangle} from 'react-loader-spinner'
+import {Box, Backdrop} from "@mui/material";
 
 const Loading = ({isLoading}) => {
     return (
@@ -8,7 +9,7 @@ const Loading = ({isLoading}) => {
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isLoading}
             >
-                <CircularProgress color="inherit"/>
+                <BallTriangle color="#00BFFF" height={80} width={80}/>
             </Backdrop>
         </Box>
     )
