@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "../../Shared/components/TextField"
 import handleErrorService from "../../Shared/utils/HandleErrorService";
 import updateUserSchema from "../constants/UpdateUserSchema";
+import SelectField from "../../Shared/components/SelectField";
 
 const UserUpdateRow = ({
                            index, theme, initialValues,
@@ -39,8 +40,7 @@ const UserUpdateRow = ({
                                 id="name"
                                 type="text"
                                 name="Name"
-                                variant="standard"
-                                size="small"
+                                variant="outlined"
                                 inputProps={{style: {textAlign: 'center'}}}
                                 value={values.Name}
                                 onChange={handleChange}
@@ -55,8 +55,7 @@ const UserUpdateRow = ({
                                 id="email"
                                 type="email"
                                 name="Email"
-                                variant="standard"
-                                size="small"
+                                variant="outlined"
                                 inputProps={{style: {textAlign: 'center'}}}
                                 value={values.Email}
                                 onChange={handleChange}
@@ -66,18 +65,15 @@ const UserUpdateRow = ({
                             />
                         </TableCell>
                         <TableCell component="th" scope="row" align="center">
-                            <TextField
-                                id="roleName"
-                                type="text"
-                                name="RoleName"
-                                variant="standard"
-                                size="small"
-                                inputProps={{style: {textAlign: 'center'}}}
-                                value={values.RoleName}
+                            <SelectField
+                                id='roleId' value={values.RoleId} name="RoleId"
+                                label="Role"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                autoComplete="RoleName"
-                                {...handleErrorService(userManagementState, errors, touched, "RoleName", "UserUpdateRequest.RoleName")}
+                                defaultField="None" data={userManagementState?.rolesExist?.roles}
+                                itemField='id'
+                                {...handleErrorService(userManagementState, errors, touched,
+                                    "RoleId", "UserUpdateRequest.RoleId")}
                             />
                         </TableCell>
                         <TableCell component="th" scope="row" align="right">

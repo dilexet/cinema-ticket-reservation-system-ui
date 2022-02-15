@@ -8,6 +8,7 @@ import TextField from "../../Shared/components/TextField"
 import PasswordTextField from "../../Shared/components/PasswordTextField"
 import createUserSchema from "../constants/CreateUserSchema";
 import {InitialFieldValuesForCreate} from "../constants/InitialFieldValues";
+import SelectField from "../../Shared/components/SelectField";
 
 const UserCreateRow = ({
                            theme, userManagementState,
@@ -69,18 +70,15 @@ const UserCreateRow = ({
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
-                                <TextField
-                                    id="roleName"
-                                    label="RoleName"
-                                    type="text"
-                                    name="RoleName"
-                                    variant="outlined"
-                                    inputProps={{style: {textAlign: 'center'}}}
-                                    value={values.RoleName}
+                                <SelectField
+                                    id='roleId' value={values.RoleId} name="RoleId"
+                                    label="Role"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    autoComplete="RoleName"
-                                    {...handleErrorService(userManagementState, errors, touched, "RoleName", "UserCreateRequest.RoleName")}
+                                    defaultField="None" data={userManagementState?.rolesExist?.roles}
+                                    itemField='id'
+                                    {...handleErrorService(userManagementState, errors, touched,
+                                        "RoleId", "UserUpdateRequest.RoleId")}
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="right">
