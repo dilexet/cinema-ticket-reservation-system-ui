@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {Navigate} from "react-router-dom";
 import {getRole} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
-import {UserRole, ManagerRole, AdminRole} from "../../Shared/constants/RoleNames";
+import {UserRole, ManagerRole, AdminRole, UnauthorizedRole} from "../../Shared/constants/RoleNames";
 
 const DashboardMainPage = () => {
 
@@ -11,17 +11,13 @@ const DashboardMainPage = () => {
     useEffect(() => {
         if (role == null) {
             const userRole = getRole();
-            if (userRole === null) {
-                setRole(undefined)
-            } else {
-                setRole(userRole);
-            }
+            setRole(userRole);
         }
     }, [role])
 
     if (role === null) {
         return <Loading isLoading={true}/>
-    } else if (role === undefined) {
+    } else if (role === UnauthorizedRole) {
         return (<Navigate to='/login'/>)
     } else if (role === UserRole) {
         return (<Navigate to='/home'/>)
