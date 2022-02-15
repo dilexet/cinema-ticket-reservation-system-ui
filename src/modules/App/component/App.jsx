@@ -5,6 +5,7 @@ import Footer from "../../Footer/component/Footer";
 import {darkTheme, lightTheme} from "../utils/DarkModeService";
 import AppRoutes from "./AppRoutes";
 import ModalError from "./ModalError";
+import Modal from "./Modal";
 
 const App = ({
                  darkMode, setDarkMode, setCookie, isLoading, isAuthenticate, setIsAuthenticate,
@@ -20,8 +21,10 @@ const App = ({
                 <CssBaseline>
                     <TopAppBarContainer setDarkMode={setDarkMode} darkMode={darkMode} setCookie={setCookie}
                                         isAuthenticate={isAuthenticate}/>
-                    <ModalError openModalError={openModalError} handleCloseModalError={handleCloseModalError}
-                                modalErrorText={modalErrorText}/>
+                    <Modal openModal={openModalError} handleCloseModal={handleCloseModalError}
+                           modalErrorText={modalErrorText}
+                           component={ModalError}
+                    />
                     <AppRoutes isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate}
                                isLoading={isLoading}/>
                     <Footer description={"Some description"}/>
