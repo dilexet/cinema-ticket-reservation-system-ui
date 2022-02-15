@@ -6,6 +6,8 @@ export const AuthorizeURL = "authorize/";
 
 export const UserManagementURL = "userManagement/"
 
+export const RoleManagementURL = "role/"
+
 export const MovieManagementURL = "movie/"
 
 export const CinemaManagementURL = "cinema/"
