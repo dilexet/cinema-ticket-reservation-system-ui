@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import {refreshTokenAsyncAction} from "../../RefreshToken/actions-creator/RefreshTokenActions";
-import {AdminRole, ManagerRole, UserRole} from "../constants/RoleNames";
+import {AdminRole, ManagerRole, UnauthorizedRole, UserRole} from "../constants/RoleNames";
 
 export const isTokenExpired = () => {
 
@@ -70,7 +70,7 @@ export const getLocalAccessToken = () => {
 export const getRole = () => {
     const payload = getJwtPayload();
     if (payload === null) {
-        return null;
+        return UnauthorizedRole;
     }
     return payload.Role;
 }
