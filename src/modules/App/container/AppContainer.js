@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useCookies} from "react-cookie";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
 import App from "../component/App";
 
@@ -13,6 +14,8 @@ const AppContainer = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const errorHandlerState = useSelector((state) => state.errorHandler);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function checkAuthorize() {
@@ -35,8 +38,10 @@ const AppContainer = () => {
         if (errorHandlerState?.error?.code === 500) {
             setOpenModalError(true)
             setModalErrorText("Internal server error! :)")
+        } else if (errorHandlerState?.error?.code === 404) {
+            navigate('/not-found')
         }
-    }, [errorHandlerState?.error?.code])
+    }, [errorHandlerState?.error?.code, navigate])
 
     useEffect(() => {
         if (cookie.DarkMode === undefined) {

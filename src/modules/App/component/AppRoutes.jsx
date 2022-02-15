@@ -37,6 +37,7 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
                                          component={DashboardWrapper}/>}/>
             <Route path="*" element={<NotFound/>}/>
+            <Route path="/not-found" element={<NotFound/>}/>
             <Route exact path='/home'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
