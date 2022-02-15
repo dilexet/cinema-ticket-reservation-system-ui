@@ -35,53 +35,58 @@ const AppRoutes = ({isAuthenticate, setIsAuthenticate, isLoading}) => {
             <Route exact path='/'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                         restricted={false}
                                          component={DashboardWrapper}/>}/>
             <Route path="*" element={<NotFound/>}/>
             <Route path="/not-found" element={<NotFound/>}/>
             <Route exact path='/home'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
-                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                         component={HomeContainer}/>}/>
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={HomeContainer}
+                                         restricted={false}
+                   />}/>
             <Route exact path='/logout'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
-                                          setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
+                                          setIsAuthenticate={setIsAuthenticate}
+                                          isLoading={isLoading}
                                           component={LogoutContainer}/>}/>
             <Route path='/login'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
-                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                         component={LoginContainer} restricted={true}/>}/>
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={LoginContainer}
+                                         restricted={true}/>}/>
             <Route path='/register'
                    element={<PublicRoute isAuthenticate={isAuthenticate}
-                                         setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                         component={RegisterContainer} restricted={true}/>}/>
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={RegisterContainer}
+                                         restricted={true}/>}/>
             <Route path='/afisha/'
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                       setIsAuthenticate={setIsAuthenticate} isLoading={isLoading}
-                                       component={MoviePageContainer} restricted={false}/>}/>
+                   element={<PublicRoute isAuthenticate={isAuthenticate}
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={MoviePageContainer}
+                                         restricted={false}/>}/>
             <Route path='/afisha/movieId=:movieId'
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                       setIsAuthenticate={setIsAuthenticate}
-                                       isLoading={isLoading}
-                                       component={MovieSessionPageContainer}
-                                       restricted={false}/>}/>
+                   element={<PublicRoute isAuthenticate={isAuthenticate}
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={MovieSessionPageContainer}
+                                         restricted={false}/>}/>
             <Route path='/afisha/movieId=:movieId/sessionId=:sessionId'
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                       setIsAuthenticate={setIsAuthenticate}
-                                       isLoading={isLoading}
-                                       component={BookingContainer}
-                                       restricted={false}/>}/>
+                   element={<PublicRoute isAuthenticate={isAuthenticate}
+                                         setIsAuthenticate={setIsAuthenticate}
+                                         isLoading={isLoading}
+                                         component={BookingContainer}
+                                         restricted={false}/>}/>
             <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                       setIsAuthenticate={setIsAuthenticate}
-                                       isLoading={isLoading}
-                                       component={ConfirmBookingPageContainer}
-                                       restricted={false}/>}/>
-            <Route path='/confirm-order/movieId=:movieId/sessionId=:sessionId'
-                   element={<RoleRoute isAuthenticate={isAuthenticate} role={UserRole}
-                                       isLoading={isLoading}
-                                       setIsAuthenticate={setIsAuthenticate}
-                                       component={ConfirmBookingPageContainer}
-                                       restricted={false}/>}/>
+                   element={<PrivateRoute isAuthenticate={isAuthenticate}
+                                          setIsAuthenticate={setIsAuthenticate}
+                                          isLoading={isLoading}
+                                          component={ConfirmBookingPageContainer}
+                                          restricted={false}/>}/>
             <Route path='/profile'
                    element={<PrivateRoute isAuthenticate={isAuthenticate}
                                           isLoading={isLoading}

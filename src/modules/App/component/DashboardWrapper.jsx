@@ -11,7 +11,12 @@ const DashboardWrapper = () => {
     useEffect(() => {
         if (isUser === null) {
             const role = getRole();
-            setIsUser(role === UserRole);
+            console.log(role)
+            if (role === null) {
+                setIsUser(true)
+            } else {
+                setIsUser(role === UserRole);
+            }
         }
     }, [isUser, navigate])
 
@@ -19,13 +24,14 @@ const DashboardWrapper = () => {
         return (
             <Loading isLoading={true}/>
         )
+    } else if (isUser === false) {
+
+        return (
+            <Navigate to='/dashboard'/>
+        )
     } else if (isUser === true) {
         return (
             <Navigate to='/home'/>
-        )
-    } else {
-        return (
-            <Navigate to='/dashboard'/>
         )
     }
 }
