@@ -4,6 +4,7 @@ import Register from "../component/Register";
 import registerSchema from "../constants/RegisterSchema";
 import {clearErrors, registerAsyncAction} from "../store/action-creator/RegisterActions";
 import Loading from "../../Loading/component/Loading";
+import {removeTokens} from "../../Shared/utils/TokenServices";
 
 const RegisterContainer = () => {
     const [redirect, setRedirect] = useState(false);
@@ -23,6 +24,7 @@ const RegisterContainer = () => {
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
+            removeTokens()
             setIsLoading(false)
             await dispatch(clearErrors())
         }
