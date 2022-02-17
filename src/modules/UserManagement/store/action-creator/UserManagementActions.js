@@ -1,5 +1,5 @@
 import {defaultApi} from "../../../Shared/constants/DefaultApi";
-import {UserManagementURL} from "../../../Shared/constants/BaseURLs";
+import {RoleManagementURL, UserManagementURL} from "../../../Shared/constants/BaseURLs";
 import {
     loading,
     clearError,
@@ -12,7 +12,10 @@ import {
     create_user_success,
     update_user_success,
     remove_user_success,
-    change_users_error
+    change_users_error,
+    get_roles_loading,
+    get_roles_success,
+    get_roles_error
 } from "../reducers/UserManagementReducer"
 
 export const clearErrors = () => {
@@ -31,6 +34,21 @@ export const getUsers = () => {
         } catch (error) {
             if (error.response) {
                 dispatch(get_users_error(error.response.data))
+            }
+        }
+    }
+}
+
+export const getRoles = () => {
+    return async (dispatch) => {
+        dispatch(get_roles_loading())
+
+        try {
+            const response = await defaultApi(RoleManagementURL).get()
+            dispatch(get_roles_success(response.data))
+        } catch (error) {
+            if (error.response) {
+                dispatch(get_roles_error(error.response.data))
             }
         }
     }

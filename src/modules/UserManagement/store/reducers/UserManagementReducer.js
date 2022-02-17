@@ -11,6 +11,11 @@ const initialState = {
         success: false,
         user: null
     },
+    rolesExist: {
+        code: null,
+        success: false,
+        roles: []
+    },
     loading: false,
     error: null,
 }
@@ -107,7 +112,32 @@ const userManagementSlice = createSlice({
         change_users_error(state, action) {
             state.loading = false;
             state.error = action.payload;
-        }
+        },
+
+
+        get_roles_loading(state) {
+            state.loading = false;
+            state.rolesExist = null;
+            state.error = null;
+        },
+        get_roles_success(state, action) {
+            state.loading = false;
+            state.rolesExist = {
+                code: action.payload.code,
+                success: action.payload.success,
+                roles: action.payload.roles
+            };
+            state.error = null;
+        },
+        get_roles_error(state, action) {
+            state.loading = false;
+            state.rolesExist = {
+                code: null,
+                success: false,
+                roles: []
+            };
+            state.error = action.payload;
+        },
     }
 })
 
@@ -125,5 +155,8 @@ export const {
     create_user_success,
     update_user_success,
     remove_user_success,
-    change_users_error
+    change_users_error,
+    get_roles_loading,
+    get_roles_success,
+    get_roles_error
 } = userManagementSlice.actions;

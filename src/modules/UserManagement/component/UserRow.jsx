@@ -26,7 +26,7 @@ const UserRow = ({
                 {user.email}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-                {user.roleName}
+                {user.role.name}
             </TableCell>
             <TableCell component="th" scope="row" align="right">
                 {openDeleteId === index ?
