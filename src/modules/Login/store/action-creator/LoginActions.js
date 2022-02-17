@@ -3,6 +3,7 @@ import {
     authenticate_success,
     authenticate_error
 } from "../../../ErrorHandler/store/reducers/ErrorHandlerReducer"
+import {removeTokens} from "../../../Shared/utils/TokenServices";
 import {login_loading, login_success, login_error, clear_errors} from "../reducers/LoginReducer"
 import {loginAPI} from "./LoginAPI";
 
@@ -19,6 +20,7 @@ export const loginAsyncAction = (data, rememberMe) => {
 
         try {
             const response = await loginAPI().login(data)
+            removeTokens();
             localStorage.setItem("rememberMe", rememberMe)
             if (Boolean(JSON.parse(rememberMe)) === true) {
                 localStorage.setItem("jwtToken", response.data?.jwtToken)
