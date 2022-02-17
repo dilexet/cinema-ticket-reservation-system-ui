@@ -56,7 +56,9 @@ axiosInstance.interceptors.response.use(
                 }
             }
         }
-        await store.dispatch(await errorHandleAction(error?.response?.status, error?.response?.data?.Errors))
+        if (error?.response?.status) {
+            await store.dispatch(await errorHandleAction(error?.response?.status, error?.response?.data?.Errors))
+        }
         return Promise.reject(error);
     }
 )
