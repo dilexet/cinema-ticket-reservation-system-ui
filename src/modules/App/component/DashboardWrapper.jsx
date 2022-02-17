@@ -11,7 +11,6 @@ const DashboardWrapper = () => {
     useEffect(() => {
         if (isUser === null) {
             const role = getRole();
-            console.log(role)
             if (role === null) {
                 setIsUser(true)
             } else {
