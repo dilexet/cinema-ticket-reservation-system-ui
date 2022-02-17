@@ -3,7 +3,10 @@ import {useNavigate} from "react-router-dom";
 import SelectedSeatsContent from "../component/SelectedSeatsContent";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
 
-const SelectedSeatsContentContainer = ({theme, session, selectedSeats, handleCancelSelectSeat}) => {
+const SelectedSeatsContentContainer = ({
+                                           theme, session, selectedSeats, handleCancelSelectSeat,
+                                           minutes, seconds, isRunning
+                                       }) => {
     const [totalPrice, setTotalPrice] = React.useState(0);
 
     const [selectedAdditionalServices, setSelectedAdditionalServices] = React.useState([])
@@ -44,7 +47,10 @@ const SelectedSeatsContentContainer = ({theme, session, selectedSeats, handleCan
                 state: {
                     selectedSeats: selectedSeats,
                     selectedAdditionalServices: selectedAdditionalServices,
-                    totalPrice: totalPrice
+                    totalPrice: totalPrice,
+                    minutes: minutes,
+                    seconds: seconds,
+                    isRunning: isRunning
                 }
             })
         } else {

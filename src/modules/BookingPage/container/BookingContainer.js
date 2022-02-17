@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
+import {useTimer} from 'react-timer-hook';
 import {useTheme} from "@mui/material";
 import Loading from "../../Loading/component/Loading";
 import BookingPage from "../component/BookingPage";
@@ -18,11 +19,27 @@ const BookingContainer = () => {
     const [selectedSeats, setSelectedSeats] = React.useState([]);
     const [connection, setConnection] = useState(null);
 
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 900);
+
+    const {
+        seconds,
+        minutes,
+        isRunning,
+        start,
+        restart,
+    } = useTimer({expiryTimestamp: time, autoStart: false, onExpire: async () => await handleCancelAllSelectedSeat()});
+
     const handleSelectSeat = async (seatId) => {
         if (connection) {
             try {
                 await connection.send('setBlockedSeat', seatId);
                 const sessionSeat = bookingState?.sessionState?.session?.sessionSeats?.find(el => el.seat.id === seatId)
+
+                if (selectedSeats.length === 0) {
+                    start();
+                }
+
                 setSelectedSeats([...selectedSeats, sessionSeat])
             } catch (e) {
                 console.log(e);
@@ -32,10 +49,26 @@ const BookingContainer = () => {
         }
     }
 
+    const handleCancelAllSelectedSeat = async () => {
+        if (connection) {
+            for (const value of selectedSeats) {
+                await connection.send('cancelBlockedSeat', value?.seat?.id);
+            }
+        }
+        setSelectedSeats([])
+    }
+
     const handleCancelSelectSeat = async (seatId) => {
         if (connection) {
             try {
                 await connection.send('cancelBlockedSeat', seatId);
+
+                if (selectedSeats.length <= 1) {
+                    const time = new Date();
+                    time.setSeconds(time.getSeconds() + 900);
+                    restart(time, false);
+                }
+
                 setSelectedSeats(selectedSeats.filter(x => x.seat.id !== seatId))
             } catch (e) {
                 console.log(e);
@@ -66,7 +99,7 @@ const BookingContainer = () => {
             <BookingPage theme={theme} bookingState={bookingState} handleClose={handleClose}
                          selectedSeats={selectedSeats} handleSelectSeat={handleSelectSeat}
                          handleCancelSelectSeat={handleCancelSelectSeat} setConnection={setConnection}
-                         connection={connection}
+                         connection={connection} minutes={minutes} seconds={seconds} isRunning={isRunning}
             />
         )
     }

@@ -8,7 +8,8 @@ import SelectedSeatsContentContainer from "../container/SelectedSeatsContentCont
 
 const BookingPage = ({
                          theme, bookingState, handleClose, selectedSeats,
-                         handleCancelSelectSeat, handleSelectSeat, setConnection, connection
+                         handleCancelSelectSeat, handleSelectSeat, setConnection, connection,
+                         minutes, seconds, isRunning
                      }) => {
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} style={{minHeight: '1000px'}}>
@@ -21,7 +22,7 @@ const BookingPage = ({
                 }}>
                     <MovieHeader theme={theme}
                                  movieName={bookingState?.sessionState?.session?.movie?.name}
-                                 handleClose={handleClose}/>
+                                 handleClose={handleClose} minutes={minutes} seconds={seconds} isRunning={isRunning}/>
                     <Divider/>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
@@ -43,7 +44,10 @@ const BookingPage = ({
                                                           session={bookingState?.sessionState?.session}/> :
                                         <SelectedSeatsContentContainer theme={theme} selectedSeats={selectedSeats}
                                                                        handleCancelSelectSeat={handleCancelSelectSeat}
-                                                                       session={bookingState?.sessionState?.session}/>
+                                                                       session={bookingState?.sessionState?.session}
+                                                                       minutes={minutes} seconds={seconds}
+                                                                       isRunning={isRunning}
+                                        />
                                 }
                             </Grid>
                         </Grid>
