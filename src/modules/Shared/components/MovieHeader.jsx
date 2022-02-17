@@ -16,7 +16,7 @@ const MovieHeader = ({movieName, theme, handleClose}) => {
                     display: 'flex',
                     alignItems: 'center',
                     padding: '0 30px',
-                    margin: '0 auto 25px',
+                    margin: '0 auto 15px',
                     maxWidth: '1300px',
                     boxSizing: 'border-box',
                     position: 'relative',
