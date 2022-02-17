@@ -63,7 +63,7 @@ const SessionUpdateRowContainer = ({session, index, setOpenEditId, theme}) => {
                 cinemaName: session.hall.cinemaName,
                 hallName: session.hall.name,
                 movieName: session.movie.name,
-                startDate: moment(new Date(session.startDate)).format('YYYY-MM-DDTHH:mm:ss'),
+                startDate: moment(session.startDate, 'DD/MM/YYYYTHH:mm').format('YYYY-MM-DDTHH:mm'),
                 sessionAdditionalServices: sessionAdditionalServices,
                 sessionSeatTypes: sessionSeatTypes
             })
