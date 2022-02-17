@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import registerSchema from "../constants/RegisterSchema";
 import {clearErrors, registerAsyncAction} from "../store/action-creator/RegisterActions";
-import {removeTokens} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
 import Register from "../component/Register";
 import Modal from "../../App/component/Modal";
@@ -42,13 +41,12 @@ const RegisterContainerModal = ({
     }, [confirmOrder, redirect, registerState?.data?.success, registerState?.loading])
 
     React.useEffect(() => {
-        const clearLoginErrors = async () => {
-            removeTokens()
+        const clearRegisterErrors = async () => {
             setIsLoading(false)
             await dispatch(clearErrors())
         }
         if (isLoading === true && registerState.error) {
-            clearLoginErrors();
+            clearRegisterErrors();
         } else {
             setIsLoading(false)
         }

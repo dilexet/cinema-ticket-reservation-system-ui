@@ -3,6 +3,7 @@ import {
     authenticate_success,
     authenticate_error
 } from "../../../ErrorHandler/store/reducers/ErrorHandlerReducer"
+import {removeTokens} from "../../../Shared/utils/TokenServices";
 import {register_loading, register_success, register_error, clear_errors} from "../reducers/RegisterReducer"
 import {registerAPI} from "./RegisterAPI";
 
@@ -19,6 +20,7 @@ export const registerAsyncAction = (data, rememberMe) => {
 
         try {
             const response = await registerAPI().register(data)
+            removeTokens()
             localStorage.setItem("rememberMe", rememberMe)
             if (Boolean(JSON.parse(rememberMe)) === true) {
                 localStorage.setItem("jwtToken", response.data?.jwtToken)
