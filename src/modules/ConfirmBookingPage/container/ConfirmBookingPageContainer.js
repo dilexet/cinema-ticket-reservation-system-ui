@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useTheme} from "@mui/material";
@@ -9,32 +9,67 @@ import {OrderInitialValues} from "../constants/OrderInitialValues";
 import {bookingTickets} from '../store/action-creator/ConfirmBookingActions'
 import {getSessionById} from "../../BookingPage/store/action-creator/BookingActions";
 import {useTimer} from "react-timer-hook";
+import {HubConnectionBuilder} from "@microsoft/signalr";
+import {HubURL} from "../../Shared/constants/BaseURLs";
+import {useCookies} from "react-cookie";
 
 const ConfirmBookingPageContainer = () => {
     const theme = useTheme();
-    const {sessionId, movieId} = useParams();
-    const {state} = useLocation();
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const {state} = useLocation();
+    const {sessionId, movieId} = useParams();
     const bookingState = useSelector((state) => state.booking);
     const confirmBookingState = useSelector((state) => state.confirmBooking);
-    const dispatch = useDispatch();
-
     const [bookedTickets, setBookedTickets] = React.useState(OrderInitialValues)
     const [isLoading, setIsLoading] = React.useState(true)
+    const [connection, setConnection] = useState(null);
+    const [cookie, setCookie, removeCookie] = useCookies();
 
-
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + (state?.minutes * 60 + state?.seconds));
+    const getTimerSettings = () => {
+        const timer = sessionStorage.getItem('timer');
+        const time = new Date(timer);
+        return {
+            expiryTimestamp: time,
+            autoStart: true,
+        }
+    }
 
     const handleClose = () => {
         navigate(`/afisha/movieId=${movieId}/sessionId=${sessionId}`)
     }
 
+    const handleCancelAllSelectedSeat = async () => {
+        if (connection) {
+            for (const value of state?.selectedSeats) {
+                await connection.send('cancelBlockedSeat', value?.seat?.id);
+            }
+        }
+        removeSeatsCookie()
+        handleClose()
+    }
+
+    const removeSeatsCookie = () => {
+        if (cookie.SelectedSeats !== undefined) {
+            removeCookie('SelectedSeats')
+        }
+    }
+
+    const handleConfirmOrder = async () => {
+        removeSeatsCookie()
+        await dispatch(await bookingTickets(sessionId, bookedTickets))
+        navigate(`/afisha`)
+    }
+
     const {
         seconds, minutes, isRunning
-    } = useTimer({expiryTimestamp: time, autoStart: true, onExpire: () => handleClose()});
+    } = useTimer({...getTimerSettings(), onExpire: async () => await handleCancelAllSelectedSeat()});
 
+    React.useEffect(() => {
+        const time = new Date();
+        time.setSeconds(time.getSeconds() + (minutes * 60 + seconds));
+        sessionStorage.setItem('timer', time)
+    }, [minutes, seconds])
 
     React.useEffect(() => {
         const getSession = async () => {
@@ -68,13 +103,24 @@ const ConfirmBookingPageContainer = () => {
         }
     }, [state, sessionId, isLoading, navigate, dispatch])
 
-    const handleConfirmOrder = async () => {
-        await dispatch(await bookingTickets(sessionId, bookedTickets))
-        navigate(`/afisha`)
-    }
+    React.useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl(HubURL)
+            .withAutomaticReconnect()
+            .build();
+        setConnection(newConnection);
+    }, [setConnection])
 
 
-    if (isLoading === true || confirmBookingState?.loading === true) {
+    React.useEffect(() => {
+        if (connection) {
+            connection.start().then(() => {
+                console.log("Connected!")
+            }).catch(e => console.log(e))
+        }
+    }, [connection])
+
+    if (isLoading === true || confirmBookingState?.loading === true || connection === null) {
         return <Loading isLoading={true}/>
     } else {
         return (
