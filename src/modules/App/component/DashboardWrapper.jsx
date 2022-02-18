@@ -2,33 +2,27 @@ import React, {useEffect} from 'react'
 import {Navigate, useNavigate} from "react-router-dom";
 import {getRole} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
-import {UserRole} from "../../Shared/constants/RoleNames";
+import {AdminRole, ManagerRole} from "../../Shared/constants/RoleNames";
 
 const DashboardWrapper = () => {
-    const [isUser, setIsUser] = React.useState(null);
+    const [role, setRole] = React.useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isUser === null) {
-            const role = getRole();
-            if (role === null) {
-                setIsUser(true)
-            } else {
-                setIsUser(role === UserRole);
-            }
+        if (role === null) {
+            setRole(getRole())
         }
-    }, [isUser, navigate])
+    }, [navigate, role])
 
-    if (isUser === null) {
+    if (role === null) {
         return (
             <Loading isLoading={true}/>
         )
-    } else if (isUser === false) {
-
+    } else if (role === AdminRole || role === ManagerRole) {
         return (
             <Navigate to='/dashboard'/>
         )
-    } else if (isUser === true) {
+    } else {
         return (
             <Navigate to='/home'/>
         )
