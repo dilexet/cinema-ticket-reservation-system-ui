@@ -1,26 +1,53 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
+import {useCookies} from "react-cookie";
 import {useTimer} from 'react-timer-hook';
 import {useTheme} from "@mui/material";
+import {HubConnectionBuilder} from "@microsoft/signalr";
 import Loading from "../../Loading/component/Loading";
+import {HubURL} from "../../Shared/constants/BaseURLs";
 import BookingPage from "../component/BookingPage";
-import {getSessionById} from "../store/action-creator/BookingActions";
+import {blockTicket, cancelBlockTicket, getSessionById} from "../store/action-creator/BookingActions";
+import {timerSeconds} from "../constants/TimerSeconds";
 
 const BookingContainer = () => {
     const theme = useTheme();
-    const {movieId, sessionId} = useParams();
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(true);
-    const bookingState = useSelector((state) => state.booking);
-
     const navigate = useNavigate();
-
-    const [selectedSeats, setSelectedSeats] = React.useState([]);
+    const bookingState = useSelector((state) => state.booking);
+    const {movieId, sessionId} = useParams();
+    const [cookie, setCookie, removeCookie] = useCookies();
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedSeats, setSelectedSeats] = React.useState(cookie.SelectedSeats === undefined ? [] : cookie.SelectedSeats);
     const [connection, setConnection] = useState(null);
 
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + 900);
+    const getTimerSettings = () => {
+        if (selectedSeats.length <= 0) {
+            sessionStorage.setItem('timer', null)
+            const time = new Date();
+            time.setSeconds(time.getSeconds() + timerSeconds);
+            return {
+                expiryTimestamp: time,
+                autoStart: false,
+            }
+        }
+        const timer = sessionStorage.getItem('timer');
+        if (timer) {
+            const time = new Date(timer);
+            return {
+                expiryTimestamp: time,
+                autoStart: true,
+            }
+        } else {
+            const time = new Date();
+            time.setSeconds(time.getSeconds() + timerSeconds);
+            return {
+                expiryTimestamp: time,
+                autoStart: false,
+            }
+        }
+    }
 
     const {
         seconds,
@@ -28,7 +55,10 @@ const BookingContainer = () => {
         isRunning,
         start,
         restart,
-    } = useTimer({expiryTimestamp: time, autoStart: false, onExpire: async () => await handleCancelAllSelectedSeat()});
+    } = useTimer({
+        ...getTimerSettings(),
+        onExpire: async () => await handleCancelAllSelectedSeat()
+    });
 
     const handleSelectSeat = async (seatId) => {
         if (connection) {
@@ -55,6 +85,7 @@ const BookingContainer = () => {
                 await connection.send('cancelBlockedSeat', value?.seat?.id);
             }
         }
+        removeCookie('SelectedSeats')
         setSelectedSeats([])
     }
 
@@ -65,7 +96,7 @@ const BookingContainer = () => {
 
                 if (selectedSeats.length <= 1) {
                     const time = new Date();
-                    time.setSeconds(time.getSeconds() + 900);
+                    time.setSeconds(time.getSeconds() + timerSeconds);
                     restart(time, false);
                 }
 
@@ -83,6 +114,23 @@ const BookingContainer = () => {
     }
 
     React.useEffect(() => {
+        const time = new Date();
+        time.setSeconds(time.getSeconds() + (minutes * 60 + seconds));
+        sessionStorage.setItem('timer', time)
+    }, [minutes, seconds])
+
+
+    React.useEffect(() => {
+        const time = new Date();
+        time.setSeconds(time.getSeconds() + (minutes * 60 + seconds));
+        setCookie('SelectedSeats', selectedSeats, {
+            path: '/',
+            expires: time
+        });
+
+    }, [minutes, seconds, selectedSeats, setCookie]);
+
+    React.useEffect(() => {
         const getSession = async () => {
             await dispatch(await getSessionById(sessionId))
             setIsLoading(false)
@@ -92,7 +140,32 @@ const BookingContainer = () => {
         }
     }, [dispatch, isLoading, sessionId])
 
-    if (isLoading === true) {
+    React.useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl(HubURL)
+            .withAutomaticReconnect()
+            .build();
+        setConnection(newConnection);
+    }, [setConnection])
+
+    React.useEffect(() => {
+        if (connection && isLoading === false) {
+
+            connection.start().then(() => {
+                console.log("Connected!")
+
+                connection.on("setBlockedSeat", async (seatId) => {
+                    await dispatch(blockTicket(seatId))
+                })
+
+                connection.on("cancelBlockedSeat", async (seatId) => {
+                    await dispatch(cancelBlockTicket(seatId))
+                })
+            }).catch(e => console.log(e))
+        }
+    }, [connection, dispatch, isLoading])
+
+    if (isLoading === true || connection === null) {
         return <Loading isLoading={true}/>
     } else {
         return (

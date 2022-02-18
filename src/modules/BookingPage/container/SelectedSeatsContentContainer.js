@@ -4,8 +4,7 @@ import SelectedSeatsContent from "../component/SelectedSeatsContent";
 import {isAuthorize} from "../../Shared/utils/TokenServices";
 
 const SelectedSeatsContentContainer = ({
-                                           theme, session, selectedSeats, handleCancelSelectSeat,
-                                           minutes, seconds, isRunning
+                                           theme, session, selectedSeats, handleCancelSelectSeat
                                        }) => {
     const [totalPrice, setTotalPrice] = React.useState(0);
 
@@ -48,9 +47,6 @@ const SelectedSeatsContentContainer = ({
                     selectedSeats: selectedSeats,
                     selectedAdditionalServices: selectedAdditionalServices,
                     totalPrice: totalPrice,
-                    minutes: minutes,
-                    seconds: seconds,
-                    isRunning: isRunning
                 }
             })
         } else {
