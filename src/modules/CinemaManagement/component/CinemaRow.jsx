@@ -23,6 +23,9 @@ const CinemaRow = ({
                 {cinema.name}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
+                {cinema.country}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
                 {cinema.cityName}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
