@@ -8,7 +8,7 @@ import App from "../component/App";
 const AppContainer = () => {
     const [cookie, setCookie] = useCookies();
 
-    const [darkMode, setDarkMode] = React.useState(cookie.DarkMode === undefined ? false : Boolean(JSON.parse(cookie.DarkMode)));
+    const [darkMode, setDarkMode] = React.useState(cookie.DarkMode === undefined ? true : Boolean(JSON.parse(cookie.DarkMode)));
 
     const [isAuthenticate, setIsAuthenticate] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
