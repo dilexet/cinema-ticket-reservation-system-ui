@@ -20,6 +20,7 @@ const TextField = ({
         >
             <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
             <OutlinedInput
+                disabled={props.disabled}
                 id={props.id}
                 label={props.label}
                 name={props.name}
