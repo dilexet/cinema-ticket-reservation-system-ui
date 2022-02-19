@@ -4,9 +4,12 @@ const cinemaSchema = yup.object({
     Name: yup
         .string()
         .required('Please enter Cinema name'),
-    CityName: yup
+    Country: yup
         .string()
-        .required('Please enter City name'),
+        .required('Please enter Country'),
+    City: yup
+        .string()
+        .required('Please enter City'),
     Street: yup
         .string()
         .required('Please enter Street'),
