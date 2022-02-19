@@ -7,8 +7,11 @@ import {clearErrors, updateCinema} from "../store/action-creator/CinemaManagemen
 const CinemaUpdateRowContainer = ({cinema, index, setOpenEditId, theme}) => {
     const initialValues = {
         "Name": cinema.name,
-        "CityName": cinema.cityName,
+        "Country": cinema.country,
+        "City": cinema.cityName,
         "Street": cinema.street,
+        "Latitude": cinema.latitude,
+        "Longitude": cinema.longitude,
     }
 
     const [isUpdate, setIsUpdate] = React.useState(false)
