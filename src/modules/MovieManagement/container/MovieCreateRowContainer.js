@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {BaseURL} from "../../Shared/constants/BaseURLs";
 import {clearUploadImage} from "../../UploadImage/store/action-creator/UploadImageActions";
@@ -16,12 +16,12 @@ const MovieCreateRowContainer = ({setOpenAdd, theme}) => {
     const uploadImageState = useSelector((state) => state.uploadImage);
 
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setOpenAdd(false)
         setIsCreate(false)
         await dispatch(clearErrors())
         await dispatch(clearUploadImage())
-    }
+    }, [dispatch, setOpenAdd])
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
@@ -43,7 +43,7 @@ const MovieCreateRowContainer = ({setOpenAdd, theme}) => {
             }
         }
         close()
-    }, [isCreate, movieState.error]);
+    }, [handleCloseClick, isCreate, movieState.error]);
 
 
     return (

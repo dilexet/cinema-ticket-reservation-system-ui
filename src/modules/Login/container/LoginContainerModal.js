@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import loginSchema from "../constants/LoginSchema";
 import {clearErrors, loginAsyncAction} from "../store/action-creator/LoginActions";
-import {removeTokens} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
 import Login from "../component/Login";
 import Modal from "../../App/component/Modal";
@@ -45,7 +44,6 @@ const LoginContainerModal = ({
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
-            removeTokens()
             setIsLoading(false)
             await dispatch(clearErrors())
         }

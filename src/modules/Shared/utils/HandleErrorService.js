@@ -85,12 +85,10 @@ export const handleSeatsNumberError = (state, errors, indexRow, index) => {
         }))
     } else if (
         state?.error?.validationErrors &&
-        state?.error?.validationErrors?.HallRequest?.rows &&
-        state?.error?.validationErrors?.HallRequest?.rows[indexRow]?.seats &&
-        state?.error?.validationErrors?.HallRequest?.rows[indexRow]?.seats[index]?.numberSeat) {
-        return ((state?.error?.validationErrors.HallRequest.rows[indexRow].seats[index].numberSeat && {
+        state?.error?.validationErrors[`HallRequest.Rows[${indexRow}].Seats`]) {
+        return ((state?.error?.validationErrors[`HallRequest.Rows[${indexRow}].Seats`] && {
             error: true,
-            helperText: state?.error?.validationErrors.HallRequest.rows[indexRow].seats[index].numberSeat
+            helperText: state?.error?.validationErrors[`HallRequest.Rows[${indexRow}].Seats`]
         }))
     }
 }

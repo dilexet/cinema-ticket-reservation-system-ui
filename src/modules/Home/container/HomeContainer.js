@@ -37,6 +37,15 @@ const HomeContainer = () => {
                 slidesToScroll: 1,
             };
             setSliderSettings(settings)
+        } else if (moviesState?.dataList?.movies?.length === 4) {
+            const settings = {
+                dots: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 2,
+                slidesToScroll: 1,
+            };
+            setSliderSettings(settings)
         } else {
             const settings = {
                 dots: false,

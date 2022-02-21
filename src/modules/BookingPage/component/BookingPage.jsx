@@ -3,12 +3,13 @@ import {Container, Divider, Grid, Paper} from "@mui/material";
 import MovieHeader from "../../Shared/components/MovieHeader";
 import ContentHeader from "./ContentHeader";
 import SeatsTypeContent from "./SeatsTypeContent";
-import HallPlanContainer from "../container/HallPlanContainer";
 import SelectedSeatsContentContainer from "../container/SelectedSeatsContentContainer";
+import HallPlan from "./HallPlan";
 
 const BookingPage = ({
                          theme, bookingState, handleClose, selectedSeats,
-                         handleCancelSelectSeat, handleSelectSeat, setConnection, connection
+                         handleCancelSelectSeat, handleSelectSeat,
+                         minutes, seconds, isRunning
                      }) => {
     return (
         <Container component="main" sx={{mt: 2, mb: 2}} style={{minHeight: '1000px'}}>
@@ -21,7 +22,7 @@ const BookingPage = ({
                 }}>
                     <MovieHeader theme={theme}
                                  movieName={bookingState?.sessionState?.session?.movie?.name}
-                                 handleClose={handleClose}/>
+                                 handleClose={handleClose} minutes={minutes} seconds={seconds} isRunning={isRunning}/>
                     <Divider/>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
@@ -30,10 +31,9 @@ const BookingPage = ({
                         </Grid>
                         <Grid container item xs={12}>
                             <Grid item xs={8}>
-                                <HallPlanContainer theme={theme} session={bookingState?.sessionState?.session}
+                                <HallPlan theme={theme} session={bookingState?.sessionState?.session}
                                                    selectedSeats={selectedSeats} handleSelectSeat={handleSelectSeat}
                                                    handleCancelSelectSeat={handleCancelSelectSeat}
-                                                   setConnection={setConnection} connection={connection}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -43,7 +43,8 @@ const BookingPage = ({
                                                           session={bookingState?.sessionState?.session}/> :
                                         <SelectedSeatsContentContainer theme={theme} selectedSeats={selectedSeats}
                                                                        handleCancelSelectSeat={handleCancelSelectSeat}
-                                                                       session={bookingState?.sessionState?.session}/>
+                                                                       session={bookingState?.sessionState?.session}
+                                        />
                                 }
                             </Grid>
                         </Grid>

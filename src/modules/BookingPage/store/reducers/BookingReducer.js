@@ -42,8 +42,8 @@ const bookingSlice = createSlice({
             state.sessionState = {
                 ...state.sessionState,
                 session: {
-                    ...state.sessionState.session,
-                    sessionSeats: state.sessionState.session.sessionSeats.map(x =>
+                    ...state.sessionState?.session,
+                    sessionSeats: state.sessionState?.session?.sessionSeats?.map(x =>
                         x.seat.id !== action.payload ? x : {...x, ticketState: TicketState.Blocked})
                 }
             }
@@ -52,8 +52,8 @@ const bookingSlice = createSlice({
             state.sessionState = {
                 ...state.sessionState,
                 session: {
-                    ...state.sessionState.session,
-                    sessionSeats: state.sessionState.session.sessionSeats.map(x =>
+                    ...state.sessionState?.session,
+                    sessionSeats: state.sessionState?.session?.sessionSeats?.map(x =>
                         x.seat.id !== action.payload ? x : {...x, ticketState: TicketState.Free})
                 }
             }

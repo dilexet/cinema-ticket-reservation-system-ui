@@ -5,7 +5,6 @@ import Login from "../component/Login";
 import loginSchema from "../constants/LoginSchema";
 import {clearErrors, loginAsyncAction} from "../store/action-creator/LoginActions";
 import Loading from "../../Loading/component/Loading";
-import {removeTokens} from "../../Shared/utils/TokenServices";
 
 const LoginContainer = () => {
     const [redirect, setRedirect] = useState(false);
@@ -36,7 +35,6 @@ const LoginContainer = () => {
 
     React.useEffect(() => {
         const clearLoginErrors = async () => {
-            removeTokens()
             setIsLoading(false)
             await dispatch(clearErrors())
         }

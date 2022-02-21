@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import AdditionalServiceUpdateRow from "../component/AdditionalServiceUpdateRow";
 import {updatingAdditionalServiceSchema} from "../constants/AdditionalServiceSchema";
@@ -16,11 +16,11 @@ const AdditionalServiceUpdateRowContainer = ({additionalService, index, setOpenE
 
     const serviceState = useSelector((state) => state.additionalServiceManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -37,7 +37,7 @@ const AdditionalServiceUpdateRowContainer = ({additionalService, index, setOpenE
             }
         }
         close()
-    }, [isUpdate, serviceState.error]);
+    }, [handleCloseClick, isUpdate, serviceState.error]);
 
 
     return (

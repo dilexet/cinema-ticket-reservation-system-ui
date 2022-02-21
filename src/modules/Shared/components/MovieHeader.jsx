@@ -2,8 +2,9 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {Box, IconButton, Typography} from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import Timer from "../../BookingPage/component/Timer";
 
-const MovieHeader = ({movieName, theme, handleClose}) => {
+const MovieHeader = ({movieName, theme, handleClose, minutes, seconds, isRunning}) => {
     return (
         <Box
             style={{
@@ -16,7 +17,7 @@ const MovieHeader = ({movieName, theme, handleClose}) => {
                     display: 'flex',
                     alignItems: 'center',
                     padding: '0 30px',
-                    margin: '0 auto 25px',
+                    margin: '0 auto 15px',
                     maxWidth: '1300px',
                     boxSizing: 'border-box',
                     position: 'relative',
@@ -48,6 +49,12 @@ const MovieHeader = ({movieName, theme, handleClose}) => {
                     }}>
                         {movieName}
                     </Typography>
+                    {
+                        isRunning ?
+                            <Box>
+                                <Timer minutes={minutes} seconds={seconds}/>
+                            </Box> : <></>
+                    }
                 </Box>
                 <Box style={{boxSizing: 'border-box'}}>
                     <IconButton aria-label="Back" onClick={handleClose}

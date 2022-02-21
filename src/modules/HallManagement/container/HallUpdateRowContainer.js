@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import HallUpdateRow from "../component/HallUpdateRow";
 import hallSchema from "../constants/HallSchema";
@@ -17,11 +17,11 @@ const HallUpdateRowContainer = ({hall, index, setOpenEditId, theme}) => {
 
     const hallState = useSelector((state) => state.hallManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -38,7 +38,7 @@ const HallUpdateRowContainer = ({hall, index, setOpenEditId, theme}) => {
             }
         }
         close()
-    }, [isUpdate, hallState.error]);
+    }, [isUpdate, hallState.error, handleCloseClick]);
 
     useEffect(() => {
         const getList = async () => {
