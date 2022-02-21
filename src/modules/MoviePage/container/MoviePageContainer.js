@@ -20,7 +20,6 @@ const MoviePageContainer = () => {
             setIsLoading(false)
         }
 
-        // TODO: fixed (called twice)
         if (isLoading === true || filterParams) {
             getMoviesList()
         }
