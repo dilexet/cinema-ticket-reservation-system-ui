@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import CinemaUpdateRow from "../component/CinemaUpdateRow";
 import cinemaSchema from "../constants/CinemaSchema";
@@ -20,11 +20,11 @@ const CinemaUpdateRowContainer = ({cinema, index, setOpenEditId, theme}) => {
 
     const cinemaManagementState = useSelector((state) => state.cinemaManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -41,7 +41,7 @@ const CinemaUpdateRowContainer = ({cinema, index, setOpenEditId, theme}) => {
             }
         }
         close()
-    }, [isUpdate, cinemaManagementState.error]);
+    }, [isUpdate, cinemaManagementState.error, handleCloseClick]);
 
     return (
         <CinemaUpdateRow

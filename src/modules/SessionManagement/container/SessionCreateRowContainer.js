@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {TableCell, TableRow} from "@mui/material";
 import {getCinemas} from "../../CinemaManagement/store/action-creator/CinemaManagementActions";
@@ -24,12 +24,11 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const cinemaState = useSelector((state) => state.cinemaManagement);
     const sessionState = useSelector((state) => state.sessionManagement);
 
-
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsCreate(false)
         setOpenAdd(false)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenAdd])
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
@@ -39,6 +38,11 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
         }
     }
 
+    const clearDataList = useCallback(async () => {
+        await dispatch(await clearData())
+        await dispatch(await clearAddServices())
+    }, [dispatch])
+
     useEffect(() => {
         const close = () => {
             if (isCreate === true && sessionState.error === null) {
@@ -46,7 +50,7 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
             }
         }
         close()
-    }, [isCreate, sessionState.error]);
+    }, [handleCloseClick, isCreate, sessionState.error]);
 
 
     useEffect(() => {
@@ -60,7 +64,7 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
         if (isLoading === true) {
             getList()
         }
-    }, [dispatch, isLoading, setIsLoading]);
+    }, [clearDataList, dispatch, isLoading, setIsLoading]);
 
     const getHalls = async (cinemaId) => {
         await dispatch(await getHallsByCinemaId(cinemaId));
@@ -68,11 +72,6 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
 
     const getAdditionalServices = async (cinemaId) => {
         await dispatch(await getAdditionalServicesByCinemaId(cinemaId));
-    }
-
-    const clearDataList = async () => {
-        await dispatch(await clearData())
-        await dispatch(await clearAddServices())
     }
 
     if (isLoading) {

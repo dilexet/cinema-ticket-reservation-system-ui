@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import UserUpdateRow from "../component/UserUpdateRow";
 import updateUserSchema from "../constants/UpdateUserSchema";
@@ -17,11 +17,11 @@ const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
 
     const userManagementState = useSelector((state) => state.userManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -38,7 +38,7 @@ const UserUpdateRowContainer = ({user, index, setOpenEditId, theme}) => {
             }
         }
         close()
-    }, [isUpdate, userManagementState.error]);
+    }, [handleCloseClick, isUpdate, userManagementState.error]);
 
 
     return (

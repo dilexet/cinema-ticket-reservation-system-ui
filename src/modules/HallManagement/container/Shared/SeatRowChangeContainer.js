@@ -20,7 +20,7 @@ const SeatRowChangeContainer = ({
             setIsLoading(false)
             setFieldValue(`rows[${indexRow}].seats[${index}].numberSeat`, index + 1)
         }
-    }, [index, isLoading, setFieldValue])
+    }, [index, indexRow, isLoading, setFieldValue])
 
     return (
         <SeatRowChange
