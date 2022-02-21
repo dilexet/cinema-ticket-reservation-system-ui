@@ -22,9 +22,9 @@ const SessionsTable = ({
                            handleAddClick, openEditId, openDeleteId, setOpenAdd, openAdd
                        }) => {
     return (
-        <Container component="main" sx={{mt: 2, mb: 2, ml: '-100px'}} maxWidth='1400px'>
+        <Container component="main" sx={{mt: 2, mb: 2, ml: '-220px'}} maxWidth='1520px'>
             <Grid item>
-                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column', minWidth: '1400px'}}>
+                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column', minWidth: '1520px'}}>
                     <Box display='block' justifyContent='center'>
                         <Typography component="h2" variant="h6" color="secondary" style={{
                             display: 'inline-block',
@@ -60,7 +60,7 @@ const SessionsTable = ({
 
                     <TableContainer style={{
                         overflow: 'hidden',
-                        minWidth: '1350px'
+                        minWidth: '1450px'
                     }}>
                         <Table width='auto' aria-label="a dense table">
                             <TableHead>
