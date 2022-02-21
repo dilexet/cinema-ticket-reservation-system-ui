@@ -9,6 +9,8 @@ const MapContainer = ({setFieldValue, latitude, longitude}) => {
     const [currentPosition, setCurrentPosition] = React.useState(defaultLocation);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const [search, setSearch] = React.useState('');
+
     const [marker, setMarker] = React.useState(parseFloat(latitude) && parseFloat(longitude) ? {
         lat: parseFloat(latitude), lng: parseFloat(longitude)
     } : null)
@@ -23,6 +25,32 @@ const MapContainer = ({setFieldValue, latitude, longitude}) => {
     const error = () => {
         setCurrentPosition(defaultLocation);
     };
+
+    const handleSearchChange = (event) => {
+        const value = event.target.value;
+        setSearch(value)
+    }
+
+    const handleSubmitSearch = () => {
+        if (search) {
+            Geocode.fromAddress(search).then(
+                (response) => {
+                    const {lat, lng} = response.results[0].geometry.location;
+                    setMarker({
+                        lat: lat,
+                        lng: lng
+                    })
+                    setCurrentPosition({
+                        lat: lat,
+                        lng: lng
+                    })
+                },
+                (error) => {
+                    console.error(error);
+                }
+            );
+        }
+    }
 
     const onSetMarker = (e) => {
         setMarker({
@@ -46,6 +74,7 @@ const MapContainer = ({setFieldValue, latitude, longitude}) => {
 
     React.useEffect(() => {
         if (marker) {
+            console.log(marker)
             Geocode.fromLatLng(marker.lat, marker.lng).then((response) => {
                 const location = response.results[0];
                 const Address = {
@@ -87,7 +116,11 @@ const MapContainer = ({setFieldValue, latitude, longitude}) => {
     if (isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
-        return (<Map currentPosition={currentPosition} marker={marker} onSetMarker={onSetMarker}/>)
+        return (
+            <Map currentPosition={currentPosition} marker={marker} onSetMarker={onSetMarker}
+                 search={search} handleSearchChange={handleSearchChange} handleSubmitSearch={handleSubmitSearch}
+            />
+        )
     }
 }
 
