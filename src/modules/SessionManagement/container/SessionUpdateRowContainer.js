@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import sessionSchema from "../constants/SessionSchema";
 import {updateSession, clearErrors} from "../store/actions-creator/SessionManagementActions";
@@ -18,11 +18,11 @@ const SessionUpdateRowContainer = ({session, index, setOpenEditId, theme}) => {
     const sessionState = useSelector((state) => state.sessionManagement);
     const [initialState, setInitialState] = React.useState(InitialSessionFieldValues)
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -36,7 +36,7 @@ const SessionUpdateRowContainer = ({session, index, setOpenEditId, theme}) => {
         if (isUpdate === true && sessionState.error === null) {
             handleCloseClick()
         }
-    }, [isUpdate, sessionState.error]);
+    }, [handleCloseClick, isUpdate, sessionState.error]);
 
     useEffect(() => {
         if (isLoading === true) {
@@ -69,7 +69,7 @@ const SessionUpdateRowContainer = ({session, index, setOpenEditId, theme}) => {
             })
             setIsLoading(false)
         }
-    }, [isLoading])
+    }, [isLoading, session.hall?.cinemaId, session.hall.cinemaName, session.hall?.id, session.hall.name, session.movie?.id, session.movie.name, session?.sessionAdditionalServices, session?.sessionSeatTypes, session.startDate])
 
     if (isLoading) {
         return (

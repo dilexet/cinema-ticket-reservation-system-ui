@@ -14,23 +14,19 @@ const CollapsibleSessionAddServicesTableCreateContainer = ({
                                                            }) => {
     const serviceState = useSelector((state) => state.additionalServiceManagement);
 
-    const initializeAdditionalServices = () => {
-        const services = []
-        serviceState?.dataList?.additionalServices?.forEach((value) => {
-            const service = {
-                'name': value.name,
-                'price': 0
-            }
-            services.push(service)
-        })
-        setFieldValue("sessionAdditionalServices", services)
-    }
-
     React.useEffect(() => {
         if (values.cinemaId !== '' && serviceState?.dataList?.additionalServices?.length > 0) {
-            initializeAdditionalServices();
+            const services = []
+            serviceState?.dataList?.additionalServices?.forEach((value) => {
+                const service = {
+                    'name': value.name,
+                    'price': 0
+                }
+                services.push(service)
+            })
+            setFieldValue("sessionAdditionalServices", services)
         }
-    }, [serviceState?.dataList?.additionalServices, values.cinemaId])
+    }, [serviceState?.dataList?.additionalServices, setFieldValue, values.cinemaId])
 
 
     return (

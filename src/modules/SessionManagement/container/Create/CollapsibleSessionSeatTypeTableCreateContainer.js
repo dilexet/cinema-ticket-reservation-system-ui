@@ -14,24 +14,20 @@ const CollapsibleSessionSeatTypeTableCreateContainer = ({
                                                         }) => {
     const hallState = useSelector((state) => state.hallManagement);
 
-    const initializeSeatTypesServices = () => {
-        const seatTypes = []
-        const hall = hallState?.dataList?.halls?.filter(x => x.id === values.hallId)
-        hall[0]?.seatTypes?.forEach((value) => {
-            const seatType = {
-                'seatType': value,
-                'price': 0
-            }
-            seatTypes.push(seatType)
-        })
-        setFieldValue("sessionSeatTypes", seatTypes)
-    }
-
     React.useEffect(() => {
         if (values.hallId !== '' && hallState?.dataList?.halls?.length > 0) {
-            initializeSeatTypesServices();
+            const seatTypes = []
+            const hall = hallState?.dataList?.halls?.filter(x => x.id === values.hallId)
+            hall[0]?.seatTypes?.forEach((value) => {
+                const seatType = {
+                    'seatType': value,
+                    'price': 0
+                }
+                seatTypes.push(seatType)
+            })
+            setFieldValue("sessionSeatTypes", seatTypes)
         }
-    }, [hallState?.dataList?.halls, values.hallId])
+    }, [hallState?.dataList?.halls, setFieldValue, values.hallId])
 
     return (
         <CollapsibleSessionSeatTypeTableChange

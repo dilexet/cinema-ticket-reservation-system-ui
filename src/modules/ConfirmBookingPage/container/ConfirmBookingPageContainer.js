@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useTheme} from "@mui/material";
@@ -24,7 +24,7 @@ const ConfirmBookingPageContainer = () => {
     const [bookedTickets, setBookedTickets] = React.useState(OrderInitialValues)
     const [isLoading, setIsLoading] = React.useState(true)
     const [connection, setConnection] = useState(null);
-    const [cookie, setCookie, removeCookie] = useCookies();
+    const [cookie, , removeCookie] = useCookies();
 
     const getTimerSettings = () => {
         const timer = sessionStorage.getItem('timer');
@@ -35,9 +35,9 @@ const ConfirmBookingPageContainer = () => {
         }
     }
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         navigate(`/afisha/movieId=${movieId}/sessionId=${sessionId}`)
-    }
+    }, [movieId, navigate, sessionId])
 
     const handleCancelAllSelectedSeat = async () => {
         if (connection) {
@@ -101,7 +101,7 @@ const ConfirmBookingPageContainer = () => {
 
             setIsLoading(false)
         }
-    }, [state, sessionId, isLoading, navigate, dispatch])
+    }, [state, sessionId, isLoading, navigate, dispatch, handleClose])
 
     React.useEffect(() => {
         const newConnection = new HubConnectionBuilder()

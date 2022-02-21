@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import CinemaCreateRow from "../component/CinemaCreateRow";
 import cinemaSchema from "../constants/CinemaSchema";
@@ -10,11 +10,11 @@ const CinemaCreateRowContainer = ({setOpenAdd, theme}) => {
     const dispatch = useDispatch();
     const cinemaManagementState = useSelector((state) => state.cinemaManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsCreate(false)
         setOpenAdd(false)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenAdd])
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
@@ -31,7 +31,7 @@ const CinemaCreateRowContainer = ({setOpenAdd, theme}) => {
             }
         }
         close()
-    }, [isCreate, cinemaManagementState.error]);
+    }, [isCreate, cinemaManagementState.error, handleCloseClick]);
 
     return (
         <CinemaCreateRow

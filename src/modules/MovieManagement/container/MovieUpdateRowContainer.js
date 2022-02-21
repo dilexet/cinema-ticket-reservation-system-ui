@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {toDateStringInputFormat} from "../../Shared/utils/DateConverter";
 import {clearUploadImage} from "../../UploadImage/store/action-creator/UploadImageActions";
@@ -26,12 +26,12 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
     const movieState = useSelector((state) => state.movieManagement);
     const uploadImageState = useSelector((state) => state.uploadImage);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsUpdate(false)
         setOpenEditId(-1)
         await dispatch(clearErrors())
         await dispatch(clearUploadImage())
-    }
+    }, [dispatch, setOpenEditId])
 
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
@@ -55,7 +55,7 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
             }
         }
         close()
-    }, [isUpdate, movieState.error]);
+    }, [handleCloseClick, isUpdate, movieState.error]);
 
 
     return (

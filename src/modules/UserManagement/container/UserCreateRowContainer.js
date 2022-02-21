@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import UserCreateRow from "../component/UserCreateRow";
 import createUserSchema from "../constants/CreateUserSchema";
@@ -12,11 +12,11 @@ const UserCreateRowContainer = ({setOpenAdd, theme}) => {
 
     const userManagementState = useSelector((state) => state.userManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsCreate(false)
         setOpenAdd(false)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenAdd])
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
@@ -33,7 +33,7 @@ const UserCreateRowContainer = ({setOpenAdd, theme}) => {
             }
         }
         close()
-    }, [isCreate, userManagementState.error]);
+    }, [handleCloseClick, isCreate, userManagementState.error]);
 
 
     return (

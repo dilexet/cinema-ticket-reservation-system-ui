@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {TableCell, TableRow} from "@mui/material";
 import HallCreateRow from "../component/HallCreateRow";
@@ -18,11 +18,11 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const hallState = useSelector((state) => state.hallManagement);
     const cinemaState = useSelector((state) => state.cinemaManagement);
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = useCallback(async () => {
         setIsCreate(false)
         setOpenAdd(false)
         await dispatch(clearErrors())
-    }
+    }, [dispatch, setOpenAdd])
 
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
@@ -39,7 +39,7 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
             }
         }
         close()
-    }, [isCreate, hallState.error]);
+    }, [isCreate, hallState.error, handleCloseClick]);
 
 
     useEffect(() => {
