@@ -1,6 +1,6 @@
 import React from 'react'
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
-import {Box, Button, Grid, IconButton, InputBase} from "@mui/material";
+import {Box, Grid, IconButton, InputBase} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {Search} from "../../TopAppBar/constants/SearchStyled";
 import {ApiKey} from "../constants/GoogleApiKey";
