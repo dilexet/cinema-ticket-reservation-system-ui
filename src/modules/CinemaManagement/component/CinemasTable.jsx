@@ -24,7 +24,7 @@ const CinemasTable = ({
                           handleAddClick, openEditId, openDeleteId, openAdd, setOpenAdd
                       }) => {
     return (
-        <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="md">
+        <Container component="main" sx={{mt: 2, mb: 2}} maxWidth="lg">
             <Grid item>
                 <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
                     <Box display='block' justifyContent='center'>
@@ -66,6 +66,7 @@ const CinemasTable = ({
                                 <TableRow>
                                     <TableCell align="left">Id</TableCell>
                                     <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center">Country</TableCell>
                                     <TableCell align="center">City</TableCell>
                                     <TableCell align="center">Street</TableCell>
                                     <TableCell align="right"/>

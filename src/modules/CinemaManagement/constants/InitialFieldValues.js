@@ -1,5 +1,8 @@
 export const InitialCinemaFieldValues = {
     Name: "",
-    CityName: "",
+    Country: "",
+    City: "",
     Street: "",
+    Latitude: "",
+    Longitude: "",
 }

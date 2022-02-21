@@ -24,7 +24,6 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
     const cinemaState = useSelector((state) => state.cinemaManagement);
     const sessionState = useSelector((state) => state.sessionManagement);
 
-
     const handleCloseClick = useCallback(async () => {
         setIsCreate(false)
         setOpenAdd(false)
@@ -43,7 +42,7 @@ const HallCreateRowContainer = ({setOpenAdd, theme}) => {
         await dispatch(await clearData())
         await dispatch(await clearAddServices())
     }, [dispatch])
-    
+
     useEffect(() => {
         const close = () => {
             if (isCreate === true && sessionState.error === null) {
