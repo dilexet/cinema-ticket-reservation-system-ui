@@ -1,1 +1,1 @@
-export const timerSeconds = 15;
+export const timerSeconds = 900;

@@ -1,3 +1,4 @@
+import {toastr} from "react-redux-toastr";
 import {
     book_tickets_loading,
     book_tickets_success,
@@ -11,6 +12,7 @@ export const bookingTickets = (id, data) => {
 
         try {
             const response = await confirmBookingAPI().book_tickets(id, data)
+            toastr.success('Success', 'Payment was successful')
             dispatch(book_tickets_success(response.data))
         } catch (error) {
             if (error.response) {

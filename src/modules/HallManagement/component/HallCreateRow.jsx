@@ -79,7 +79,7 @@ const HallCreateRow = ({
                                 />
                             </TableCell>
                             <TableCell component="th" scope="row" align="center">
-                                {values.NumberOfRows}
+                                {values.numberOfRows}
                             </TableCell>
                             <TableCell component="th" scope="row" align="right">
                                 <ButtonGroup>

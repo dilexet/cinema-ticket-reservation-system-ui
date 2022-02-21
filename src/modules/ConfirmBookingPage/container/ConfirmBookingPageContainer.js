@@ -2,16 +2,16 @@ import React, {useCallback, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useTheme} from "@mui/material";
+import {useTimer} from "react-timer-hook";
+import {HubConnectionBuilder} from "@microsoft/signalr";
+import {useCookies} from "react-cookie";
 import Loading from "../../Loading/component/Loading";
 import {getJwtPayload} from "../../Shared/utils/TokenServices";
 import ConfirmBookingPage from "../component/ConfirmBookingPage";
 import {OrderInitialValues} from "../constants/OrderInitialValues";
 import {bookingTickets} from '../store/action-creator/ConfirmBookingActions'
 import {getSessionById} from "../../BookingPage/store/action-creator/BookingActions";
-import {useTimer} from "react-timer-hook";
-import {HubConnectionBuilder} from "@microsoft/signalr";
 import {HubURL} from "../../Shared/constants/BaseURLs";
-import {useCookies} from "react-cookie";
 
 const ConfirmBookingPageContainer = () => {
     const theme = useTheme();

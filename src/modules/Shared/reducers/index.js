@@ -1,4 +1,5 @@
 import {combineReducers} from "@reduxjs/toolkit"
+import {reducer as toastrReducer} from 'react-redux-toastr'
 import loginSlice from "../../Login/store/reducers/LoginReducer";
 import registerSlice from "../../Register/store/reducers/RegisterReducer";
 import userManagementSlice from "../../UserManagement/store/reducers/UserManagementReducer";
@@ -33,5 +34,6 @@ export const rootReducer = combineReducers({
     movieSession: movieSessionSlice,
     booking: bookingSlice,
     confirmBooking: confirmBookingSlice,
-    userProfile: userProfileSlice
+    userProfile: userProfileSlice,
+    toastr: toastrReducer
 })

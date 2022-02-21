@@ -85,7 +85,7 @@ const BookingContainer = () => {
                 await connection.send('cancelBlockedSeat', value?.seat?.id);
             }
         }
-        removeCookie('SelectedSeats')
+        removeSeatsCookie()
         setSelectedSeats([])
     }
 
@@ -109,8 +109,15 @@ const BookingContainer = () => {
         }
     }
 
-    const handleClose = () => {
+    const handleClose = async () => {
+        await handleCancelAllSelectedSeat()
         navigate(`/afisha/movieId=${movieId}`)
+    }
+
+    const removeSeatsCookie = () => {
+        if (cookie.SelectedSeats !== undefined) {
+            removeCookie('SelectedSeats')
+        }
     }
 
     React.useEffect(() => {
