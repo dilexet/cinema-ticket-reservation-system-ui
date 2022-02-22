@@ -6,6 +6,7 @@ import {getJwtPayload} from "../../Shared/utils/TokenServices";
 import Loading from "../../Loading/component/Loading";
 import ProfilePage from "../component/ProfilePage";
 import {getUserProfileById} from "../store/action-creator/ProfileActions";
+import {UserRole} from "../../Shared/constants/RoleNames";
 
 const ProfilePageContainer = () => {
     const [tabsValue, setTabsValue] = React.useState('tickets');
@@ -30,12 +31,15 @@ const ProfilePageContainer = () => {
 
     React.useEffect(() => {
         const getUserProfile = async () => {
-            const {UserProfileId} = getJwtPayload();
-
-            if (UserProfileId) {
-                await dispatch(await getUserProfileById(UserProfileId, showPastTickets))
+            const {UserProfileId, Role} = getJwtPayload();
+            if (Role !== UserRole) {
+                navigate('/')
             } else {
-                navigate('/login')
+                if (UserProfileId) {
+                    await dispatch(await getUserProfileById(UserProfileId, showPastTickets))
+                } else {
+                    navigate('/login')
+                }
             }
             setIsLoading(false)
         }
