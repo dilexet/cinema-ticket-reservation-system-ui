@@ -8,14 +8,22 @@ const CityMenuContainer = ({open, filter, setFilter}) => {
     const dispatch = useDispatch();
     const movieFilterState = useSelector((state) => state.movieFilter);
     const [isLoading, setIsLoading] = useState(true);
+    const [search, setSearch] = React.useState('');
 
     const handleChange = async (event) => {
-        await dispatch(await getListCityNames(event.target.value))
+        setSearch(event.target.value)
     }
 
     const handleCityChoose = (name) => {
         setFilter({...filter, CityName: name})
     }
+
+    useEffect(() => {
+        const getCityNames = async () => {
+            await dispatch(await getListCityNames(search))
+        }
+        getCityNames()
+    }, [dispatch, search])
 
     useEffect(() => {
         async function getCityNames() {
@@ -27,6 +35,12 @@ const CityMenuContainer = ({open, filter, setFilter}) => {
             getCityNames()
         }
     }, [dispatch, isLoading]);
+
+    useEffect(() => {
+        if (open === true) {
+            setSearch('')
+        }
+    }, [open])
 
     if (isLoading === true) {
         return <Loading isLoading={true}/>

@@ -8,14 +8,22 @@ const CinemaMenuContainer = ({open, filter, setFilter}) => {
     const dispatch = useDispatch();
     const movieFilterState = useSelector((state) => state.movieFilter);
     const [isLoading, setIsLoading] = useState(true);
+    const [search, setSearch] = React.useState('');
 
     const handleChange = async (event) => {
-        await dispatch(await getListCinemaNames(event.target.value))
+        setSearch(event.target.value)
     }
 
     const handleCinemaChoose = (name) => {
         setFilter({...filter, CinemaName: name})
     }
+
+    useEffect(() => {
+        const getCinemaNames = async () => {
+            await dispatch(await getListCinemaNames(search))
+        }
+        getCinemaNames()
+    }, [dispatch, search])
 
     useEffect(() => {
         async function getCinemaNames() {
@@ -28,12 +36,18 @@ const CinemaMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [dispatch, isLoading]);
 
+    useEffect(() => {
+        if (open === true) {
+            setSearch('')
+        }
+    }, [open])
+
     if (isLoading === true) {
         return <Loading isLoading={true}/>
     } else {
         return (
             <CinemaMenu open={open} handleChange={handleChange}
-                       movieFilterState={movieFilterState} filter={filter}
+                        movieFilterState={movieFilterState} filter={filter}
                         handleCinemaChoose={handleCinemaChoose}/>
         )
     }
