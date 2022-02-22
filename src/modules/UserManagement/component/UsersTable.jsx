@@ -74,6 +74,11 @@ const UsersTable = ({
                             </TableHead>
                             <TableBody>
                                 {
+                                    openAdd === true ?
+                                        <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
+                                        : <></>
+                                }
+                                {
                                     usersState?.dataList ?
                                         usersState?.dataList?.users?.map((user, index) => (
                                             <React.Fragment key={index}>
@@ -95,11 +100,6 @@ const UsersTable = ({
                                                 }
                                             </React.Fragment>
                                         )) : <></>
-                                }
-                                {
-                                    openAdd === true ?
-                                        <UserCreateRowContainer theme={theme} setOpenAdd={setOpenAdd}/>
-                                        : <></>
                                 }
                             </TableBody>
                         </Table>
