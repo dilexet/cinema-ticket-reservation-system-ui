@@ -20,7 +20,12 @@ const MoviePageContainer = () => {
             setIsLoading(false)
         }
 
-        if (isLoading === true || filterParams) {
+        if (isLoading === true) {
+            getMoviesList()
+
+        }
+
+        if (filterParams) {
             getMoviesList()
         }
 
