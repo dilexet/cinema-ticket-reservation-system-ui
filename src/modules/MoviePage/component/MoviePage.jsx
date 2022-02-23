@@ -45,7 +45,7 @@ const MoviePage = ({theme, moviesState, filterParams, setFilterParams}) => {
                             width: '100%'
                         }}>
                             {
-                                moviesState?.dataList ?
+                                moviesState?.dataList?.movies?.length > 0 ?
                                     moviesState?.dataList?.movies?.map((movie, index) => (
                                         <Box key={index}
                                              style={{
@@ -59,7 +59,20 @@ const MoviePage = ({theme, moviesState, filterParams, setFilterParams}) => {
                                                 <MovieCard movie={movie} theme={theme}/>
                                             </Box>
                                         </Box>
-                                    )) : <></>
+                                    )) : <Box style={{
+                                        margin: '50px 10px'
+                                    }}>
+                                        <Typography variant="h1"
+                                                    style={{
+                                                        color: theme.palette.mode === 'dark'
+                                                            ? "rgba(255, 255, 255, 0.9)"
+                                                            : "rgba(0, 0, 0, 0.9)",
+                                                        fontSize: '2.125em',
+                                                        fontWeight: '500',
+                                                    }}>
+                                            No results
+                                        </Typography>
+                                    </Box>
                             }
                         </Box>
                     </Box>
