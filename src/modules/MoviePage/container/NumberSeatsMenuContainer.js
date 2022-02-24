@@ -2,7 +2,6 @@ import React from 'react';
 import NumberSeatsMenu from "../component/Menu/NumberSeatsMenu";
 
 const NumberSeatsMenuContainer = ({open, filter, setFilter}) => {
-
     const handleNumberSeatsChange = (event) => {
         if (event.target.value === '') {
             setFilter({...filter, NumberAvailableSeats: 0})

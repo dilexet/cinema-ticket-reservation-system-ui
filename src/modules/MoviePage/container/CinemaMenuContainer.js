@@ -41,7 +41,6 @@ const CinemaMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [open])
 
-
     return (
         <CinemaMenu open={open} handleChange={handleChange}
                     movieFilterState={movieFilterState} filter={filter}

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import Loading from "../../Loading/component/Loading";
 import MovieMenu from "../component/Menu/MovieMenu";
 import {getListMovieTitles} from "../store/action-creator/MovieActions";
 
@@ -41,7 +40,6 @@ const MovieMenuContainer = ({open, filter, setFilter}) => {
             setSearch('')
         }
     }, [open])
-
 
     return (
         <MovieMenu open={open} handleChange={handleChange}
