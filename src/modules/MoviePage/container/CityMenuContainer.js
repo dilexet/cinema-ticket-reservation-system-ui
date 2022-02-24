@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import Loading from "../../Loading/component/Loading";
 import {getListCityNames} from "../store/action-creator/MovieActions";
 import CityMenu from "../component/Menu/CityMenu";
 
@@ -42,15 +41,12 @@ const CityMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [open])
 
-    if (isLoading === true) {
-        return <Loading isLoading={true}/>
-    } else {
-        return (
-            <CityMenu open={open} handleChange={handleChange}
-                      movieFilterState={movieFilterState} filter={filter}
-                      handleCityChoose={handleCityChoose}/>
-        )
-    }
+
+    return (
+        <CityMenu open={open} handleChange={handleChange}
+                  movieFilterState={movieFilterState} filter={filter}
+                  handleCityChoose={handleCityChoose}/>
+    )
 }
 
 export default CityMenuContainer;

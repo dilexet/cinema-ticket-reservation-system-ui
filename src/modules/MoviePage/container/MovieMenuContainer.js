@@ -42,15 +42,12 @@ const MovieMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [open])
 
-    if (isLoading === true) {
-        return <Loading isLoading={true}/>
-    } else {
-        return (
-            <MovieMenu open={open} handleChange={handleChange}
-                       movieFilterState={movieFilterState} filter={filter}
-                       handleMovieChoose={handleMovieChoose}/>
-        )
-    }
+
+    return (
+        <MovieMenu open={open} handleChange={handleChange}
+                   movieFilterState={movieFilterState} filter={filter}
+                   handleMovieChoose={handleMovieChoose}/>
+    )
 }
 
 export default MovieMenuContainer;

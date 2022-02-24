@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
-import Loading from "../../Loading/component/Loading";
 import StartDateMenu from "../component/Menu/StartDateMenu";
 
 const StartDateMenuContainer = ({open, filter, setFilter}) => {
@@ -25,14 +24,11 @@ const StartDateMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [dates, isLoading]);
 
-    if (isLoading === true) {
-        return <Loading isLoading={true}/>
-    } else {
-        return (
-            <StartDateMenu open={open} filter={filter} dates={dates}
-                           handleDateChange={handleDateChange}/>
-        )
-    }
+
+    return (
+        <StartDateMenu open={open} filter={filter} dates={dates}
+                       handleDateChange={handleDateChange}/>
+    )
 }
 
 export default StartDateMenuContainer;

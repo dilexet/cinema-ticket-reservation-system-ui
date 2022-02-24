@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import Loading from "../../Loading/component/Loading";
 import {getListCinemaNames} from "../store/action-creator/MovieActions";
 import CinemaMenu from "../component/Menu/CinemaMenu";
 
@@ -42,15 +41,12 @@ const CinemaMenuContainer = ({open, filter, setFilter}) => {
         }
     }, [open])
 
-    if (isLoading === true) {
-        return <Loading isLoading={true}/>
-    } else {
-        return (
-            <CinemaMenu open={open} handleChange={handleChange}
-                        movieFilterState={movieFilterState} filter={filter}
-                        handleCinemaChoose={handleCinemaChoose}/>
-        )
-    }
+
+    return (
+        <CinemaMenu open={open} handleChange={handleChange}
+                    movieFilterState={movieFilterState} filter={filter}
+                    handleCinemaChoose={handleCinemaChoose}/>
+    )
 }
 
 export default CinemaMenuContainer;
