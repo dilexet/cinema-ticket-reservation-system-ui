@@ -36,14 +36,15 @@ const MovieUpdateRowContainer = ({movie, index, setOpenEditId, theme}) => {
     const handleSubmitEditClick = async (values) => {
         setIsUpdate(false)
         if (await movieSchema.isValid(values)) {
+            const newValues = {...values}
             if (uploadImageState?.data !== null) {
-                values.PosterUrl = `${BaseURL}${uploadImageState?.data?.posterPath}`;
+                newValues.PosterUrl = `${BaseURL}${uploadImageState?.data?.posterPath}`;
             }
-            values.Countries = values.Countries.split(',')
-            values.Genres = values.Genres.split(',')
-            await dispatch(await updateMovie(values, movie.id))
-            values.Countries = values.Countries.join(',')
-            values.Genres = values.Genres.join(',')
+
+            newValues.Countries = newValues.Countries.split(',').map(country => country.trim())
+            newValues.Genres = newValues.Genres.split(',').map(genre => genre.trim())
+
+            await dispatch(await updateMovie(newValues, movie.id))
             setIsUpdate(true)
         }
     }

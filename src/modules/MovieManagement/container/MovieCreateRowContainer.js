@@ -26,12 +26,13 @@ const MovieCreateRowContainer = ({setOpenAdd, theme}) => {
     const handleSubmitCreateClick = async (values) => {
         setIsCreate(false)
         if (await movieSchema.isValid(values) && uploadImageState?.data?.posterPath !== null) {
-            values.PosterUrl = `${BaseURL}${uploadImageState?.data?.posterPath}`;
-            values.Countries = values.Countries.split(',')
-            values.Genres = values.Genres.split(',')
-            await dispatch(await createMovie(values))
-            values.Countries = values.Countries.join(',')
-            values.Genres = values.Genres.join(',')
+            const newValues = {...values}
+            newValues.PosterUrl = `${BaseURL}${uploadImageState?.data?.posterPath}`;
+
+            newValues.Countries = newValues.Countries.split(',').map(country => country.trim())
+            newValues.Genres = newValues.Genres.split(',').map(genre => genre.trim())
+
+            await dispatch(await createMovie(newValues))
             setIsCreate(true)
         }
     }
